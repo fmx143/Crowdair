@@ -5,15 +5,15 @@
 
   <h3>You are currently positionned on :</h3>
 
-  <div class="">
+  <div class="row">
   <% @user.transactions.each do |transaction| %>
-    <div class="card-product">
+    <div class="col-12 col-md-6 card-product">
     <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
         <div class="">
             <h2><%= transaction.event.title %></h2>
             <p> <%= transaction.event.description %> </p>
         </div>
-          <%= link_to "More infos", events_path %>
+         <p> <%= link_to "More infos", events_path %> </p>
         </div>
     <% end %>
     </div>
