@@ -62,16 +62,21 @@ puts "Users table now contains #{Event.count} users."
 puts "Creating a seed of #{number_of_transactions} fake transactions..."
 
 number_of_transactions.times do |i|
-  buyer = User.all.sample
-  seller = User.all.sample
-  while seller == buyer
-    seller = User.all.sample
-  end
+  buyer, seller = User.all.sample(2)
   Transaction.create!({
     price: rand(),
     n_actions: rand(1..20),
     buyer: buyer,
     seller: seller,
+    event: Event.all.sample
+  })
+end
+
+number_of_transactions.times do |i|
+  Transaction.create!({
+    price: rand(),
+    n_actions: rand(1..20),
+    seller: User.all.sample,
     event: Event.all.sample
   })
 end
