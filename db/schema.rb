@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_120312) do
+ActiveRecord::Schema.define(version: 2021_11_29_142109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,9 @@ ActiveRecord::Schema.define(version: 2021_11_29_120312) do
     t.integer "n_actions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "event_id", null: false
     t.index ["buyer_id"], name: "index_transactions_on_buyer_id"
+    t.index ["event_id"], name: "index_transactions_on_event_id"
     t.index ["seller_id"], name: "index_transactions_on_seller_id"
   end
 
@@ -60,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_120312) do
 
   add_foreign_key "investments", "events"
   add_foreign_key "investments", "users"
+  add_foreign_key "transactions", "events"
   add_foreign_key "transactions", "users", column: "buyer_id"
   add_foreign_key "transactions", "users", column: "seller_id"
 end
