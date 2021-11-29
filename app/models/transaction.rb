@@ -1,16 +1,18 @@
 class Transaction < ApplicationRecord
-  after_save :add_to_investments
+  after_validation :add_to_investments
 
-  belongs_to :buyer, class_name: 'User'
+  belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :seller, class_name: 'User'
   belongs_to :event
 
   def add_to_investments
     if buyer_id_changed?
-      self.buyer.investments.find_by(event: self.event).n_actions += n_actions
-      self.seller.investments.find_by(event: self.event).n_actions -= n_actions
-      self.buyer.points -= price * n_actions
-      self.seller.points += price * n_actions
+      buyer_invest_actions = buyer.investments.find_by(event: event)
+      seller_invest_actions = seller.investments.find_by(event: event)
+      buyer_invest_actions.update(n_actions: seller_invest_actions.n_actions + n_actions)
+      seller_invest_actions.update(n_actions: seller_invest_actions.n_actions - n_actions)
+      buyer.update(points: buyer.points - (price * n_actions))
+      seller.update(points: buyer.points + (price * n_actions))
     end
   end
 end

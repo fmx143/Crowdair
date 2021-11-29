@@ -63,13 +63,13 @@ puts "Creating a seed of #{number_of_transactions} fake transactions..."
 
 number_of_transactions.times do |i|
   buyer, seller = User.all.sample(2)
-  Transaction.create!({
+  transaction = Transaction.create!({
     price: rand(),
     n_actions: rand(1..20),
-    buyer: buyer,
     seller: seller,
     event: Event.all.sample
   })
+  transaction.update(buyer_id: buyer.id)
 end
 
 number_of_transactions.times do |i|
