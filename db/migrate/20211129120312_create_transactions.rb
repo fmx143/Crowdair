@@ -1,7 +1,7 @@
 class CreateTransactions < ActiveRecord::Migration[6.1]
   def change
     create_table :transactions do |t|
-      t.references :buyer, null: false
+      t.references :buyer, null: true
       t.references :seller, null: false
       t.float :price
       t.integer :n_actions
