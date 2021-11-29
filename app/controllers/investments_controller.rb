@@ -7,4 +7,9 @@ class InvestmentsController < ApplicationController
 
   def show
   end
+
+  private
+
+  def investment_params
+  end
 end
