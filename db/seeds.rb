@@ -1,3 +1,4 @@
+
 require 'faker'
 
 number_of_users = 10

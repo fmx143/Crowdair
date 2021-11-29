@@ -13,4 +13,5 @@ class Transaction < ApplicationRecord
       self.seller.points += price * n_actions
     end
   end
+  validates :price, numericality: { in: 0..1 }
 end
