@@ -1,0 +1,19 @@
+<div class="container">
+  <div>
+    <h1>Crowdair</h1>
+    <h2>list of all available events:</h2>
+
+
+
+    <div class="card-product">
+      <%= @events.each do |event| %>
+          <div class="">
+              <h2><%= @event.title %></h2>
+              <p> <%= @event.description %> </p>
+          </div>
+            <%= link_to "More info" %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
