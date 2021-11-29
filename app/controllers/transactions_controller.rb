@@ -13,6 +13,6 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:transaction).permit(:buyer_id, :seller_id, :price, :n_actions)
+    params.require(:transaction).permit(:price, :n_actions)
   end
 end
