@@ -1,0 +1,19 @@
+<div class="container">
+  <div>
+    <h1>Crowdair</h1>
+    <h2>list of all available events:</h2>
+
+
+    <div class="card-product">
+      <% @events.each do |event| %>
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+          <div class="">
+              <h2><%= event.title %></h2>
+              <p> <%= event.description %> </p>
+          </div>
+            <%= link_to "More infos", event_path(event.id) %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
