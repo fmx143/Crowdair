@@ -7,6 +7,7 @@ class EndDateValidator < ActiveModel::Validator
 end
 
 class Event < ApplicationRecord
+  has_many :transactions
   include ActiveModel::Validations
   validates_with EndDateValidator # End date must be in the future!
   validates :title, presence: true, length: { in: 5..100 }

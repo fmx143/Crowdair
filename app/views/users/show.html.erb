@@ -1,0 +1,19 @@
+<div class="container">
+  <h1> Dashboard of <%= @user.username %> </h1>
+
+  <h2>Current amount of actions: <%= "number of actions here" %> </h2>
+
+  <h2>You are currently positionned on :</h2>
+  <div class="card-product">
+    <% @user.transactions.each do |transaction| %>
+    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="">
+            <h2><%= transaction.event.title %></h2>
+            <p> <%= transaction.event.description %> </p>
+        </div>
+          <%= link_to "More infos" %>
+        </div>
+    <% end %>
+  </div>
+
+</div>
