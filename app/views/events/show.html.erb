@@ -17,7 +17,10 @@
   </div>
   <div class="technical-content row">
     <div class="col-12 col-sm-6">
-      <div class="graph-container">Chart container.</div>
+      <div class="graph-container">
+        <%= line_chart(@event.transactions.pluck(:created_at, :price),
+              xtitle: "Time", ytitle: "Price", curve: false, points: false) %>
+      </div>
     </div>
     <div class="col-12 col-sm-6">
       <%= render("trading_pannel") %>
