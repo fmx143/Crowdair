@@ -3,4 +3,8 @@ class PagesController < ApplicationController
 
   def home
   end
+
+  def ranking
+    @users = User.order(points: :desc)
+  end
 end

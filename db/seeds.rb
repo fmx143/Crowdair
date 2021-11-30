@@ -53,7 +53,7 @@ puts "Creating a seed of #{number_of_events} fake events..."
 number_of_events.times do |i|
   Event.create!({
     title: Faker::Lorem.question,
-    end_date: Date.today+rand(100),
+    end_date: Faker::Time.forward(days: 100),
     description: Faker::Lorem.paragraph_by_chars(number: 200)
   })
 end
