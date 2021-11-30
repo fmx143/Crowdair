@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_142109) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.bigint "buyer_id", null: false
+    t.bigint "buyer_id"
     t.bigint "seller_id", null: false
     t.float "price"
     t.integer "n_actions"
