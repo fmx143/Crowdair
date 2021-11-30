@@ -1,9 +1,14 @@
 require 'faker'
 require 'json'
 
+
+number_of_users = 10
+number_of_events = 10
+number_of_transactions = 600
+min_points = 10
+max_points = 100
+
 filepath = 'app/assets/data/kalshi.json'
-
-
 kalshi_json = File.read(filepath)
 kalshi_markets = JSON.parse(kalshi_json)
 
@@ -15,6 +20,7 @@ def valid_transaction_params
   while (price * n_actions) > buyer.points || n_actions > seller.investments.find_by(event: event).n_actions
     price = rand()
     n_actions = rand(1..20)
+    buyer, seller = User.all.sample(2)
   end
   {
     params: {
@@ -25,13 +31,6 @@ def valid_transaction_params
   },
   buyer: buyer}
 end
-
-number_of_users = 50
-number_of_events = 10
-number_of_transactions = 600
-min_points = 10
-max_points = 100
-
 
 puts "Destroying all Investment... 💣"
 Investment.destroy_all
@@ -90,13 +89,17 @@ puts "Creating a seed of #{number_of_transactions} fake transactions..."
 number_of_transactions.times do |i|
   transaction = Transaction.create!(valid_transaction_params[:params])
   transaction.update(buyer_id: valid_transaction_params[:buyer].id)
+  print "." if (i)%10 == 0
+  puts "#{i+1} transactions created" if (i+1)%40 == 0
 end
 
 number_of_transactions.times do |i|
   Transaction.create!(valid_transaction_params[:params])
+  print "." if (i)%10 == 0
+  puts "#{i+1} offers created" if (i+1)%40 == 0
 end
 
 
-
-puts "Users table now contains #{Transaction.count} Transaction."
-puts "Users table now contains #{Investment.count} Investment."
+puts ""
+puts "Users table now contains #{Transaction.count} Transactions."
+puts "Users table now contains #{Investment.count} Investments."
