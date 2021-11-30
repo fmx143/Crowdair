@@ -1,0 +1,12 @@
+<div class="containerr">
+  <div class= "form_new">
+    <h2>Edit your event!</h2>
+      <div>
+        <%= simple_form_for @event do |f| %>
+        <%= f.input :title %>
+        <%= f.input :description %>
+        <%= f.input :end_date %>
+        <%= f.submit "Edit my event", class:"button" %> <%= link_to "Cancel" %>
+      <% end %>
+  </div>
+</div>
