@@ -1,0 +1,9 @@
+<div class="d-flex align-items-center justify-content-center mt-3">
+  <div class="bg-white rounded p-3 shadow">
+    <h3>Confirm transaction (price: <%= '%.2f' % @transaction.price %>):</h3>
+    <%= simple_form_for [@transaction.event, @transaction] do |f| %>
+      <%= f.input :n_actions %>
+      <%= f.submit "Buy", class: 'button' %> <%= link_to "Cancel" %>
+    <% end %>
+  </div>
+</div>
