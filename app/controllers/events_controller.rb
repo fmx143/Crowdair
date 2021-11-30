@@ -20,12 +20,8 @@ class EventsController < ApplicationController
   def show
     @user = current_user
     @event = Event.find(params[:id])
-    @actions_held = Investment.where(
-      ["user_id = ? and event_id = ?", @user.id, @event.id]
-    ).first.n_actions
-    @offers = Transaction.where(
-      ["buyer_id IS ? and event_id = ?", nil, @event.id]
-    ).order(:price).limit(5)
+    @actions_held = @user.investments.find_by(event: @event).n_actions
+    @offers = @event.transactions.where(buyer_id: nil)
   end
 
   private
