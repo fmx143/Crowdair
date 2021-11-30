@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-  after_update :add_to_investments
+  before_update :add_to_investments
 
   belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :seller, class_name: 'User'
@@ -9,6 +9,7 @@ class Transaction < ApplicationRecord
   validate :points_validator
 
   def add_to_investments
+    byebug
     if buyer_id_changed?
       buyer_invest_actions = buyer.investments.find_by(event: event)
       seller_invest_actions = seller.investments.find_by(event: event)
