@@ -1,1 +1,22 @@
 // Specific CSS for your home-page
+
+.landing {
+  background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p1/695297-bougie-bougie-graphique-de-l-39-investissement-boursier-gratuit-vectoriel.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing a {
+  font-size: 100px;
+  color: white;
+}
+
+.landing a:hover {
+    text-decoration: none;
+    font-size: 140px;
+  }
