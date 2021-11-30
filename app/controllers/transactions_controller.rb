@@ -38,7 +38,7 @@ class TransactionsController < ApplicationController
     params.require(:transaction).permit(:price, :n_actions)
   end
 
-def buy_transaction_params
+  def buy_transaction_params
     params.require(:transaction).permit(:n_actions)
   end
 end
