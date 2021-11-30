@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = Transaction.new(create_transaction_params)
     @event = Event.find(params[:event_id])
     @transaction.event = @event
     @transaction.seller = current_user
@@ -17,9 +17,14 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transaction = Transaction.find(params[:id])
-    @transaction.update(buyer_id: current_user.id)
-    redirect_to event_path(@transaction.event)
+    @initial_transaction = Transaction.find(params[:id])
+    if buy_transaction_params[:n_actions].to_i < @initial_transaction.n_actions
+      @new_transaction = @initial_transaction.dup
+      @new_transaction.update(n_actions: (@initial_transaction.n_actions - buy_transaction_params[:n_actions].to_i))
+      @initial_transaction.update(n_actions: buy_transaction_params[:n_actions].to_i)
+    end
+    @initial_transaction.update(buyer_id: current_user.id)
+    redirect_to event_path(@initial_transaction.event)
   end
 
   def destroy
@@ -29,7 +34,11 @@ class TransactionsController < ApplicationController
 
   private
 
-  def transaction_params
+  def create_transaction_params
     params.require(:transaction).permit(:price, :n_actions)
+  end
+
+def buy_transaction_params
+    params.require(:transaction).permit(:n_actions)
   end
 end
