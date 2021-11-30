@@ -10,7 +10,6 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.user = current_user
     @transaction.save ? (redirect_to event_path(@event)) : (render :new)
   end
 
