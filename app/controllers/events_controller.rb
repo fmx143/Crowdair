@@ -21,10 +21,10 @@ class EventsController < ApplicationController
     @user = current_user
     @event = Event.find(params[:id])
     @actions_held = Investment.where(
-      ["user = ? and event = ?", @user, @event]
-    ).n_actions
+      ["user_id = ? and event_id = ?", @user.id, @event.id]
+    ).first.n_actions
     @offers = Transaction.where(
-      ["buyer = ? and event = ?", nil, @event]
+      ["buyer_id = ? and event_id = ?", nil, @event.id]
     ).order(:price).limit(5)
   end
 
