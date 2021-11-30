@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-  after_update :add_to_investments
+  before_update :add_to_investments
 
   belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :seller, class_name: 'User'
