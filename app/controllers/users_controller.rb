@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
   def show
     @user = current_user
-    # @all_events = Event.joins(:buyer_transactions).where(buyer_transactions: { user: @user })
-    # @events = Event.joins().where(buyer_transactions.id_buyer = current_user)
     Event.joins(buyer_transactions: :current_user)
+
+    @investments = Investment.all.where(user_id: current_user.id)
+
+
+    # obtenir le nombre d'actions spécifique à un investement
   end
 
   def update

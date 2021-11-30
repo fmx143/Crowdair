@@ -1,0 +1,9 @@
+<ol>
+  <% @users.each do |user| %>
+    <li>
+    <%= user.username %>
+    --
+    <%= user.points %>
+    </li>
+  <% end %>
+</ol>
