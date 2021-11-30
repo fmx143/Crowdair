@@ -26,9 +26,9 @@ def valid_transaction_params
   buyer: buyer}
 end
 
-number_of_users = 10
-number_of_events = 20
-number_of_transactions = 30
+number_of_users = 50
+number_of_events = 10
+number_of_transactions = 600
 min_points = 10
 max_points = 100
 
