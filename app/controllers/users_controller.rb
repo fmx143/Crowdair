@@ -4,8 +4,6 @@ class UsersController < ApplicationController
     Event.joins(buyer_transactions: :current_user)
 
     @investments = Investment.all.where(user_id: current_user.id)
-
-
     # obtenir le nombre d'actions spécifique à un investement
   end
 
