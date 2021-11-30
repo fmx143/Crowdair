@@ -1,6 +1,7 @@
 <div class="card-selling">
-  <div class="card-selling-infos">
-    <p>You hold <%= @actions_held %> actions in this event.</p>
-    <%= link_to('Sell', new_event_transaction_path(@event), class: "sell") %>
-  </div>
+  <p>You currently hold
+    <strong><%= @actions_held %></strong>
+    actions in this event.
+  </p>
+  <%= link_to('Sell', new_event_transaction_path(@event), class: "sell") %>
 </div>

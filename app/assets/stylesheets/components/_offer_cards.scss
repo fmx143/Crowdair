@@ -1,4 +1,4 @@
-.card-selling {
+.card-offer {
   width: 100%;
   overflow: hidden;
   height: 80px;
@@ -8,22 +8,27 @@
   justify-content: space-between;
   padding: 16px 32px;
   font-size: 18px;
+  border-bottom: 1px solid rgb(216, 216, 216);
 }
 
-.card-selling p {
+.card-offer p {
   opacity: 0.7;
   margin-bottom: 0;
 }
 
-.card-selling a {
-  color: rgb(34, 80, 230);
-  border: 1px solid rgb(34, 80, 230);
+.card-offer a {
+  color: rgb(230, 112, 34);
+  border: 1px solid rgb(230, 112, 34);
   border-radius: 1em;
   padding: 5px 20px;
   opacity: 0.7;
 }
 
-.card-selling a:hover {
+.card-offer a:hover {
   opacity: 1;
   text-decoration: none;
+}
+
+.card-offer:last-child {
+  border-bottom: none;
 }

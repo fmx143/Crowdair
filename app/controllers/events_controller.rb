@@ -24,7 +24,7 @@ class EventsController < ApplicationController
       ["user_id = ? and event_id = ?", @user.id, @event.id]
     ).first.n_actions
     @offers = Transaction.where(
-      ["buyer_id = ? and event_id = ?", nil, @event.id]
+      ["buyer_id IS ? and event_id = ?", nil, @event.id]
     ).order(:price).limit(5)
   end
 

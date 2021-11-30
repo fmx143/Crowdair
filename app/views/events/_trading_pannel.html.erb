@@ -1,10 +1,10 @@
-<div class="trading-pannel">
-  <div class="selling">
-    <%= render("selling_card") %>
-  </div>
-  <div class="buying">
-    <% @offers.each do |offer| %>
-      <%= render("offer_card", locals: { offer: offer }) %>
-    <% end %>
+<div class="container-temp">
+  <div class="trading-pannel">
+    <div class="selling">
+      <%= render("selling_card") %>
+    </div>
+    <div class="buying">
+      <%= render("offer_cards") %>
+    </div>
   </div>
 </div>

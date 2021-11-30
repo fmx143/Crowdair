@@ -1,8 +1,21 @@
+.container-temp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .trading-pannel {
+  width: 600px;
+  // background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .selling {
+  width: 100%;
+  margin-bottom: 5px;
 }
 
 .buying {
+  width: 100%;
 }
