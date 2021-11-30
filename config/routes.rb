@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'ranking', to: 'pages#ranking'
   resources :events do
-    resources :transactions, only: [:new, :create, :destroy]
+    resources :transactions, only: [:new, :create, :edit, :update, :destroy]
   end
   resources :users
   resources :offers
