@@ -1,9 +1,9 @@
 <div class="container">
-  <h1> Dashboard of <%= @user.username %> </h1>
-
-  <h3>Current amount of points: <%= @user.points %> </h3>
-
-  <h3>You are currently positionned on :</h3>
+  <div>
+    <h1> Dashboard of <%= @user.username %> </h1>
+    <h3>Current amount of points: <%= @user.points %> </h3>
+    <h3>You are currently positionned on :</h3>
+  </div>
 
   <div class="row">
   <% @investments.each do |investment| %>
@@ -14,7 +14,7 @@
             <p> <%= investment.event.description %> </p>
             <p style="color: red;"> Remaining actions : <strong><%= investment.n_actions %></strong> </p>
         </div>
-         <p> <%= link_to "More infos", events_path %> </p>
+          <%= link_to "More infos", events_path, class:"button-info" %>
         </div>
     <% end %>
     </div>
