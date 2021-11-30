@@ -3,7 +3,7 @@
     <h3>Confirm transaction (price: <%= '%.2f' % @transaction.price %>):</h3>
     <%= simple_form_for [@transaction.event, @transaction] do |f| %>
       <%= f.input :n_actions %>
-      <%= f.submit "Buy", class: 'button' %> <%= link_to "Cancel" %>
+      <%= f.submit "Buy", class: 'button' %> <%= link_to "Cancel", event_path(@transaction.event) %>
     <% end %>
   </div>
 </div>

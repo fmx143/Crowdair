@@ -4,7 +4,7 @@
     <%= simple_form_for [@event, @transaction] do |f| %>
       <%= f.input :n_actions %>
       <%= f.input :price %>
-      <%= f.submit "Submit my offer", class: 'button' %> <%= link_to "Cancel" %>
+      <%= f.submit "Submit my offer", class: 'button' %> <%= link_to "Cancel", event_path(@event) %>
     <% end %>
   </div>
 </div>
