@@ -9,6 +9,6 @@
       coins.
     </p>
     <%# TODO: IMPLEMENT THE LOGIC OF BUY BUTTON %>
-    <%= link_to('Buy', events_path, class: "buy") %>
+    <%= link_to('Buy', edit_event_transaction_path(@event, offer), class: "buy") %>
   </div>
 <% end %>

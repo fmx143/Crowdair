@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center justify-content-center mt-3">
   <div class="bg-white rounded p-3 shadow">
     <h3>Submit your offer !</h3>
-    <%= simple_form_for [@event, @transaction] do |f| %>
+    <%= simple_form_for [@transaction.event, @transaction] do |f| %>
       <%= f.input :n_actions %>
       <%= f.input :price %>
       <%= f.submit "Submit my offer", class: 'button' %> <%= link_to "Cancel" %>

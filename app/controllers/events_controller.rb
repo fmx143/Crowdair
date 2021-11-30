@@ -21,7 +21,7 @@ class EventsController < ApplicationController
     @user = current_user
     @event = Event.find(params[:id])
     @actions_held = @user.investments.find_by(event: @event).n_actions
-    @offers = @event.transactions.where(buyer_id: nil)
+    @offers = @event.transactions.where(buyer_id: nil).order(price: :asc)
   end
 
   private

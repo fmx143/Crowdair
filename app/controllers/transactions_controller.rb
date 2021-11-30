@@ -9,19 +9,17 @@ class TransactionsController < ApplicationController
     @event = Event.find(params[:event_id])
     @transaction.event = @event
     @transaction.seller = current_user
-    @transaction.save ? (redirect_to user_path(@transaction.user_id)) : (render :new)
+    @transaction.save ? (redirect_to event_path(@event)) : (render :new)
   end
 
   def edit
     @transaction = Transaction.find(params[:id])
-    @event = @transaction.event
-    @user = current_user
   end
 
   def update
     @transaction = Transaction.find(params[:id])
-    @transaction.update(transaction_params)
-    redirect_to(user_path(@transaction.user))
+    @transaction.update(buyer_id: current_user.id)
+    redirect_to event_path(@transaction.event)
   end
 
   def destroy
