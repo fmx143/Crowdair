@@ -34,10 +34,10 @@ dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample
   buyer, seller = User.all.sample(2)
-  price = real_price(event)
+  price = rand(0..100)
   n_actions = rand(1..20)
   while (price * n_actions) > buyer.points || n_actions > seller.investments.find_by(event: event).n_actions
-    price = real_price(event)
+    price = rand(0..100)
     n_actions = rand(1..20)
     buyer, seller = User.all.sample(2)
   end
