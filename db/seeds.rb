@@ -14,9 +14,9 @@ kalshi_markets = JSON.parse(kalshi_json)
 
 def real_price(event)
   if event.transactions.last
-    new_price = event.transactions.last.price + ((rand(0...100)/rand(20..40).to_f) * [-1,1].sample)
+    new_price = event.transactions.last.price + (rand(0...10) * [-1,1].sample)
     while new_price > 100 || new_price < 1
-      new_price = event.transactions.last.price + ((rand(0...100)/rand(20..40).to_f)* [-1,1].sample)
+      new_price = event.transactions.last.price + (rand(0...10)* [-1,1].sample)
     end
     price = new_price
   else
