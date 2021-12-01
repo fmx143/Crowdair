@@ -4,7 +4,7 @@ require 'json'
 
 number_of_users = 10
 number_of_events = 10
-number_of_transactions = 600
+number_of_transactions = 1000
 min_points = 10
 max_points = 100
 
@@ -12,11 +12,30 @@ filepath = 'app/assets/data/kalshi.json'
 kalshi_json = File.read(filepath)
 kalshi_markets = JSON.parse(kalshi_json)
 
+def real_price(event)
+  if event.transactions.last
+    new_price = event.transactions.last.price + ((rand(0...100)/rand(2000..4000).to_f) * [-1,1].sample)
+    while new_price > 1.0 || new_price < 0.0
+      new_price = event.transactions.last.price + ((rand(0...100)/rand(2000..4000).to_f)* [-1,1].sample)
+    end
+    price = new_price
+  else
+    price = rand(0...100)/100.0
+  end
+  price
+end
+
+dates = []
+number_of_transactions.times do
+  dates << Faker::Time.between(from: 1.day.ago, to: DateTime.now)
+end
+dates.sort_by! { |s| s}
+
 def valid_transaction_params
+  event = Event.all.sample
   buyer, seller = User.all.sample(2)
   price = rand(0..100)
   n_actions = rand(1..20)
-  event = Event.all.sample
   while (price * n_actions) > buyer.points || n_actions > seller.investments.find_by(event: event).n_actions
     price = rand(0..100)
     n_actions = rand(1..20)
@@ -28,7 +47,7 @@ def valid_transaction_params
     n_actions: n_actions,
     seller: seller,
     event: event
-  },
+    },
   buyer: buyer}
 end
 
@@ -69,7 +88,7 @@ puts "Creating a seed of #{users_list.size} fake Users..."
 
 users_list.each_with_index do |user, i|
   User.create!(user)
-  puts "> Created User ##{i + 1}"
+  print "> Created User ##{i + 1} \r"
 end
 
 puts "Users table now contains #{User.count} users."
@@ -84,20 +103,26 @@ number_of_events.times do |i|
 end
 puts "Users table now contains #{Event.count} users."
 
-puts "Creating a seed of #{number_of_transactions} fake transactions..."
+puts "Creating a seed of #{number_of_transactions*2} fake transactions..."
+
 
 number_of_transactions.times do |i|
   transaction = Transaction.create!(valid_transaction_params[:params])
-  transaction.update(buyer_id: valid_transaction_params[:buyer].id)
-  print "." if (i)%10 == 0
-  puts "#{i+1} transactions created" if (i+1)%40 == 0
+  transaction.update(buyer_id: valid_transaction_params[:buyer].id, updated_at: dates[i])
+  print "#{i+1} transactions created \r"
 end
 
+puts "#{number_of_transactions} transactions created"
+
 number_of_transactions.times do |i|
-  Transaction.create!(valid_transaction_params[:params])
-  print "." if (i)%10 == 0
-  puts "#{i+1} offers created" if (i+1)%40 == 0
+  transaction = Transaction.create!(valid_transaction_params[:params])
+  transaction.update(updated_at: dates[i])
+  print "#{i+1} offers created \r"
 end
+
+
+
+puts "#{number_of_transactions} offers created"
 
 
 puts ""
