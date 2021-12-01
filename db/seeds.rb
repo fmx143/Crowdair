@@ -2,11 +2,11 @@ require 'faker'
 require 'json'
 
 
-number_of_users = 10
+number_of_users = 20
 number_of_events = 10
-number_of_transactions = 1000
-min_points = 10
-max_points = 100
+number_of_transactions = 200
+min_points = 100
+max_points = 1000
 
 filepath = 'app/assets/data/kalshi.json'
 kalshi_json = File.read(filepath)
@@ -30,17 +30,23 @@ number_of_transactions.times do
   dates << Faker::Time.between(from: 1.day.ago, to: DateTime.now)
 end
 dates.sort_by! { |s| s}
-
 def valid_transaction_params
   event = Event.all.sample
-  buyer, seller = User.all.sample(2)
   price = real_price(event)
   n_actions = rand(1..20)
-  while (price * n_actions) > buyer.points || n_actions > seller.investments.find_by(event: event).n_actions
+  buyer, seller = User.all.sample(2)
+  actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
+  seller_investments = seller.investments.find_by(event: event).n_actions
+
+  while (price * n_actions) > buyer.points || n_actions > seller_investments - actions_on_offer
+    event = Event.all.sample
     price = real_price(event)
     n_actions = rand(1..20)
     buyer, seller = User.all.sample(2)
+    actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
+    seller_investments = seller.investments.find_by(event: event).n_actions
   end
+
   {
     params: {
     price: price,
@@ -65,13 +71,13 @@ users_list = [
     username: "marcel",
     email: "mbower@gmail.com",
     password: "abcdef",
-    points: 89
+    points: 10000000
   },
   {
     username: "jane",
     email: "janetarzan@hotmail.com",
     password: "abcdef",
-    points: 67
+    points: 10000000
   }
 ]
 

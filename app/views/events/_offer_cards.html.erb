@@ -1,14 +1,19 @@
 <% @offers.each do |offer| %>
   <div class="card-offer">
     <p>
-      <strong><%= offer.seller.username %></strong>
-      is offering
+      <% if offer.seller == current_user %>
+        <strong>You</strong> are offering
+      <% else %>
+        <strong><%= offer.seller.username %></strong> is offering
+      <% end %>
       <strong><%= offer.n_actions %></strong>
       actions for
       <strong><%= '%.2f' % offer.price %></strong>
       coins.
     </p>
     <%# TODO: IMPLEMENT THE LOGIC OF BUY BUTTON %>
-    <%= link_to('Buy', edit_event_transaction_path(@event, offer), class: "buy") %>
+    <% unless offer.seller == current_user  %>
+      <%= link_to('Buy', event_transaction_buy_path(@event, offer), class: "buy") %>
+    <% end %>
   </div>
 <% end %>
