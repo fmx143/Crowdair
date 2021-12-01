@@ -18,3 +18,20 @@
   <%= render('technical_container')  %>
   <%= link_to("Back to Events", events_path, class: "button-main") %>
 </div>
+
+<div class="container">
+  <div class="row">
+    <% @data.each do |new| %>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"> <%= new['title'] %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"> <%= new['source'] %> </h6>
+            <p class="card-text"> <%= new['description'] %></p>
+            <a href="<%= new['url'] %>" class="card-link"> Acces this article</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
