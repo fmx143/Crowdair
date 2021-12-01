@@ -1,0 +1,68 @@
+// button for the more infos-infos, etc
+
+.button-main {
+  border: none;
+  background-color: $blue;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  line-height: normal;
+  width: fit-content;
+  padding: 5px 10px;
+}
+
+.button-main:hover {
+  border: none;
+  background-color: $dark-blue;
+  color: white;
+  text-decoration: none;
+}
+
+.button-cancel {
+  border: none;
+  background-color: $orange;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  line-height: normal;
+  width: fit-content;
+  padding: 5px 10px;
+}
+
+.button-cancel:hover {
+  background-color: $dark-orange;
+  color: white;
+  text-decoration: none;
+}
+
+// buy, sell, cancel
+
+.button-buy {
+  border: 1px solid $blue;
+  border-radius: 0.7em;
+  text-align: center;
+  color: $blue;
+  line-height: normal;
+  width: fit-content;
+  padding: 5px 10px;
+}
+.button-buy:hover {
+  border: 1px solid $dark-blue;
+  color: $dark-blue;
+  text-decoration: none;
+}
+
+.button-sell {
+  border: 1px solid $orange;
+  border-radius: 0.7em;
+  text-align: center;
+  color: $orange;
+  line-height: normal;
+  width: fit-content;
+  padding: 5px 10px;
+}
+.button-sell:hover {
+  border: 1px solid $dark-orange;
+  color: $dark-orange;
+  text-decoration: none;
+}

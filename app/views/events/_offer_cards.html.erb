@@ -13,7 +13,7 @@
     </p>
     <%# TODO: IMPLEMENT THE LOGIC OF BUY BUTTON %>
     <% unless offer.seller == current_user  %>
-      <%= link_to('Buy', event_transaction_buy_path(@event, offer), class: "buy") %>
+      <%= link_to('Buy', event_transaction_buy_path(@event, offer), class: "button-buy") %>
     <% end %>
   </div>
 <% end %>
