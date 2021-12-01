@@ -14,13 +14,13 @@ kalshi_markets = JSON.parse(kalshi_json)
 
 def real_price(event)
   if event.transactions.last
-    new_price = event.transactions.last.price + ((rand(0...100)/rand(2000..4000).to_f) * [-1,1].sample)
-    while new_price > 1.0 || new_price < 0.0
-      new_price = event.transactions.last.price + ((rand(0...100)/rand(2000..4000).to_f)* [-1,1].sample)
+    new_price = event.transactions.last.price + ((rand(0...100)/rand(20..40).to_f) * [-1,1].sample)
+    while new_price > 100 || new_price < 1
+      new_price = event.transactions.last.price + ((rand(0...100)/rand(20..40).to_f)* [-1,1].sample)
     end
     price = new_price
   else
-    price = rand(0...100)/100.0
+    price = rand(0...100)
   end
   price
 end
@@ -34,10 +34,10 @@ dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample
   buyer, seller = User.all.sample(2)
-  price = rand(0..100)
+  price = real_price(event)
   n_actions = rand(1..20)
   while (price * n_actions) > buyer.points || n_actions > seller.investments.find_by(event: event).n_actions
-    price = rand(0..100)
+    price = real_price(event)
     n_actions = rand(1..20)
     buyer, seller = User.all.sample(2)
   end
