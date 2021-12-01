@@ -11,6 +11,13 @@ class Event < ApplicationRecord
   has_many :transactions
   has_many :investments
 
+  include ActiveModel::Validations
+  validates_with EndDateValidator # End date must be in the future!
+  validates :title, presence: true, length: { in: 5..100 }
+  validates :description, presence: true, length: { in: 10..300 }
+
+  private
+
   def add_initial_investment
     User.all.each do |user|
       Investment.create!({
@@ -20,8 +27,4 @@ class Event < ApplicationRecord
       })
     end
   end
-  include ActiveModel::Validations
-  validates_with EndDateValidator # End date must be in the future!
-  validates :title, presence: true, length: { in: 5..100 }
-  validates :description, presence: true, length: { in: 10..300 }
 end

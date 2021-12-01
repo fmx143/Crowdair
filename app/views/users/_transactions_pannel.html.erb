@@ -1,0 +1,25 @@
+<div class="transactions_pannel">
+  <h3>Recent transactions</h3>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Event</th>
+      <th>Actions</th>
+      <th>Price</th>
+      <th>Partner</th>
+      <th>Flow</th>
+    </tr>
+    <% @transactions.each do |t| %>
+      <div class="card-transaction">
+        <tr>
+          <td><%= t.updated_at.strftime("%d %b, %H:%M") %></td>
+          <td><%= link_to("#{t.event.title.slice(..20)}...", event_path(t.event_id)) %></td>
+          <td><%= t.n_actions %></td>
+          <td><%= '%.1f' % t.price %></td>
+          <td><%= User.find((current_user == t.buyer ? t.seller_id : t.buyer_id)).username %></td>
+          <td><%= "#{current_user == t.buyer ? '-' : '+'}#{'%.1f' % (t.n_actions * t.price)}" %></td>
+        </tr>
+      </div>
+    <% end %>
+  </table>
+</div>
