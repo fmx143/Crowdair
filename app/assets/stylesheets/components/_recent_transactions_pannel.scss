@@ -5,18 +5,22 @@
   height: 100vh;
 }
 
-// .transactions_pannel {
-//   width: 600px;
-// }
+.transactions_pannel h3 {
+  padding: 18px 12px;
+  padding-top: 18px;
+  border-top: 1px solid #ddd;
+  font-weight: bold;
+}
 
-.transactions_pannel {
+.transactions_pannel table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  border: 1px solid #ddd;
 }
 
 .transactions_pannel td,
 .transactions_pannel th {
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 8px;
 }
 
@@ -31,7 +35,28 @@
 .transactions_pannel th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
   background-color: $dark-blue;
   color: white;
+  width: 100px;
+}
+
+.td-updated_at {
+  font-weight: bold;
+}
+
+.td-event_title {
+  width: 200px;
+  color: $blue;
+}
+
+.td-flow-pos {
+  color: $blue;
+}
+
+.td-flow-neg {
+  color: $orange;
+}
+
+.td-centered {
+  text-align: center;
 }
