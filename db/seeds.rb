@@ -4,7 +4,7 @@ require 'json'
 
 number_of_users = 10
 number_of_events = 10
-number_of_transactions = 600
+number_of_transactions = 1000
 min_points = 10
 max_points = 100
 
@@ -14,9 +14,9 @@ kalshi_markets = JSON.parse(kalshi_json)
 
 def real_price(event)
   if event.transactions.last
-    new_price = event.transactions.last.price + ((rand(0...100)/rand(1000..4000).to_f) * [-1,1].sample)
+    new_price = event.transactions.last.price + ((rand(0...100)/rand(2000..4000).to_f) * [-1,1].sample)
     while new_price > 1.0 || new_price < 0.0
-      new_price = event.transactions.last.price + ((rand(0...100)/rand(1000..4000).to_f)* [-1,1].sample)
+      new_price = event.transactions.last.price + ((rand(0...100)/rand(2000..4000).to_f)* [-1,1].sample)
     end
     price = new_price
   else
@@ -25,13 +25,11 @@ def real_price(event)
   price
 end
 
-def created_time(event)
-  time = Faker::Time.backward(days: 1)
-  while time < event.transactions.last(2).first.created_at
-    time = Faker::Time.backward(days: 1)
-  end
-  time
+dates = []
+number_of_transactions.times do
+  dates << Faker::Time.between(from: 1.day.ago, to: DateTime.now)
 end
+dates.sort_by! { |s| s}
 
 def valid_transaction_params
   event = Event.all.sample
@@ -107,20 +105,23 @@ puts "Users table now contains #{Event.count} users."
 
 puts "Creating a seed of #{number_of_transactions*2} fake transactions..."
 
+
 number_of_transactions.times do |i|
   transaction = Transaction.create!(valid_transaction_params[:params])
-  transaction.update(buyer_id: valid_transaction_params[:buyer].id)
-  transaction.created_at = Faker::Time.backward(days: 1)
-  transaction.created_at = created_time(transaction.event)
+  transaction.update(buyer_id: valid_transaction_params[:buyer].id, updated_at: dates[i])
   print "#{i+1} transactions created \r"
 end
+
 puts "#{number_of_transactions} transactions created"
+
 number_of_transactions.times do |i|
-  Transaction.create!(valid_transaction_params[:params])
-  transaction.created_at = Faker::Time.backward(days: 1)
-  transaction.created_at = created_time(transaction.event)
+  transaction = Transaction.create!(valid_transaction_params[:params])
+  transaction.update(updated_at: dates[i])
   print "#{i+1} offers created \r"
 end
+
+
+
 puts "#{number_of_transactions} offers created"
 
 
