@@ -1,0 +1,12 @@
+<div class="technical-content row" id="event-<%= @event.id %>">
+  <div class="col-12 col-sm-6">
+    <div class="graph-container">
+      <%= line_chart(@event.transactions.where.not(buyer_id: nil).pluck(:updated_at, :price),
+            xtitle: "Time", ytitle: "Price", curve: false, points: false) %>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6">
+    <%= render("trading_pannel") %>
+  </div>
+</div>

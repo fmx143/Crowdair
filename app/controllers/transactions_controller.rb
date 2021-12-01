@@ -27,6 +27,18 @@ class TransactionsController < ApplicationController
     redirect_to event_path(@initial_transaction.event)
   end
 
+  def buy
+    @initial_transaction = Transaction.find(params[:id])
+    # if buy_transaction_params[:n_actions].to_i < @initial_transaction.n_actions
+    #   @new_transaction = @initial_transaction.dup
+    #   @new_transaction.update(n_actions: (@initial_transaction.n_actions - buy_transaction_params[:n_actions].to_i))
+    #   @initial_transaction.update(n_actions: buy_transaction_params[:n_actions].to_i)
+    # end
+    @initial_transaction.update(buyer_id: current_user.id)
+    # byebug
+    redirect_to event_path(@initial_transaction.event)
+  end
+
   def destroy
     @transaction = Transaction.find(params[:id])
     @transaction.destroy

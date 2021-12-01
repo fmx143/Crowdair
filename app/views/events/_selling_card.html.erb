@@ -1,8 +1,10 @@
 <div class="card-selling">
   <p>You currently hold
     <strong><%= @actions_held %></strong>
-    actions in this event.
+    actions in this event. Of which
+  <strong><%= @event.transactions.where(buyer_id: nil, seller_id: current_user.id).sum(:n_actions) %></strong>
+  are on sale
   </p>
-  <%# TODO: IMPLEMENT THE LOGIC OF SELL BUTTON %>
+    <%# TODO: IMPLEMENT THE LOGIC OF SELL BUTTON %>
   <%= link_to('Sell', new_event_transaction_path(@event), class: "sell") %>
 </div>

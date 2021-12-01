@@ -16,4 +16,4 @@ const initEventCable = () => {
   }
 };
 
-export { initeventCable };
+export { initEventCable };
