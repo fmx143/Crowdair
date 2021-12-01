@@ -45,6 +45,9 @@ class EventsController < ApplicationController
     data_news = JSON.parse(news_json)
     @data = data_news["data"]
     # @news["data"][0]["title"] --> accéder au titre du Hash dans array dans Data
+
+    @new_offer = Transaction.new
+
   end
 
   private

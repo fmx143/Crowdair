@@ -28,9 +28,12 @@ class Transaction < ApplicationRecord
   end
 
   def actions_validator
-    seller_actions = seller.investments.find_by(event: event).n_actions
-    if seller_actions < n_actions
-      errors.add(:n_actions, "You don't have enough actions")
+    unless buyer_id_changed?
+      seller_actions = seller.investments.find_by(event: event).n_actions
+      actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
+      if seller_actions - actions_on_offer < n_actions
+        errors.add(:n_actions, "You don't have enough actions, or change your previous offers")
+      end
     end
   end
 end
