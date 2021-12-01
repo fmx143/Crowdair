@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
   belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :seller, class_name: 'User'
   belongs_to :event
-  validates :price, numericality: { in: 0..1 }
+  validates :price, numericality: { in: 0..100 }
   validate :actions_validator
   validate :points_validator
 

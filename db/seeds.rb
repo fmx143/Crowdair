@@ -14,11 +14,11 @@ kalshi_markets = JSON.parse(kalshi_json)
 
 def valid_transaction_params
   buyer, seller = User.all.sample(2)
-  price = rand()
+  price = rand(0..100)
   n_actions = rand(1..20)
   event = Event.all.sample
   while (price * n_actions) > buyer.points || n_actions > seller.investments.find_by(event: event).n_actions
-    price = rand()
+    price = rand(0..100)
     n_actions = rand(1..20)
     buyer, seller = User.all.sample(2)
   end
