@@ -8,8 +8,16 @@ end
 
 class Event < ApplicationRecord
   after_save :add_initial_investment
+  after_save :add_end_date_scheduler
   has_many :transactions
   has_many :investments
+
+  include ActiveModel::Validations
+  validates_with EndDateValidator # End date must be in the future!
+  validates :title, presence: true, length: { in: 5..100 }
+  validates :description, presence: true, length: { in: 10..300 }
+
+  private
 
   def add_initial_investment
     User.all.each do |user|
@@ -20,8 +28,8 @@ class Event < ApplicationRecord
       })
     end
   end
-  include ActiveModel::Validations
-  validates_with EndDateValidator # End date must be in the future!
-  validates :title, presence: true, length: { in: 5..100 }
-  validates :description, presence: true, length: { in: 10..300 }
+
+  def add_end_date_scheduler
+    HandleEventEndingJob.set(wait_until: end_date).perform_later(self)
+  end
 end
