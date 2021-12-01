@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   require 'uri'
   require 'net/http'
-  require 'openssl'
 
   def index
     @events = Event.all
@@ -33,12 +32,19 @@ class EventsController < ApplicationController
     @actions_held = @user.investments.find_by(event: @event).n_actions
     @offers = @event.transactions.where(buyer_id: nil).order(price: :asc)
 
-    url = URI("https://google-news.p.rapidapi.com/v1/top_headlines?lang=en&country=US")
-    request = Net::HTTP::Get.new(url)
-    request["x-rapidapi-host"] = 'google-news.p.rapidapi.com'
-    request["x-rapidapi-key"] = '5d8e5d60aemsh5ede1e83832d521p1a3615jsn0f0668644bc2'
-    response = http.request(request)
-    puts response.read_body
+    uri = URI("http://api.mediastack.com/v1/news")
+    params = {
+      'access_key' => ENV["MEDIASTACK_ACCESS_KEY"],
+      'search' => @event.title,
+      'limit' => 6,
+      'languages' => 'en'
+    }
+    uri.query = URI.encode_www_form(params)
+    response = Net::HTTP.get_response(uri)
+    news_json = response.read_body
+    data_news = JSON.parse(news_json)
+    @data = data_news["data"]
+    # @news["data"][0]["title"] --> accéder au titre du Hash dans array dans Data
   end
 
   private
