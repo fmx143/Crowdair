@@ -2,36 +2,18 @@
   <div class="dashboard-header">
     <h3>Your stats</h3>
     <div class="dashboard-header-content row">
-      <div class="points-content col-12 col-md-8">
-        <div class="points-graph-container">
-          <%= line_chart(@points_history, ytitle: "Points", curve: false, points: false) %>
-        </div>
-      </div>
-      <div class="ranking-content col-12 col-md-4">
-        <div class="points-info">
-          <span style="margin: 0px 10px;">Current points balance</span>
-          <strong id="points-balance">
-            <%= @user.points %>
-            <i class="fas fa-coins" style="margin: 0px 10px;"></i>
-          </strong>
-        </div>
-        <p class="ranking-info">Ranking</p>
-        <strong id="user-ranking">
-          <%= @ranking_position %> / <%= @total_participants %>
-        </strong>
-        <%= image_tag('podium.png', id:'podium-icon') %>
-      </div>
+      <%= render('dashboard_header') %>
     </div>
   </div>
 
   <div class="dashboard-content row">
-    <div class="positions_pannel_container col-12 col-md-6">
+    <div class="positions_pannel_container flex-container  col-12 col-md-6">
       <h3>Your positions</h3>
       <div class="positions_pannel">
         <%= render('investment_cards') %>
       </div>
     </div>
-    <div class="transactions_pannel_container col-12 col-md-6">
+    <div class="transactions_pannel_container flex-container  col-12 col-md-6">
       <h3>Your latest transactions</h3>
       <%= render('transactions_pannel') %>
     </div>

@@ -3,6 +3,12 @@ class UsersController < ApplicationController
     @user = current_user
     Event.joins(buyer_transactions: :current_user)
     @investments = @user.investments
+    @engaged_investments = []
+    @investments.each do |investment|
+      n = @user.transactions.where(event_id: investment.event.id).count
+      @engaged_investments.push(investment) if n > 1
+    end
+
     @transactions = current_user.transactions.where.not(buyer_id: nil).order(updated_at: :desc)#.limit(12)
     @latest_transactions = @transactions.limit(12)
     @offers = current_user.transactions.where(buyer_id: nil)
