@@ -1,20 +1,8 @@
-.transactions_pannel_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.transactions_pannel h3 {
-  padding: 18px 12px;
-  padding-top: 18px;
-  border-top: 1px solid #ddd;
-  font-weight: bold;
-}
-
 .transactions_pannel table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   border: 1px solid #ddd;
+  background-color: $super-light-gray;
 }
 
 .transactions_pannel td,
@@ -24,7 +12,7 @@
 }
 
 .transactions_pannel tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: white;
 }
 
 .transactions_pannel tr:hover {
