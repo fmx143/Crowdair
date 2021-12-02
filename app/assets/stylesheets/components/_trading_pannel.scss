@@ -1,19 +1,20 @@
-.trading-pannel {
-  width: 100%;
-  max-width: 600px;
-  // box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  // border: 1px solid rgb(226, 226, 226);
-  max-height: 400px; // The height of the chart
+.trading {
+}
+
+.trading .t-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 9px;
+  margin: 10px 0px 0px 0px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+  padding: 16px 32px;
+  row-gap: 20px;
+}
+
+.trading .buying-panel {
+  max-height: 300px;
+  min-height: 400px;
   overflow: auto;
-}
-
-.selling {
-  width: 100%;
-  margin-bottom: 5px;
-  border: 1px solid rgb(226, 226, 226);
-}
-
-.buying {
-  border: 1px solid rgb(226, 226, 226);
-  width: 100%;
 }

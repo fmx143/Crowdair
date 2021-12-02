@@ -1,5 +1,3 @@
-
-<div class="show-container">
   <div class="descriptive-content">
     <h1><%= @event.title %></h1>
     <h5 class="end-date-info">
@@ -15,15 +13,18 @@
       <p><%= @event.description %></p>
     </div>
   </div>
-  <%= render('technical_container')  %>
-  <%= link_to("Back to Events", events_path, class: "button-main") %>
-</div>
 
-<div class="container">
+  <%= render('technical_container')  %>
+
+  <%= link_to("Back to Events", events_path, class: "button-main") %>
+
+<% if false %>
+
+<div class="d-flex justify-content-between">
   <div class="row">
     <% @data.each do |new| %>
       <div class="col">
-        <div class="card" style="width: 18rem; height: 15rem; margin-bottom: 5px;">
+        <div class="card mx-auto" style="width: 18rem; height: 15rem; margin-bottom: 5px;">
           <div class="card-body">
             <h5 class="card-title"> <%= new['title'] %></h5>
             <h6 class="card-subtitle mb-2 text-muted"> <%= new['source'] %> </h6>
@@ -35,3 +36,5 @@
     <% end %>
   </div>
 </div>
+
+<% end %>
