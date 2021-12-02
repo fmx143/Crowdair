@@ -25,6 +25,5 @@ import "chartkick/chart.js";
 import { initEventCable } from "../channels/event_channel";
 
 document.addEventListener("turbolinks:load", () => {
-  // Call your functions here, e.g:
   initEventCable();
 });

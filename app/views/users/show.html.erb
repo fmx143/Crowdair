@@ -4,16 +4,20 @@
     <h3>Current amount of points: <%= @user.points %> </h3>
   </div>
 
-  <div class="positions_pannel_container">
-    <%= render('positions_pannel') %>
-  </div>
-
-  <div class="transactions_pannel_container">
-    <%= render('transactions_pannel') %>
-  </div>
-
+  <ul class="list-inline tabs-underlined">
+    <li>
+      <a id="tab-positions" href="#" class="tab-underlined active">Positions</a>
+      <div class="positions_pannel_container">
+        <div class="positions_pannel">
+          <%= render('investment_cards') %>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a id="tab-recent-transactions" href="#" class="tab-underlined">Latest transactions</a>
+      <div class="transactions_pannel_container">
+        <%= render('transactions_pannel') %>
+      </div>
+    </li>
+  </ul>
 </div>
-
-
-<%# .each to do ; %>
- <%= render partial: 'shared/investment_card', locals: {investment: Investment.all.sample}%>

@@ -10,29 +10,3 @@
   border-top: 1px solid #ddd;
   font-weight: bold;
 }
-
-.active-offers {
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
-}
-
-.offers-list {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.offer-row a {
-  display: inline-block;
-}
-
-.offer-row {
-  border-bottom: 1px solid rgb(230, 230, 230);
-  display: flex;
-  justify-content: space-between;
-}
-
-.offer-row:first-child {
-  border-top: 1px solid rgb(230, 230, 230);
-}
