@@ -1,0 +1,27 @@
+<% @investments.where.not(n_actions: 10).each do |investment| %>
+  <div class="card-investment">
+    <div>
+      <%= link_to(investment.event.title, events_path, class:"event-title") %>
+      <p>You hold <strong><%= investment.n_actions %></strong> actions.</p>
+      <div class="active-offers">
+        <h5>Your active offers</h5>
+        <div class="offers-list">
+          <% event_offers = @offers.where(event: investment.event) %>
+          <% if event_offers.length == 0 %>
+          <div class="offer-row">
+            None.
+          </div>
+          <% end %>
+          <% event_offers.each do |offer| %>
+            <div class="offer-row">
+              <%= offer.n_actions %> actions for
+              <%= offer.price %> coins.
+              <%= link_to('Cancel offer') %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <%  %>
+    </div>
+  </div>
+<% end %>

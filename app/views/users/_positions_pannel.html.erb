@@ -1,17 +1,4 @@
 <div class="positions_pannel">
   <h3>Your positions</h3>
-  <div class="row">
-  <% @investments.each do |investment| %>
-    <div class="col-12 col-md-6 card-product">
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-        <div class="">
-            <h2><%= investment.event.title %></h2>
-            <p> <%= investment.event.description %> </p>
-            <p style="color: red;"> Remaining actions : <strong><%= investment.n_actions %></strong> </p>
-        </div>
-          <%= link_to "More infos", events_path, class:"button-main" %>
-        </div>
-    <% end %>
-    </div>
-  </div>
+  <%= render('investment_cards') %>
 </div>
