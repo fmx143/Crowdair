@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # validates :username, length: { in: 3..60 }
 
   def transactions
-    buyer_transactions + seller_transactions
+    buyer_transactions.or(seller_transactions)
   end
 
   def add_initial_portfolio
