@@ -2,6 +2,7 @@
   <%= link_to "#", class: "navbar-brand" do %>
     <%= image_tag('logo.jpg') %>
   <% end %>
+  <p class="navbar-title"> CROWDAIR </p>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -14,14 +15,11 @@
         <li class="nav-item active">
           <%= link_to "Home", events_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Messages", "#", class: "nav-link" %>
-        </li>
         <li class="nav-item dropdown">
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <%= image_tag "https://source.unsplash.com/random?/face", class: "avatar1 dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "My Dashboard", user_path(:id), class: "dropdown-item" %>
-            <%= link_to "Top 20 Users Ranking", "#", class: "dropdown-item" %>
+            <%= link_to "Top 20 Users Ranking", ranking_path, class: "dropdown-item" %>
             <%= link_to "Edit my profile", edit_user_path(current_user), class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>

@@ -27,3 +27,5 @@ import { initEventCable } from "../channels/event_channel";
 document.addEventListener("turbolinks:load", () => {
   initEventCable();
 });
+
+
