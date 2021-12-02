@@ -1,12 +1,11 @@
 <div class="container">
   <div>
-    <h1>Crowdair</h1>
-    <h2>list of all available events:</h2>
+    <h2 class="mt-4 mb-3"> list of all available events: </h2>
   </div>
   <div>
     <% @events.each do |event| %>
     <div class="card-product">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <img src="https://source.unsplash.com/random" />
           <div class="">
               <h2><%= event.title %></h2>
               <p> <%= event.description %> </p>

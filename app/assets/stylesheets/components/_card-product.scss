@@ -10,9 +10,13 @@
   margin: 2px 0;
 }
 
+.card-product:hover {
+  background: rgb(235, 230, 230);
+}
+
 .card-product img {
   height: 100%;
-  width: 120px;
+  width: 150px;
   object-fit: cover;
   margin-right: 5px;
 }
