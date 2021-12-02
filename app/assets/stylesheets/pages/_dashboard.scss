@@ -1,19 +1,32 @@
-.tabs-underlined {
+.dashboard-header {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  margin: 20px;
+}
+
+.dashboard-content {
   display: flex;
   align-items: flex-start;
 }
 
-.tabs-underlined .tab-underlined {
-  color: black;
-  padding: 8px;
-  margin: 8px 16px;
-  opacity: 0.4;
-  cursor: pointer;
-  text-decoration: none;
-  border-bottom: 4px solid transparent;
+.positions_pannel_container,
+.transactions_pannel_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.tabs-underlined .tab-underlined.active {
-  opacity: 1;
-  border-bottom: 3px solid #555555;
+.positions_pannel {
+  max-height: 600px;
+  overflow: auto;
+}
+
+.dashboard-content h3 {
+  padding: 18px 12px;
+  padding-top: 18px;
+  font-weight: bold;
 }

@@ -45,7 +45,7 @@
                   <strong><%= offer.price %></strong> coins.
                 </div>
                 <div class="cancel-offer">
-                  <%= link_to('Cancel <i class="fas fa-ban"></i>'.html_safe) %>
+                  <%= link_to('Cancel <i class="fas fa-ban"></i>'.html_safe, event_transaction_path(offer.event, offer), method: :delete, data: { confirm: "Are you sure?" }) %>
                 </div>
               </div>
             <% end %>

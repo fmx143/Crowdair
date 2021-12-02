@@ -1,23 +1,19 @@
 <div class="container">
-  <div>
+  <div class="dashboard-header">
     <h1> Dashboard of <%= @user.username %> </h1>
     <h3>Current amount of points: <%= @user.points %> </h3>
   </div>
 
-  <ul class="list-inline tabs-underlined">
-    <li>
-      <a id="tab-positions" href="#" class="tab-underlined active">Positions</a>
-      <div class="positions_pannel_container">
-        <div class="positions_pannel">
-          <%= render('investment_cards') %>
-        </div>
+  <div class="dashboard-content row">
+    <div class="positions_pannel_container col-12 col-md-6">
+      <h3>Positions</h3>
+      <div class="positions_pannel">
+        <%= render('investment_cards') %>
       </div>
-    </li>
-    <li>
-      <a id="tab-recent-transactions" href="#" class="tab-underlined">Latest transactions</a>
-      <div class="transactions_pannel_container">
-        <%= render('transactions_pannel') %>
-      </div>
-    </li>
-  </ul>
+    </div>
+    <div class="transactions_pannel_container col-12 col-md-6">
+      <h3>Latest transactions</h3>
+      <%= render('transactions_pannel') %>
+    </div>
+  </div>
 </div>

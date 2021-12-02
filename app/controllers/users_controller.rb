@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = current_user
     Event.joins(buyer_transactions: :current_user)
     @investments = Investment.all.where(user_id: current_user.id)
-    @transactions = current_user.transactions.where.not(buyer_id: nil).order(updated_at: :desc).limit(10)
+    @transactions = current_user.transactions.where.not(buyer_id: nil).order(updated_at: :desc).limit(12)
     @offers = current_user.transactions.where(buyer_id: nil)
   end
 
