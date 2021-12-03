@@ -8,8 +8,8 @@
       <th class="td-centered"><i class="fas fa-tag"></i> Price</th>
       <th><i class="fas fa-coins"></i> Flow</th>
     </tr>
-      <% day = @transactions.first.updated_at.day %>
-      <% @transactions.each do |t| %>
+      <% day = @latest_transactions.first.updated_at.day %>
+      <% @latest_transactions.each do |t| %>
         <div class="card-transaction">
           <% if t.updated_at.day != day %>
             <tr>
