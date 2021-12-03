@@ -104,7 +104,7 @@ number_of_events.times do |i|
   Event.create!({
     title: kalshi_markets["markets"].sample["title"],
     end_date: Faker::Time.forward(days: 100),
-    description: kalshi_markets["markets"].sample["settle_details"],
+    description: kalshi_markets["markets"].sample["settle_details"].truncate(300),
   })
 end
 puts "Users table now contains #{Event.count} users."

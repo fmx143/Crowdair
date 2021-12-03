@@ -19,10 +19,12 @@
         <div>
           <%= simple_form_for [@event, @transaction],
           wrapper: :inline_form,
-          html: { class: "row row-cols-lg-auto g-3 align-items-center" },
+          html: {
+            class: "row row-cols-lg-auto g-3 align-items-center"
+          },
           wrapper_mappings: { boolean: :inline_boolean} do |f| %>
-            <%= f.input :n_actions %>
-            <%= f.input :price %>
+            <%= f.input :n_actions, placeholder: 'Actions', input_html: {size: '1'}%>
+            <%= f.input :price, placeholder: 'Price'%>
             <%= f.submit "Submit my offer", class: "button-main" %> <%= link_to "Cancel", event_path(@event), class: "button-cancel" %>
           <% end %>
         </div>
