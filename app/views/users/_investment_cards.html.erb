@@ -1,4 +1,4 @@
-<% @investments.where.not(n_actions: 10).each_with_index do |investment, i| %>
+<% @engaged_investments.each_with_index do |investment, i| %>
 
   <% id_name = "activeOffers#{i}" %>
   <% id_heading = "headingOffers#{i}" %>
@@ -8,8 +8,8 @@
   <div class="card-investment">
     <div class="card-investment-content">
       <div class="event-text-data">
-        <%= link_to(investment.event.title, events_path, class:"event-title") %>
-        <p>You hold <strong class="user-n_actions"><%= investment.n_actions %></strong> actions.</p>
+        <%= link_to(investment.event.title, event_path(investment.event), class:"event-title") %>
+        <p>You hold <strong class="user-n_actions"><%= investment.n_actions %></strong> actions in this event.</p>
       </div>
       <div class="event-actions-data">
         <p>

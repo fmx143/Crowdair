@@ -2,9 +2,27 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     Event.joins(buyer_transactions: :current_user)
-    @investments = Investment.all.where(user_id: current_user.id)
-    @transactions = current_user.transactions.where.not(buyer_id: nil).order(updated_at: :desc).limit(12)
+    @investments = @user.investments
+    @engaged_investments = []
+    @investments.each do |investment|
+      n = @user.transactions.where(event_id: investment.event.id).count
+      @engaged_investments.push(investment) if n > 1
+    end
+
+    @transactions = current_user.transactions.where.not(buyer_id: nil).order(updated_at: :desc)#.limit(12)
+    @latest_transactions = @transactions.limit(12)
     @offers = current_user.transactions.where(buyer_id: nil)
+    @total_participants = User.count
+    @ranking_position = User.order(points: :desc).pluck(:id).find_index(@user.id) + 1
+
+    # Compute data for portfolio graph in dashboard /!\ Not accurate! /!\
+    balance = 0
+    @points_history = {}
+    @transactions.each do |transaction|
+      factor = transaction.buyer == @user ? -1 : 1 # subtract if buying, add if selling
+      balance += transaction.n_actions * transaction.price * factor
+      @points_history[transaction.updated_at] = balance
+    end
   end
 
   def update
