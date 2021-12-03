@@ -1,18 +1,25 @@
 <div class="container">
   <div>
-    <h2 class="mt-4 mb-3"> list of all available events: </h2>
+    <div class="index-header-content">
+      <h2 class="mt-4 mb-3"> Start to trade</h2>
+    </div>
   </div>
-
-  <div class="row">
+    <div class="row">
     <% @events.each do |event| %>
-    <div class="col-12 col-xl-6">
-      <div class="card-product">
-        <img src="https://source.unsplash.com/random" />
-            <div class="">
-              <h2><%= event.title %></h2>
-              <p> <%= event.description %> </p>
-            </div>
-            <%= link_to "More infos", event_path(event.id), class:"button-main mr-2" %>
+    <div class="col-12 col-md-4">
+      <div class="card-products">
+        <img src="https://source.unsplash.com/random", class="card-product-img" />
+        <div class="title">
+          <%= link_to event.title, event_path(event.id) %>
+        </div>
+        <div class="events-data-badge">
+          <p>
+            <i class="fas fa-chart-line" style="margin: 0px 5px"></i>current value:
+            <strong class="current-price"><%= event.transactions.last.price %></strong>
+            <% p0, p1 = event.transactions.last(2).pluck(:price) %>
+            <span style="margin: 0px 5px;" class="badge <%= p1 >= p0 ? 'badge-success' : 'badge-danger' %>"><%= p1 >= p0 ? '+' : '' %><%= p1 - p0 %></span>
+          </p>
+        </div>
       </div>
     </div>
     <% end %>

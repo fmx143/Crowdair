@@ -1,7 +1,7 @@
 .card-investment {
-  margin: 18px;
+  margin: 22px 8px;
   background: white;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-investment-content {
@@ -79,7 +79,15 @@
 
 .offer-content,
 .cancel-offer {
-  padding: 2px 50px;
+  padding: 2px 0px;
+}
+
+.offer-content {
+  padding-left: 40px;
+}
+
+.cancel-offer {
+  padding-right: 40px;
 }
 
 .offer-row {

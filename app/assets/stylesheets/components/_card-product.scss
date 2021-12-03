@@ -1,51 +1,51 @@
-.card-product {
+.card-products {
   overflow: hidden;
-  height: 150px;
-  max-height: 150px;
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  border-radius: 15px;
-  margin: 4px 0;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  height: 360px;
+  margin-bottom: 10px;
+  position: relative;
 }
 
-.card-product img {
-  height: 100%;
-  width: 150px;
+.card-product-img {
+  height: 220px;
+  width: 100%;
   object-fit: cover;
-  margin-right: 5px;
+  margin-bottom: 10px;
 }
 
-.card-product h2 {
+.title {
   font-size: 16px;
   font-weight: bold;
-  margin: 0;
-}
-
-.card-product p {
+  padding: 10px;
   text-align: justify;
-  font-size: 12px;
-  line-height: 1.4;
-  opacity: .7;
-  margin-bottom: 0;
-  margin-top: 8px;
-  margin-right: 15px;
 }
 
-.card-product .card-product-infos {
-  padding: 16px;
+.title a {
+  text-decoration: none;
+  color: $almost-black;
+  margin-bottom: 400px;
 }
 
-.card-product-past {
-  opacity: 0.5;
-  overflow: hidden;
-  height: 150px;
-  max-height: 150px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+.title a:hover {
+  color: $blue;
+}
+
+.events-data-badge {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  right: 0px;
+  background-color: white;
+  border: 2px solid $light-gray;
+  margin-bottom: 0px;
+  padding: 2px 15px;
+}
+
+.events-data-badge p {
+  padding: 5px 15px;
   display: flex;
   align-items: center;
-  border-radius: 15px;
-  margin: 4px 0;
+  justify-content: center;
+  margin-bottom: 0px;
 }

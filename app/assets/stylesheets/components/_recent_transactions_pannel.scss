@@ -5,6 +5,10 @@
   background-color: $super-light-gray;
 }
 
+.transactions_pannel th i {
+  display: inline-block;
+}
+
 .transactions_pannel td,
 .transactions_pannel th {
   border-bottom: 1px solid #ddd;
@@ -25,6 +29,8 @@
   background-color: $dark-blue;
   color: white;
   width: 100px;
+  text-align: center;
+  height: 80px;
 }
 
 .td-updated_at {
