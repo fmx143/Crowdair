@@ -15,8 +15,8 @@
         <div class="events-data-badge">
           <p>
             <i class="fas fa-chart-line" style="margin: 0px 5px"></i>current value:
-            <strong class="current-price"><%= event.transactions.last.price %></strong>
-            <% p0, p1 = event.transactions.last(2).pluck(:price) %>
+            <strong class="current-price"><%= event.transactions.where.not(buyer_id: nil).last.price %></strong>
+            <% p0, p1 = event.transactions.where.not(buyer_id: nil).last(2).pluck(:price) %>
             <span style="margin: 0px 5px;" class="badge <%= p1 >= p0 ? 'badge-success' : 'badge-danger' %>"><%= p1 >= p0 ? '+' : '' %><%= p1 - p0 %></span>
           </p>
         </div>

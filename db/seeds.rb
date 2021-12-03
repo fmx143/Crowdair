@@ -129,10 +129,7 @@ number_of_transactions.times do |i|
   print "#{i+1} offers created \r"
 end
 
-
-
 puts "#{number_of_transactions} offers created"
-
 
 puts ""
 puts "Users table now contains #{Transaction.count} Transactions."
