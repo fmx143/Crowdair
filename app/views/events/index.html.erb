@@ -8,7 +8,7 @@
     <% @events.each do |event| %>
     <div class="col-12 col-md-4">
       <div class="card-products">
-        <img src="https://source.unsplash.com/random", class="card-product-img" />
+        <img src="<%= event.img_url %>", class="card-product-img" />
         <div class="title">
           <%= link_to event.title, event_path(event.id) %>
         </div>
