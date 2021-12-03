@@ -7,9 +7,9 @@
       <p class="username-p">
         <%= index + 1 %>.
         <%= user.username %>
-        <%= image_tag 'medal.png' if index == 0 %>
-        <%= image_tag 'medal (1).png' if index == 1 %>
-        <%= image_tag 'medal (2).png' if index == 2 %>
+        <%= image_tag("medal.png", :class => "medal") if index == 0 %>
+        <%= image_tag("medal (1).png", :class => "medal") if index == 1 %>
+        <%= image_tag("medal (2).png", :class => "medal") if index == 2 %>
       </p>
       <p class="points-p"> <%= user.points %> </p>
       </li>
