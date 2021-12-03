@@ -1,10 +1,11 @@
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Murecho:wght@300;400&family=Raleway:ital,wght@0,300;0,400;1,200;1,300&display=swap");
+// @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
 
 // Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
+$body-font: "Raleway", "sans-serif";
+$headers-font: "Murecho", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
