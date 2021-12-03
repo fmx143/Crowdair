@@ -5,15 +5,17 @@
 </div>
 <div class="ranking-content flex-container col-12 col-md-4">
   <div class="points-info flex-container">
-    <span style="margin: 0px 10px;">Your balance</span>
+    <p class="ranking-info">Balance</p>
     <strong id="points-balance">
       <%= @user.points %>
       <i class="fas fa-coins" style="margin: 0px 10px;"></i>
     </strong>
   </div>
-  <p class="ranking-info">Ranking</p>
-  <strong id="user-ranking">
-    <%= @ranking_position %> / <%= @total_participants %>
-  </strong>
-  <%= image_tag('podium.png', id:'podium-icon') %>
+  <div class="points-info flex-container">
+    <p class="ranking-info">Ranking</p>
+    <strong id="user-ranking">
+      <%= @ranking_position %> / <%= @total_participants %>
+    </strong>
+    <%= image_tag('podium.png', id:'podium-icon') %>
+  </div>
 </div>

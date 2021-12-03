@@ -9,14 +9,16 @@ class UsersController < ApplicationController
       @engaged_investments.push(investment) if n > 1
     end
 
-    @transactions = current_user.transactions.where.not(buyer_id: nil).order(updated_at: :desc)#.limit(12)
+    @transactions = current_user.transactions.where.not(buyer_id: nil).order(updated_at: :desc)
     @latest_transactions = @transactions.limit(12)
+    @day = @latest_transactions.first.updated_at.day if @latest_transactions.length >= 1
+
     @offers = current_user.transactions.where(buyer_id: nil)
     @total_participants = User.count
     @ranking_position = User.order(points: :desc).pluck(:id).find_index(@user.id) + 1
 
     # Compute data for portfolio graph in dashboard /!\ Not accurate! /!\
-    balance = 0
+    balance = @user.points - @transactions.sum(:price)
     @points_history = {}
     @transactions.each do |transaction|
       factor = transaction.buyer == @user ? -1 : 1 # subtract if buying, add if selling
