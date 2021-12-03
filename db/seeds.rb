@@ -3,8 +3,8 @@ require 'json'
 
 
 number_of_users = 20
-number_of_events = 10
-number_of_transactions = 200
+number_of_events = 12
+number_of_transactions = 500
 min_points = 100
 max_points = 1000
 
@@ -71,14 +71,14 @@ users_list = [
     username: "marcel",
     email: "mbower@gmail.com",
     password: "abcdef",
-    points: 10000000,
+    points: 1000,
     admin: true
   },
   {
     username: "jane",
     email: "janetarzan@hotmail.com",
     password: "abcdef",
-    points: 10000000
+    points: 1000
   }
 ]
 
@@ -102,10 +102,12 @@ puts "Users table now contains #{User.count} users."
 
 puts "Creating a seed of #{number_of_events} fake events..."
 number_of_events.times do |i|
+  kalshi_event = kalshi_markets["markets"].sample
   Event.create!({
-    title: kalshi_markets["markets"].sample["title"],
+    title: kalshi_event["title"].truncate(100),
     end_date: Faker::Time.forward(days: 100),
-    description: kalshi_markets["markets"].sample["settle_details"].truncate(300),
+    description: kalshi_event["settle_details"].truncate(300),
+    img_url: kalshi_event["image_url"]
   })
 end
 puts "Users table now contains #{Event.count} users."
