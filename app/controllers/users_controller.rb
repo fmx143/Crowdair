@@ -18,11 +18,11 @@ class UsersController < ApplicationController
     @ranking_position = User.order(points: :desc).pluck(:id).find_index(@user.id) + 1
 
     # Compute data for portfolio graph in dashboard /!\ Not accurate! /!\
-    balance = @user.points - @transactions.sum(:price)
+    balance = @user.points
     @points_history = {}
     @transactions.each do |transaction|
       factor = transaction.buyer == @user ? -1 : 1 # subtract if buying, add if selling
-      balance += transaction.n_actions * transaction.price * factor
+      balance += transaction.price * factor
       @points_history[transaction.updated_at] = balance
     end
   end
