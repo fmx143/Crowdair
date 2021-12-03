@@ -1,11 +1,17 @@
 <div class="container">
-  <ol>
-    <% @users.each do |user| %>
+  <h3 class="top-h3"> Top 20 users </h3>
+  <ol type="1">
+    <% @users.each_with_index do |user,index| %>
       <li class="ranking-li">
       <%= image_tag "https://source.unsplash.com/random?/face", class: "avatar-ranking" %>
-      <%= user.username %>
-      --
-      <%= user.points %>
+      <p class="username-p">
+        <%= index + 1 %>.
+        <%= user.username %>
+        <%= image_tag 'medal.png' if index == 0 %>
+        <%= image_tag 'medal (1).png' if index == 1 %>
+        <%= image_tag 'medal (2).png' if index == 2 %>
+      </p>
+      <p class="points-p"> <%= user.points %> </p>
       </li>
     <% end %>
   </ol>

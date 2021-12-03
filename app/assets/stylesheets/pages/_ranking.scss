@@ -4,11 +4,75 @@
   height: 30px;
   width: 30px;
   border-radius: 100%;
+  margin-top: 2px;
+  margin-left: 5px;
 }
 
 .ranking-li {
-  padding: 10px;
+  padding: 5px;
   margin: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
+  background-image: url("https://media.istockphoto.com/photos/dark-blue-defocused-blurred-motion-abstract-background-picture-id1138740533?b=1&k=20&m=1138740533&s=170667a&w=0&h=6lC-tk4xLy4j0P47D_TflXhoQ1UkxG7Au69UjSXmqZk=");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-h3 {
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bold;
+  color: #0c59ac;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  text-decoration: underline;
+}
+
+.username-p {
+  color: whitesmoke;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  flex-grow: 1;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.points-p {
+  color: whitesmoke;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.ranking-li:nth-child(1) .username-p {
+  color: gold;
+}
+
+.ranking-li:nth-child(2) .username-p {
+  color: silver;
+}
+
+.ranking-li:nth-child(3) .username-p {
+  color: #cb7a01;
+}
+
+.ranking-li:nth-child(1) .points-p {
+  color: gold;
+}
+
+.ranking-li:nth-child(2) .points-p {
+  color: silver;
+}
+
+.ranking-li:nth-child(3) .points-p {
+  color: #cb7a01;
+}
+
+img {
+  width: 20px;
+  height: 20px;
 }
