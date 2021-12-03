@@ -1,23 +1,21 @@
 <div class="container">
-  <div>
-    <h1> Dashboard of <%= @user.username %> </h1>
-    <h3>Current amount of points: <%= @user.points %> </h3>
-    <h3>You are currently positionned on :</h3>
-  </div>
-
-  <div class="row">
-  <% @investments.each do |investment| %>
-    <div class="col-12 col-md-6 card-product">
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-        <div class="">
-            <h2><%= investment.event.title %></h2>
-            <p> <%= investment.event.description %> </p>
-            <p style="color: red;"> Remaining actions : <strong><%= investment.n_actions %></strong> </p>
-        </div>
-          <%= link_to "More infos", events_path, class:"button-info" %>
-        </div>
-    <% end %>
+  <div class="dashboard-header">
+    <h3>Your stats</h3>
+    <div class="dashboard-header-content row">
+      <%= render('dashboard_header') %>
     </div>
   </div>
 
+  <div class="dashboard-content row">
+    <div class="positions_pannel_container flex-container  col-12 col-md-6">
+      <h3>Your positions</h3>
+      <div class="positions_pannel">
+        <%= render('investment_cards') %>
+      </div>
+    </div>
+    <div class="transactions_pannel_container flex-container  col-12 col-md-6">
+      <h3>Your latest transactions</h3>
+      <%= render('transactions_pannel') %>
+    </div>
+  </div>
 </div>

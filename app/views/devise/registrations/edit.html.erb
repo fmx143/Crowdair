@@ -12,9 +12,9 @@
       <% end %>
 
       <%= f.input :username,
-            hint: "Type your new username",
-            required: true,
-            input_html: { autocomplete: "Username" } %>
+                  hint: "Type your new username",
+                  required: true,
+                  input_html: { autocomplete: "Username" } %>
       <%= f.input :current_password,
                   hint: "we need your current password to confirm your changes",
                   required: true,
@@ -29,11 +29,11 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Update", class: "button-info" %>
+      <%= f.button :submit, "Update", class: "button-main" %>
     </div>
   <% end %>
 
-  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button-cancel" %></p>
 
-  <%= link_to "Back", :back %>
+  <%= link_to "Back", :back, class: "button-main" %>
 </div>

@@ -6,7 +6,7 @@
         <%= f.input :title, placeholder: 'Title' %>
         <%= f.input :description, placeholder: 'Description' %>
         <%= f.input :end_date %>
-        <%= f.submit "Submit your event", class:"button" %> <%= link_to "Cancel", user_path(@user.id) %>
+        <%= f.submit "Submit your event", class: "button-main" %> <%= link_to "Cancel", user_path(@user.id), , class: "button-cancel" %>
       <% end %>
   </div>
 </div>

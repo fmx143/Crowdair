@@ -1,0 +1,63 @@
+#price-chart {
+  background-color: white;
+  border-radius: 9px;
+}
+
+.trading {
+  --heightChart: 400px;
+  max-height: var(--heightChart);
+  min-height: var(--heightChart);
+  margin: 0px 0px 8px 0px;
+}
+
+
+.trading .seller-card {
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  background: white;
+  border-radius: 9px;
+  min-height: 90px;
+  max-height: 100%;
+  margin: 0px 0px 8px 0px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+  padding: 16px 32px;
+  row-gap: 20px;
+}
+
+.trading .offer-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 9px;
+  min-height: 90px;
+  max-height: 100%;
+  margin: 0px 0px 8px 0px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+  padding: 16px 32px;
+  row-gap: 20px;
+}
+
+.buying-panel .offer-card {
+  margin: 0px 0px 8px 0px;
+}
+
+.trading .buying-panel {
+  overflow: auto;
+  max-height: calc(var(--heightChart) - 90px);
+  min-height: calc(var(--heightChart) - 90px);
+}
+
+.event-text {
+  background-color: white;
+  border-radius: 9px;
+  padding: 16px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+  margin: 8px 0px 8px 0px;
+  text-align: center;
+}
+
+.calendar {
+  color: $dark-orange;
+}

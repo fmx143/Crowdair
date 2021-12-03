@@ -1,9 +1,12 @@
-<ol>
-  <% @users.each do |user| %>
-    <li>
-    <%= user.username %>
-    --
-    <%= user.points %>
-    </li>
-  <% end %>
-</ol>
+<div class="container">
+  <ol>
+    <% @users.each do |user| %>
+      <li class="ranking-li">
+      <%= image_tag "https://source.unsplash.com/random?/face", class: "avatar-ranking" %>
+      <%= user.username %>
+      --
+      <%= user.points %>
+      </li>
+    <% end %>
+  </ol>
+</div>

@@ -1,0 +1,121 @@
+.card-investment {
+  margin: 18px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-investment-content {
+  width: 100%;
+  padding: 20px;
+  padding-top: 35px;
+  position: relative;
+}
+
+.card-investment .event-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: $almost-black;
+}
+
+.card-investment p {
+  font-size: 16px;
+  color: $almost-black;
+  line-height: 1.4;
+  opacity: 0.7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.user-n_actions {
+  color: $blue;
+}
+
+.current-price {
+  color: $almost-black;
+  padding: 0px 5px;
+}
+
+.event-actions-data {
+  position: absolute;
+  top: -12px;
+  right: 0px;
+  background-color: $super-light-gray;
+  border-radius: 5px;
+  border: 2px solid $light-gray;
+}
+
+.event-actions-data p {
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+}
+
+.active-offers-header {
+  background-color: $super-light-gray;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.active-offers-header button {
+  color: $almost-black;
+}
+
+.active-offers-header button:hover {
+  text-decoration: none;
+}
+
+.offers-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+}
+
+.offer-row {
+  background-color: white;
+}
+
+.offer-content,
+.cancel-offer {
+  padding: 2px 50px;
+}
+
+.offer-row {
+  border-bottom: 1px solid rgb(230, 230, 230);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 40px;
+}
+
+.offer-row:hover {
+  background-color: #fdfdfd;
+}
+
+.offer-row:first-child {
+  border-top: 1px solid rgb(230, 230, 230);
+}
+
+.cancel-offer a {
+  text-decoration: none;
+  color: $orange;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+  padding: 2px 5px;
+  margin: 4px 0px;
+  border-radius: 1em;
+  border: 1px solid $orange;
+}
+
+.offer-row:hover .cancel-offer a {
+  visibility: visible;
+  opacity: 0.8;
+}
+
+.cancel-offer a:hover {
+  background-color: $orange;
+  color: white;
+}

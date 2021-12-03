@@ -1,0 +1,42 @@
+.dashboard-header-content {
+  margin: 20px;
+  padding: 10px 5px;
+  background-color: white;
+  box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+#podium-icon {
+  height: 120px;
+  margin-top: 10px;
+}
+
+#points-balance {
+  padding: 10px 20px;
+  font-size: 28px;
+}
+
+#user-ranking {
+  font-size: 46px;
+}
+
+.ranking-info {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.points-info {
+  margin: 10px 0px;
+  flex-direction: column;
+  font-size: 18px;
+  border: 2px solid $light-gray;
+  border-radius: 5px;
+}
+
+.points-graph-container {
+  margin: 10px;
+}
+
+.ranking-content {
+  flex-direction: column;
+  border-left: 1px solid $light-gray;
+}
