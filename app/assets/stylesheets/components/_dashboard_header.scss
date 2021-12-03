@@ -26,11 +26,19 @@
 
 .ranking-info {
   font-weight: bold;
-  margin-bottom: 5px;
+  margin: 10px;
+  margin-bottom: 0px;
+}
+
+.points-content {
+  border-radius: 5px;
+  margin: 10px 0px;
 }
 
 .points-info {
+  width: 100%;
   margin: 10px 0px;
+  padding: 5px 10px;
   flex-direction: column;
   font-size: 18px;
   border: 2px solid $light-gray;
@@ -39,9 +47,9 @@
 
 .points-graph-container {
   margin: 10px;
+  height: 100%;
 }
 
 .ranking-content {
   flex-direction: column;
-  border-left: 1px solid $light-gray;
 }
