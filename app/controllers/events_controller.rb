@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     @actions_held = @user.investments.find_by(event: @event).n_actions
     @actions_on_offer = @user.transactions.where(buyer_id: nil, seller_id: current_user.id).sum(:n_actions)
     @offers = @event.transactions.includes([:seller]).where(buyer_id: nil).order(price: :asc)
-
+    @transaction = Transaction.new
 
     #REAL API
 

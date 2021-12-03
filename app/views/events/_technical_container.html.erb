@@ -1,3 +1,4 @@
+
 <div class="row" id="event-<%= @event.id %>">
   <div class="col-12 col-sm-6 mb-2">
     <%= line_chart(
@@ -13,9 +14,20 @@
   </div>
   <div class="col-12 col-sm-6 mb-2">
     <div class="trading">
-      <div class='t-card'>
+      <div class='seller-card'>
         <div>You currently hold <strong><%= @actions_held %></strong> actions in this event. Of which <strong><%= @actions_on_offer %></strong> are on sale.</div>
-        <%= link_to('Sell', new_event_transaction_path(@event), class: "button-sell") %>
+        <div>
+          <%= simple_form_for [@event, @transaction],
+          wrapper: :inline_form,
+          html: { class: "row row-cols-lg-auto g-3 align-items-center" },
+          wrapper_mappings: { boolean: :inline_boolean} do |f| %>
+            <%= f.input :n_actions %>
+            <%= f.input :price %>
+            <%= f.submit "Submit my offer", class: "button-main" %> <%= link_to "Cancel", event_path(@event), class: "button-cancel" %>
+          <% end %>
+        </div>
+
+        <%# <%= link_to('Sell', new_event_transaction_path(@event), class: "button-sell") %>
       </div>
 
       <div class="buying-panel">
@@ -24,7 +36,7 @@
           <% if offer.seller != current_user %>
             <% first += 1 %>
           <% end %>
-          <div class='t-card'>
+          <div class='offer-card'>
             <div>
               <% if offer.seller == current_user %>
                 <strong>You</strong> are offering
