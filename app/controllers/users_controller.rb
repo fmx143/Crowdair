@@ -20,11 +20,13 @@ class UsersController < ApplicationController
     # Compute data for portfolio graph in dashboard /!\ Not accurate! /!\
     balance = @user.points
     @points_history = {}
+    @points_history[Time.now] = balance
     @transactions.each do |transaction|
-      factor = transaction.buyer == @user ? -1 : 1 # subtract if buying, add if selling
-      balance += transaction.price * factor
       @points_history[transaction.updated_at] = balance
+      factor = transaction.buyer == @user ? -1 : 1 # subtract if buying, add if selling
+      balance += transaction.n_actions * transaction.price * factor
     end
+    # raise
   end
 
   def update
