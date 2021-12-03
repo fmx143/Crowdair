@@ -12,50 +12,46 @@
       height: "100%"
       )%>
   </div>
-  <div class="col-12 col-sm-6 mb-2">
-    <div class="trading">
-      <div class='seller-card'>
-        <div>You currently hold <strong><%= @actions_held %></strong> actions in this event. Of which <strong><%= @actions_on_offer %></strong> are on sale.</div>
-        <div>
-          <%= simple_form_for [@event, @transaction],
-          wrapper: :inline_form,
-          html: {
-            class: "row row-cols-lg-auto g-3 align-items-center"
-          },
-          wrapper_mappings: { boolean: :inline_boolean} do |f| %>
-            <%= f.input :n_actions, placeholder: 'Actions', input_html: {size: '1'}%>
-            <%= f.input :price, placeholder: 'Price'%>
-            <%= f.submit "Submit my offer", class: "button-main" %> <%= link_to "Cancel", event_path(@event), class: "button-cancel" %>
-          <% end %>
-        </div>
-
-        <%# <%= link_to('Sell', new_event_transaction_path(@event), class: "button-sell") %>
-      </div>
-
-      <div class="buying-panel">
-        <% first = 0 %>
-        <% @offers.each do |offer| %>
-          <% if offer.seller != current_user %>
-            <% first += 1 %>
-          <% end %>
-          <div class='offer-card'>
-            <div>
-              <% if offer.seller == current_user %>
-                <strong>You</strong> are offering
-              <% else %>
-                <strong><%= offer.seller.username %></strong> is offering
-              <% end %>
-              <strong><%= offer.n_actions %></strong>
-              actions for
-              <strong><%= '%.2f' % offer.price %></strong>
-              coins.
-            </div>
-            <% if first == 1 %>
-              <%= link_to('Buy', event_transaction_buy_path(@event, offer), class: "button-buy") %>
-            <% end %>
-          </div>
+  <div class="col-12 col-sm-6 mb-2 trading" style="overflow: auto">
+    <div class='seller-card'>
+      <div>You currently hold <strong><%= @actions_held %></strong> actions in this event. Of which <strong><%= @actions_on_offer %></strong> are on sale.</div>
+      <div>
+        <%= simple_form_for [@event, @transaction],
+        wrapper: :inline_form,
+        html: {
+          class: "inline-form"
+        },
+        wrapper_mappings: { boolean: :inline_boolean} do |f| %>
+          <%= f.input :n_actions, placeholder: 'Actions', label: false, input_html: {class: 'form-input'}%>
+          <%= f.input :price, placeholder: 'Price', label: false, input_html: {class: 'form-input'}%>
+          <%= f.submit "Submit my offer", class: "button-main" %>
         <% end %>
       </div>
     </div>
+
+    <% first = 0 %>
+    <% @offers.each do |offer| %>
+      <% if offer.seller != current_user %>
+        <% first += 1 %>
+      <% end %>
+      <div class='offer-card'>
+        <div>
+          <% if offer.seller == current_user %>
+            <strong>You</strong> are offering
+          <% else %>
+            <strong><%= offer.seller.username %></strong> is offering
+          <% end %>
+          <strong><%= offer.n_actions %></strong>
+          actions for
+          <strong><%= offer.price %></strong>
+          coins.
+        </div>
+        <% if first == 1 %>
+          <%= link_to('Buy', event_transaction_buy_path(@event, offer), class: "button-buy") %>
+        <% elsif offer.seller == current_user %>
+          <%= link_to("Cancel offer", event_transaction_path(@event, offer), method: :delete, class: "button-sell") %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
