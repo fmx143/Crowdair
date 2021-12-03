@@ -17,19 +17,4 @@
     </div>
     <% end %>
   </div>
-
-  <div class="row">
-    <% @past_events.each do |past_event| %>
-    <div class="col-12 col-xl-6">
-      <div class="card-product-past">
-        <img src="https://source.unsplash.com/random" />
-            <div class="">
-              <h2><%= past_event.title %></h2>
-              <p> <%= past_event.description %> </p>
-            </div>
-            <%= link_to "More infos", event_path(past_event.id), class:"button-main mr-2" %>
-      </div>
-    </div>
-    <% end %>
-  </div>
 </div>
