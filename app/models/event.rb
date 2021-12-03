@@ -8,7 +8,6 @@ end
 
 class Event < ApplicationRecord
   after_save :add_initial_investment
-  after_save :add_end_date_scheduler
   has_many :transactions
   has_many :investments
 
@@ -40,11 +39,4 @@ class Event < ApplicationRecord
       # t.update(buyer_id: user.id)
     end
   end
-<<<<<<< HEAD
-
-  def add_end_date_scheduler
-    HandleEventEndingJob.set(wait_until: end_date).perform_later(self)
-  end
-=======
->>>>>>> master
 end
