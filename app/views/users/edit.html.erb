@@ -3,7 +3,7 @@
 
     <h2>Edit my profile</h2>
 
-    <%= simple_form_for(@user, url: registration_path(@user), html: { method: :put }) do |f| %>
+    <%= simple_form_for(@user, url: registration_path(@user), html: { method: :put }, class: "form-edit") do |f| %>
       <%= f.error_notification %>
 
       <div class="form-inputs">
