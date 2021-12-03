@@ -1,7 +1,7 @@
 .card-product {
   overflow: hidden;
-  height: 150px;
-  max-height: 150px;
+  height: 170px;
+  max-height: 200px;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
@@ -12,7 +12,7 @@
 
 .card-product img {
   height: 100%;
-  width: 150px;
+  width: 170px;
   object-fit: cover;
   margin-right: 5px;
 }
