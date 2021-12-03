@@ -23,10 +23,9 @@ class UsersController < ApplicationController
     @points_history[Time.now] = balance
     @transactions.each do |transaction|
       @points_history[transaction.updated_at] = balance
-      factor = transaction.buyer == @user ? -1 : 1 # subtract if buying, add if selling
+      factor = transaction.buyer == @user ? 1 : -1 # subtract if buying, add if selling
       balance += transaction.n_actions * transaction.price * factor
     end
-    # raise
   end
 
   def update
