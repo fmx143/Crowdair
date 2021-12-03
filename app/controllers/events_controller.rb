@@ -1,9 +1,12 @@
 class EventsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
   require 'uri'
   require 'net/http'
 
   def index
     @events = Event.all
+    # @past_events = Event.where("end_date < ?", Time.now)    # Event.all.where(Date.today = Event.end_date)
+    # @events[1].end_date
   end
 
   def new
