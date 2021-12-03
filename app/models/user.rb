@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_save :add_initial_portfolio
+  after_create :add_initial_portfolio
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :buyer_transactions, class_name: 'Transaction', foreign_key: 'buyer_id'

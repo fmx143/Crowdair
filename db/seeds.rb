@@ -71,7 +71,8 @@ users_list = [
     username: "marcel",
     email: "mbower@gmail.com",
     password: "abcdef",
-    points: 10000000
+    points: 10000000,
+    admin: true
   },
   {
     username: "jane",

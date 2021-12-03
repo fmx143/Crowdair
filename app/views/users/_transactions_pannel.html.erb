@@ -1,5 +1,4 @@
 <div class="transactions_pannel">
-  <h3>Your latest transactions</h3>
   <table>
     <tr>
       <th class="td-centered"><i class="fas fa-calendar-alt"></i></th>
@@ -9,27 +8,27 @@
       <th class="td-centered"><i class="fas fa-tag"></i> Price</th>
       <th><i class="fas fa-coins"></i> Flow</th>
     </tr>
-    <% day = @transactions.first.updated_at.day %>
-    <% @transactions.each do |t| %>
-      <div class="card-transaction">
-        <% if t.updated_at.day != day %>
+      <% day = @latest_transactions.first.updated_at.day %>
+      <% @latest_transactions.each do |t| %>
+        <div class="card-transaction">
+          <% if t.updated_at.day != day %>
+            <tr>
+              <td colspan="6"><%= t.updated_at.strftime("%d %b") %></td>
+            </tr>
+            <% day = t.updated_at.day %>
+          <% end %>
           <tr>
-            <td colspan="6"><%= t.updated_at.strftime("%d %b") %></td>
+            <td class="td-updated_at td-centered"><%= t.updated_at.strftime("%H:%M") %></td>
+            <!--
+            <td class="td-event_title"><%= link_to("#{t.event.title.slice(..20)}...", event_path(t.event_id)) %></td>
+            -->
+            <td><%= link_to("# #{t.event.id}", event_path(t.event_id)) %></td>
+            <td><%= User.find((current_user == t.buyer ? t.seller_id : t.buyer_id)).username %></td>
+            <td class="td-centered"><%= t.n_actions %></td>
+            <td class="td-centered"><%= '%.1f' % t.price %></td>
+            <td class=<%= current_user == t.buyer ? "td-flow-neg" : "td-flow-pos" %>><%= "#{current_user == t.buyer ? '-' : '+'}#{'%.1f' % (t.n_actions * t.price)}" %></td>
           </tr>
-          <% day = t.updated_at.day %>
-        <% end %>
-        <tr>
-          <td class="td-updated_at td-centered"><%= t.updated_at.strftime("%H:%M") %></td>
-          <td class="td-event_title"><%= link_to("#{t.event.title.slice(..20)}...", event_path(t.event_id)) %></td>
-          <!--
-          <td><%= link_to(t.event.id, event_path(t.event_id)) %></td>
-          -->
-          <td><%= User.find((current_user == t.buyer ? t.seller_id : t.buyer_id)).username %></td>
-          <td class="td-centered"><%= t.n_actions %></td>
-          <td class="td-centered"><%= '%.1f' % t.price %></td>
-          <td class=<%= current_user == t.buyer ? "td-flow-neg" : "td-flow-pos" %>><%= "#{current_user == t.buyer ? '-' : '+'}#{'%.1f' % (t.n_actions * t.price)}" %></td>
-        </tr>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
   </table>
 </div>
