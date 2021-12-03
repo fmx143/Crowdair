@@ -1,12 +1,12 @@
 <div class="transactions_pannel">
   <table>
     <tr>
-      <th class="td-centered"><i class="fas fa-calendar-alt"></i></th>
-      <th><i class="fas fa-star"></i> Event</th>
-      <th><i class="fas fa-user-friends"></i> Partner</th>
-      <th class="td-centered"><i class="fas fa-chart-line"></i> Actions</th>
-      <th class="td-centered"><i class="fas fa-tag"></i> Price</th>
-      <th><i class="fas fa-coins"></i> Flow</th>
+      <th class="td-centered"><i class="fas fa-clock"></i><br>Time</th>
+      <th class="td-centered"><i class="fas fa-star"></i><br>Event</th>
+      <th class="td-centered"><i class="fas fa-user-friends"></i><br>Partner</th>
+      <th class="td-centered"><i class="fas fa-chart-line"></i><br>Actions</th>
+      <th class="td-centered"><i class="fas fa-tag"></i><br>Price</th>
+      <th class="td-centered"><i class="fas fa-coins"></i><br>Flow</th>
     </tr>
       <% day = @latest_transactions.first.updated_at.day %>
       <% @latest_transactions.each do |t| %>
