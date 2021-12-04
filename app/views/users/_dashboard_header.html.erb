@@ -1,6 +1,6 @@
 <div class="points-content col-12 col-md-8">
   <div class="points-graph-container flex-container">
-    <%= line_chart(@points_history, ytitle: "Points", curve: false, points: false) %>
+    <%= line_chart(@points_history, ytitle: "Points", curve: false, points: false, colors: ["#1064c7"] ) %>
   </div>
 </div>
 <div class="ranking-content flex-container col-12 col-md-4">
@@ -16,6 +16,6 @@
     <strong id="user-ranking">
       <%= @ranking_position %> / <%= @total_participants %>
     </strong>
-    <%= image_tag('podium.png', id:'podium-icon') %>
+    <%= image_tag('podium-custom.png', id:'podium-icon') %>
   </div>
 </div>
