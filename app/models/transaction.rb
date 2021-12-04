@@ -16,7 +16,32 @@ class Transaction < ApplicationRecord
       seller_invest_actions.update(n_actions: seller_invest_actions.n_actions - n_actions)
       buyer.update(points: buyer.points - (price * n_actions))
       seller.update(points: seller.points + (price * n_actions))
+
+      update_portfolio_values
     end
+  end
+
+  def update_portfolio_values
+    User.all.each do |user|
+      pv = compute_portfolio_value(user)
+      Portfolio.create!(user: user, pv: pv)
+    end
+  end
+
+  def compute_portfolio_value(user)
+    portfolio_value = user.points
+    user.investments.each do |investment|
+      n_actions = investment.n_actions
+      event_transaction_history = investment.event.transactions.where.not(buyer_id: nil)
+      if event_transaction_history.count > 0
+        current_value = event_transaction_history.last.price
+      else
+        current_value = 50
+      end
+      investment_value = n_actions * current_value
+      portfolio_value += investment_value
+    end
+    portfolio_value
   end
 
   def points_validator

@@ -26,6 +26,8 @@ class UsersController < ApplicationController
       factor = transaction.buyer == @user ? 1 : -1 # subtract if buying, add if selling
       balance += transaction.n_actions * transaction.price * factor
     end
+
+    @portfolio_values = Portfolio.where(user_id: @user.id).order(created_at: :desc).pluck(:created_at, :pv)
   end
 
   def update
