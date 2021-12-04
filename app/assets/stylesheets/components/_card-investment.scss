@@ -1,7 +1,7 @@
 .card-investment {
-  margin: 22px 8px;
+  margin: 30px 8px;
   background: white;
-  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 8px rgba(86, 114, 148, 0.2);
 }
 
 .card-investment-content {
@@ -32,23 +32,24 @@
 }
 
 .current-price {
-  color: $almost-black;
+  color: white;
+  font-size: 20px;
   padding: 0px 5px;
 }
 
 .event-actions-data {
+  color: white;
   position: absolute;
-  top: -12px;
-  right: 0px;
-  background-color: $super-light-gray;
+  top: -20px;
+  right: 10px;
+  background-color: $dark-blue;
   border-radius: 5px;
   border: 2px solid $light-gray;
-}
-
-.event-actions-data p {
   padding: 5px 15px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 75%;
 }
 
 .active-offers-header {
