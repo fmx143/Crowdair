@@ -24,11 +24,12 @@
   line-height: 1.4;
   opacity: 0.7;
   margin-bottom: 0;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .user-n_actions {
-  color: $blue;
+  color: $orange;
+  font-size: 18px;
 }
 
 .current-price {
@@ -110,18 +111,18 @@
 .cancel-offer a {
   text-decoration: none;
   color: $orange;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 0.3s linear;
   padding: 2px 5px;
   margin: 4px 0px;
   border-radius: 1em;
   border: 1px solid $orange;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s linear;
 }
 
 .offer-row:hover .cancel-offer a {
   visibility: visible;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .cancel-offer a:hover {

@@ -14,6 +14,11 @@
 .transactions_pannel_container {
   flex-direction: column;
   align-items: flex-start;
+  // padding-left: 0px;
+  // padding-right: 0px;
+  // margin-left: 15px;
+  // margin-right: 15px;
+  // background-color: $dark-blue;
 }
 
 .positions_pannel {
@@ -21,12 +26,20 @@
   height: 630px;
   overflow: auto;
   margin: 0px;
-  background-color: $light-gray;
+  background-color: white;
 }
 
 .dashboard-content h3,
 .dashboard-header h3 {
   padding: 18px 12px;
-  padding-top: 18px;
+  margin: 12px 0px;
+  margin-bottom: 0px;
   font-weight: bold;
+  font-size: 30px;
+  display: block;
+  width: 100%;
+  background-color: $dark-blue;
+  color: white;
+  border-radius: 5px 5px 0px 0px;
+  text-align: center;
 }

@@ -1,23 +1,30 @@
+.transactions_pannel {
+  width: 100%;
+}
+
 .transactions_pannel table {
   background-color: $super-light-gray;
   box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.2);
-
   display: block;
   width: 100%;
 
+  max-height: 630px;
+  overflow: auto;
+
   thead {
-    // display: inline-block;
     width: 100%;
-    background-color: $dark-blue;
-    color: white;
     text-align: center;
+    font-weight: bold;
+    position: sticky;
+    top: 0px;
+    background-color: white;
+
     tr {
       width: 100%;
       border-bottom: 1px solid #ddd;
       th {
         width: auto;
         height: 80px;
-        // padding: 8px 22px;
       }
     }
   }
@@ -38,7 +45,7 @@
   }
 }
 
-.transactions_pannel tr:nth-child(even) {
+.transactions_pannel tbody tr:nth-child(even) {
   background-color: white;
 }
 
