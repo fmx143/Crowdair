@@ -4,7 +4,7 @@ require 'json'
 
 number_of_users = 12
 number_of_events = 4
-number_of_transactions = 200
+number_of_transactions = 500
 number_of_offers = number_of_events * number_of_users
 min_points = 100
 max_points = 1000
