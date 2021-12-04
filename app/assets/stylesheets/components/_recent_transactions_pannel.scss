@@ -1,47 +1,52 @@
 .transactions_pannel table {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  border: 1px solid #ddd;
   background-color: $super-light-gray;
-}
+  box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.2);
 
-.transactions_pannel th i {
-  display: inline-block;
-}
+  display: block;
+  width: 100%;
 
-.transactions_pannel td,
-.transactions_pannel th {
-  border-bottom: 1px solid #ddd;
-  padding: 8px;
+  thead {
+    // display: inline-block;
+    width: 100%;
+    background-color: $dark-blue;
+    color: white;
+    text-align: center;
+    tr {
+      width: 100%;
+      border-bottom: 1px solid #ddd;
+      th {
+        width: auto;
+        height: 80px;
+        // padding: 8px 22px;
+      }
+    }
+  }
+
+  tbody {
+    // display: inline-block;
+    width: 100%;
+    max-height: 545px;
+    overflow-y: scroll;
+    tr {
+      width: 100%;
+      border-bottom: 1px solid #ddd;
+      td {
+        height: 40px;
+        padding: 8px 17px;
+      }
+    }
+  }
 }
 
 .transactions_pannel tr:nth-child(even) {
   background-color: white;
 }
 
-.transactions_pannel tr:hover {
-  background-color: #ddd;
-}
-
-.transactions_pannel th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  background-color: $dark-blue;
-  color: white;
-  width: 100px;
-  text-align: center;
-  height: 80px;
-}
-
 .td-updated_at {
   font-weight: bold;
 }
 
-.td-event_title {
-  width: 200px;
-  color: $blue;
-}
-
+.td-event_title,
 .td-flow-pos {
   color: $blue;
 }
@@ -52,4 +57,8 @@
 
 .td-centered {
   text-align: center;
+}
+
+.transactions_pannel tbody tr:hover {
+  background-color: #ddd;
 }

@@ -8,6 +8,8 @@ class Transaction < ApplicationRecord
   validate :actions_validator
   validate :points_validator
 
+  private
+
   def add_to_investments
     if buyer_id_changed?
       buyer_invest_actions = buyer.investments.find_by(event: event)
