@@ -1,6 +1,7 @@
 <div class="points-content col-12 col-md-8">
   <div class="points-graph-container flex-container">
-    <%= line_chart(@points_history, ytitle: "Points", curve: false, points: false, colors: ["#567294"] ) %>
+    <% # orange: #fa7b2d, dark blue: #567294 %>
+    <%= line_chart(@points_history, ytitle: "Points", curve: false, points: false, colors: ["#fa7b2d"] ) %>
   </div>
 </div>
 <div class="ranking-content flex-container col-12 col-md-4">

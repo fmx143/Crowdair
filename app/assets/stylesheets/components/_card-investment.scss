@@ -20,7 +20,7 @@
 
 .card-investment p {
   font-size: 16px;
-  color: $almost-black;
+  color: black;
   line-height: 1.4;
   opacity: 0.7;
   margin-bottom: 0;
@@ -128,4 +128,8 @@
 .cancel-offer a:hover {
   background-color: $orange;
   color: white;
+}
+
+.custom-badge {
+  font-size: 1em;
 }
