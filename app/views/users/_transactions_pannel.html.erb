@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @latest_transactions.each do |t| %>
+      <% @transactions.each do |t| %>
         <div class="card-transaction">
           <% if t.updated_at.day != @day %>
             <tr>

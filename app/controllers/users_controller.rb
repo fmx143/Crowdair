@@ -4,8 +4,7 @@ class UsersController < ApplicationController
     Event.joins(buyer_transactions: :current_user)
     @engaged_investments = select_engaged_investments
     @transactions = current_user.transactions.where.not(buyer_id: nil).order(updated_at: :desc)
-    @latest_transactions = @transactions#.limit(12)
-    @day = @latest_transactions.first.updated_at.day if @latest_transactions.length >= 1
+    @day = @transactions.first.updated_at.day if @transactions.length >= 1
     @offers = current_user.transactions.where(buyer_id: nil)
     @ranking_position = User.order(points: :desc).pluck(:id).find_index(@user.id) + 1
     @total_participants = User.count
