@@ -1,18 +1,16 @@
-<div class="points-content col-12 col-md-8">
+<div class="points-content col-12 col-lg-8">
   <div class="points-graph-container flex-container">
-    <% # orange: #fa7b2d, dark blue: #567294 %>
     <%= line_chart(@points_history, ytitle: "Points", curve: false, points: false, colors: ["#fa7b2d"] ) %>
   </div>
 </div>
-<div class="ranking-content flex-container col-12 col-md-4">
+<div class="ranking-content flex-container col-12 col-lg-4">
   <div class="points-info flex-container">
     <p class="ranking-info">Balance</p>
     <strong id="points-balance">
       <%= @user.points %>
       <i class="fas fa-coins" style="margin: 0px 10px;"></i>
     </strong>
-  </div>
-  <div class="points-info flex-container">
+    <%# <hr> %>
     <p class="ranking-info">Current ranking</p>
     <strong id="user-ranking">
       <%= @ranking_position %> / <%= @total_participants %>
