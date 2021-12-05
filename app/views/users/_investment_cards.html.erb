@@ -5,7 +5,7 @@
   <% id_collapse = "collapse#{i}" %>
   <% event_offers = @offers.where(event: investment.event) %>
 
-  <div class="card-investment">
+  <div class="card-investment shadowed-blue">
     <div class="card-investment-content">
       <div class="event-text-data">
         <%= link_to(investment.event.title, event_path(investment.event), class:"event-title") %>
@@ -68,13 +68,18 @@
             <% end %>
             <% event_offers.each do |offer| %>
               <div class="offer-row">
-                <div class="offer-content">
+                <div>
                   <strong><%= offer.n_actions %></strong> actions for
                   <strong><%= offer.price %></strong> coins.
                 </div>
-                <div class="cancel-offer">
-                  <%= link_to('Cancel <i class="fas fa-ban"></i>'.html_safe, event_transaction_path(offer.event, offer), method: :delete, data: { confirm: "Are you sure?" }) %>
-                </div>
+                <%=
+                link_to(
+                  'Cancel <i class="fas fa-ban"></i>'.html_safe,
+                  event_transaction_path(offer.event, offer),
+                  method: :delete, data: { confirm: "Are you sure?" },
+                  class: "cancel-offer-btn"
+                )
+                %>
               </div>
             <% end %>
           </div>

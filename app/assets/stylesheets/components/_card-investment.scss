@@ -1,135 +1,111 @@
 .card-investment {
   margin: 30px 8px;
-  background: white;
-  box-shadow: 1px 2px 8px rgba(86, 114, 148, 0.2);
-}
-
-.card-investment-content {
-  width: 100%;
-  padding: 20px;
-  padding-top: 35px;
   position: relative;
-}
 
-.card-investment .event-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-  color: $almost-black;
-}
+  .card-investment-content {
+    padding: 20px;
+    padding-top: 35px;
 
-.card-investment p {
-  font-size: 16px;
-  color: black;
-  line-height: 1.4;
-  opacity: 0.7;
-  margin-bottom: 0;
-  margin-top: 12px;
-}
+    .event-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: $almost-black;
+    }
 
-.user-n_actions {
-  color: $orange;
-  font-size: 18px;
-}
+    p {
+      font-size: 16px;
+      color: $almost-black;
+      margin-bottom: 0;
+      margin-top: 12px;
 
-.current-price {
-  color: white;
-  font-size: 20px;
-  padding: 0px 5px;
-}
+      .user-n_actions {
+        color: $orange;
+        font-size: 18px;
+      }
+    }
 
-.event-actions-data {
-  color: white;
-  position: absolute;
-  top: -20px;
-  right: 10px;
-  background-color: $dark-blue;
-  border-radius: 5px;
-  border: 2px solid $light-gray;
-  padding: 5px 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 75%;
+    .event-actions-data {
+      color: white;
+      position: absolute;
+      top: -20px;
+      right: 10px;
+      background-color: $dark-blue;
+      border-radius: 5px;
+      border: 2px solid $light-gray;
+      padding: 5px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 75%;
+
+      .current-price {
+        color: white;
+        font-size: 20px;
+        padding: 0px 5px;
+      }
+
+      .custom-badge {
+        font-size: 1em;
+      }
+    }
+  }
 }
 
 .active-offers-header {
   background-color: $super-light-gray;
   font-size: 16px;
-  font-weight: bold;
   padding: 5px;
-}
 
-.active-offers-header button {
-  color: $almost-black;
-}
+  button {
+    color: $almost-black;
+  }
 
-.active-offers-header button:hover {
-  text-decoration: none;
+  button:hover {
+    text-decoration: none;
+  }
 }
 
 .offers-list {
   display: flex;
   flex-direction: column;
-  width: 100%;
   padding: 0;
+
+  .offer-row {
+    border-bottom: 1px solid rgb(230, 230, 230);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 40px;
+
+    .cancel-offer-btn {
+      display: block;
+      text-decoration: none;
+      color: $orange;
+      padding: 2px 5px;
+      border-radius: 1em;
+      border: 1px solid $orange;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s linear;
+    }
+
+    .cancel-offer-btn:hover {
+      background-color: $orange;
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+  .offer-row:hover {
+    background-color: #fdfdfd;
+  }
+
+  .offer-row:first-child {
+    border-top: 1px solid rgb(230, 230, 230);
+  }
 }
 
-.offer-row {
-  background-color: white;
-}
-
-.offer-content,
-.cancel-offer {
-  padding: 2px 0px;
-}
-
-.offer-content {
-  padding-left: 40px;
-}
-
-.cancel-offer {
-  padding-right: 40px;
-}
-
-.offer-row {
-  border-bottom: 1px solid rgb(230, 230, 230);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 40px;
-}
-
-.offer-row:hover {
-  background-color: #fdfdfd;
-}
-
-.offer-row:first-child {
-  border-top: 1px solid rgb(230, 230, 230);
-}
-
-.cancel-offer a {
-  text-decoration: none;
-  color: $orange;
-  padding: 2px 5px;
-  margin: 4px 0px;
-  border-radius: 1em;
-  border: 1px solid $orange;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s linear;
-}
-
-.offer-row:hover .cancel-offer a {
+.offer-row:hover .cancel-offer-btn {
   visibility: visible;
   opacity: 1;
-}
-
-.cancel-offer a:hover {
-  background-color: $orange;
-  color: white;
-}
-
-.custom-badge {
-  font-size: 1em;
 }
