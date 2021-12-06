@@ -3,7 +3,7 @@
   <ol type="1">
     <% @users.each_with_index do |user,index| %>
       <li class="ranking-li">
-      <%= image_tag "https://source.unsplash.com/random?/face", class: "avatar-ranking" %>
+      <%= image_tag "https://i.pravatar.cc/5#{rand(1..9)}", class: "avatar-ranking" %>
       <p class="username-p">
         <%= index + 1 %>.
         <%= user.username %>

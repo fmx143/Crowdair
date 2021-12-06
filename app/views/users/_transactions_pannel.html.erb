@@ -1,15 +1,17 @@
 <div class="transactions_pannel">
-  <table>
-    <tr>
-      <th><i class="fas fa-clock"></i><br>Time</th>
-      <th><i class="fas fa-star"></i><br>Event</th>
-      <th><i class="fas fa-user-friends"></i><br>Partner</th>
-      <th><i class="fas fa-chart-line"></i><br>Actions</th>
-      <th><i class="fas fa-tag"></i><br>Price</th>
-      <th><i class="fas fa-coins"></i><br>Flow</th>
-    </tr>
-      <%# <% day = @latest_transactions.first.updated_at.day %>
-      <% @latest_transactions.each do |t| %>
+  <table class="transactions-table">
+    <thead>
+      <tr>
+        <th><i class="fas fa-clock"></i><br>Time</th>
+        <th><i class="fas fa-star"></i><br>Event</th>
+        <th><i class="fas fa-user-friends"></i><br>Partner</th>
+        <th><i class="fas fa-chart-line"></i><br>Actions</th>
+        <th><i class="fas fa-tag"></i><br>Price</th>
+        <th><i class="fas fa-coins"></i><br>Flow</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @transactions.each do |t| %>
         <div class="card-transaction">
           <% if t.updated_at.day != @day %>
             <tr>
@@ -18,19 +20,20 @@
             <% @day = t.updated_at.day %>
           <% end %>
           <tr>
-            <td class="td-updated_at td-centered"><%= t.updated_at.strftime("%H:%M") %></td>
-            <td><%= link_to("# #{t.event.id}", event_path(t.event_id)) %></td>
+            <td class="td-centered td-updated_at"><%= t.updated_at.strftime("%H:%M") %></td>
+            <td class="td-centered"><%= link_to("# #{t.event.id}", event_path(t.event_id)) %></td>
             <td><%= User.find((current_user == t.buyer ? t.seller_id : t.buyer_id)).username %></td>
             <td class="td-centered"><%= t.n_actions %></td>
             <td class="td-centered"><%= '%.1f' % t.price %></td>
-            <td class=<%= current_user == t.buyer ? "td-flow-neg" : "td-flow-pos" %>><%= "#{current_user == t.buyer ? '-' : '+'}#{'%.1f' % (t.n_actions * t.price)}" %></td>
+            <td class="td-centered <%= current_user == t.buyer ? 'td-flow-neg' : 'td-flow-pos' %>">
+                <%= "#{current_user == t.buyer ? '-' : '+'}#{'%.1f' % (t.n_actions * t.price)}" %>
+            </td>
           </tr>
         </div>
       <% end %>
-
       <div class="card-transaction">
         <tr><td colspan="6", style="text-align: center;"></td></tr>
       </div>
-
+    </tbody>
   </table>
 </div>
