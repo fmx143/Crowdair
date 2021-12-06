@@ -1,20 +1,31 @@
 <div class="points-content col-12 col-lg-8">
   <div class="points-graph-container flex-container">
-    <%= line_chart(@points_history, ytitle: "Points", curve: false, points: false, colors: ["#fa7b2d"] ) %>
+    <%= line_chart(@portfolio_values, ytitle: "Portfolio valuation", curve: false, points: false, colors: ["#fa7b2d"] ) %>
   </div>
 </div>
 <div class="ranking-content flex-container col-12 col-lg-4">
   <div class="points-info flex-container">
-    <p class="ranking-info">Balance</p>
-    <strong id="points-balance">
-      <%= @user.points %>
-      <i class="fas fa-coins" style="margin: 0px 10px;"></i>
-    </strong>
-    <%# <hr> %>
-    <p class="ranking-info">Current ranking</p>
-    <strong id="user-ranking">
-      <%= @ranking_position %> / <%= @total_participants %>
-    </strong>
+    <div class="stats-table">
+      <table>
+        <tr>
+          <td>Coins value</td>
+          <td><%= @user.points %></td>
+        </tr>
+        <tr>
+          <td>Actions value</td>
+          <td>+<%= @portfolio_values.first[1] - @user.points %></td>
+        </tr>
+        <tr>
+          <td>Portfolio valuation</td>
+          <td><%= @portfolio_values.first[1] %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="points-info flex-container">
+    <p class="ranking-info">Ranking</p>
+    <strong id="user-ranking"><%= @ranking_position %> / <%= @total_participants %></strong>
+
     <%= image_tag('podium-blue.png', id:'podium-icon') %>
     <%= link_to('View Leaderboard', ranking_path, class: "button-classy leaderboard-btn") %>
   </div>
