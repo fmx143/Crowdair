@@ -16,10 +16,6 @@ class Event < ApplicationRecord
   validates :title, presence: true, length: { in: 5..100 }
   validates :description, presence: true, length: { in: 10..300 }
 
-  def all_active
-    Event.all.where.not(:archived)
-  end
-
   def pay_due(outcome)
     # Called when event ends (when admin presses yes/no in events index)
     end_action_price = outcome == "yes" ? 100 : 0

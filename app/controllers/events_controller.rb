@@ -4,8 +4,8 @@ class EventsController < ApplicationController
   require 'net/http'
 
   def index
-    # @events = Event.all
-    @event = Event.all_active
+    @events = Event.all.where(archived: false)
+
     # @past_events = Event.where("end_date < ?", Time.now)    # Event.all.where(Date.today = Event.end_date)
     # @events[1].end_date
   end
@@ -68,7 +68,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.pay_due(params["outcome"])
     @event.archived = true
-    redirect_to event_path(@event)
+    @event.save
+    redirect_to(events_path)
   end
 
   private
