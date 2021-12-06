@@ -1,9 +1,8 @@
 require 'faker'
 require 'json'
 
-
-number_of_users = 12
-number_of_events = 4
+number_of_users = 20
+number_of_events = 12
 number_of_transactions = 500
 number_of_offers = number_of_events * number_of_users
 min_points = 100
@@ -15,9 +14,9 @@ kalshi_markets = JSON.parse(kalshi_json)
 
 def real_price(event)
   if event.transactions.last
-    new_price = event.transactions.last.price + (rand(0...2) * [-1,1].sample)
+    new_price = event.transactions.last.price + (rand(0...4) * [-1,1].sample)
     while new_price > 100 || new_price < 1
-      new_price = event.transactions.last.price + (rand(0...2)* [-1,1].sample)
+      new_price = event.transactions.last.price + (rand(0...4)* [-1,1].sample)
     end
     price = new_price
   else
