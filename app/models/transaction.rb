@@ -18,14 +18,6 @@ class Transaction < ApplicationRecord
       seller_invest_actions.update(n_actions: seller_invest_actions.n_actions - n_actions)
       buyer.update(points: buyer.points - (price * n_actions))
       seller.update(points: seller.points + (price * n_actions))
-
-      update_portfolio_values
-    end
-  end
-
-  def update_portfolio_values
-    User.all.each do |user|
-      Portfolio.create!(user: user, pv: user.compute_portfolio_value)
     end
   end
 

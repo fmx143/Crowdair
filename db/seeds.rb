@@ -1,12 +1,12 @@
 require 'faker'
 require 'json'
 
-number_of_users = 6
+
+number_of_users = 20
 number_of_events = 12
-number_of_transactions = 300
-number_of_offers = number_of_events * number_of_users
-# min_points = 100
-# max_points = 1000
+number_of_transactions = 500
+min_points = 100
+max_points = 1000
 
 filepath = 'app/assets/data/kalshi.json'
 kalshi_json = File.read(filepath)
@@ -14,9 +14,9 @@ kalshi_markets = JSON.parse(kalshi_json)
 
 def real_price(event)
   if event.transactions.last
-    new_price = event.transactions.last.price + (rand(0...4) * [-1,1].sample)
+    new_price = event.transactions.last.price + (rand(0...10) * [-1,1].sample)
     while new_price > 100 || new_price < 1
-      new_price = event.transactions.last.price + (rand(0...4)* [-1,1].sample)
+      new_price = event.transactions.last.price + (rand(0...10)* [-1,1].sample)
     end
     price = new_price
   else
@@ -46,15 +46,15 @@ def valid_transaction_params
     actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
     seller_investments = seller.investments.find_by(event: event).n_actions
   end
+
   {
     params: {
-      price: price,
-      n_actions: n_actions,
-      seller: seller,
-      event: event
+    price: price,
+    n_actions: n_actions,
+    seller: seller,
+    event: event
     },
-    buyer: buyer
-  }
+  buyer: buyer}
 end
 
 puts "Destroying all Investment... 💣"
@@ -71,14 +71,14 @@ users_list = [
     username: "marcel",
     email: "mbower@gmail.com",
     password: "abcdef",
-    # points: 1000,
+    points: 1000,
     admin: true
   },
   {
     username: "jane",
     email: "janetarzan@hotmail.com",
     password: "abcdef",
-    # points: 1000
+    points: 1000
   }
 ]
 
@@ -86,7 +86,7 @@ users_list = [
   users_list << {
     username: Faker::Internet.unique.username,
     email: Faker::Internet.email,
-    # points: rand(min_points..max_points),
+    points: rand(min_points..max_points),
     password: "abcdef"
   }
 end
@@ -116,23 +116,21 @@ puts "Creating a seed of #{number_of_transactions*2} fake transactions..."
 
 
 number_of_transactions.times do |i|
-  transaction_params = valid_transaction_params
-  transaction = Transaction.create!(transaction_params[:params])
-  transaction.update(buyer_id: transaction_params[:buyer].id, updated_at: dates[i])
+  transaction = Transaction.create!(valid_transaction_params[:params])
+  transaction.update(buyer_id: valid_transaction_params[:buyer].id, updated_at: dates[i])
   print "#{i+1} transactions created \r"
 end
 
 puts "#{number_of_transactions} transactions created"
 
-number_of_offers.times do |i|
+number_of_transactions.times do |i|
   transaction = Transaction.create!(valid_transaction_params[:params])
   transaction.update(updated_at: dates[i])
   print "#{i+1} offers created \r"
 end
 
-puts "#{number_of_offers} offers created"
+puts "#{number_of_transactions} offers created"
 
 puts ""
 puts "Users table now contains #{Transaction.count} Transactions."
 puts "Users table now contains #{Investment.count} Investments."
-puts "Portfolio table now contains #{Portfolio.count} Investments."
