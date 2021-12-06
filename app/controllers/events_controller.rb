@@ -63,6 +63,13 @@ class EventsController < ApplicationController
 
   end
 
+  def archive
+    @event = Event.find(params[:id])
+    @event.archived = true
+    
+    raise
+  end
+
   private
 
   def event_params

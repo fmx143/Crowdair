@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :offers
+
+  get 'events/:id/archive', to: 'events#archive', as: :event_archive
 end

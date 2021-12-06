@@ -25,18 +25,6 @@ class Event < ApplicationRecord
         event: self,
         n_actions: 10
       })
-
-      ### This should be a Transaction with the 'bank' so that it is recorded
-      ### in the user's history. Something like:
-      # t = Transaction.create!(
-      #   {
-      #     price: 0.5,
-      #     n_actions: 10,
-      #     seller: User.find(user_id: 0), # The Bank
-      #     event: self
-      #   }
-      # )
-      # t.update(buyer_id: user.id)
     end
   end
 end
