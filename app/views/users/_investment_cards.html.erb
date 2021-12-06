@@ -9,19 +9,30 @@
     <div class="card-investment-content">
       <div class="event-text-data">
         <%= link_to(investment.event.title, event_path(investment.event), class:"event-title") %>
-        <p>You hold
-          <strong class="user-n_actions"><%= investment.n_actions %></strong>
-           actions in this event (value: <strong class="user-n_actions"><%= investment.n_actions * investment.event.current_price %></strong> coins).</p>
+        <p>You hold <strong class="user-n_actions"><%= investment.n_actions %></strong> actions in this event.</p>
       </div>
       <div class="event-actions-data">
         <div class="badge-value">
-          Likelihood to happen
-          <strong class="current-price"><%= "#{investment.event.current_price}%" %></strong>
+          Likelihood
+          <strong class="current-price"><%= "#{investment.event.transactions.where.not(buyer_id: nil).last.price}%" %></strong>
         </div>
         <div class="badge-change">
           Last hour change
           <%
-            diff = investment.event.last_hour_change
+            # Note: This should be outside the view - but how?
+            all_transactions = investment.event.transactions.where.not(buyer_id: nil)
+            p0 = 0
+            p1 = 0
+            if all_transactions.count > 0
+              recent_transactions = all_transactions
+                .order(updated_at: :desc)
+                .where("updated_at >= ?", 1.hour.ago)
+              if recent_transactions.count > 1
+                p0 = recent_transactions.last.price
+                p1 = recent_transactions.first.price
+              end
+            end
+            diff = p1 - p0
             if diff == 0
               badge_class = 'badge-secondary'
               sign = '+'
