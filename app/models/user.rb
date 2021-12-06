@@ -37,10 +37,8 @@ class User < ApplicationRecord
 
   def compute_portfolio_value
     portfolio_value = points
-    investments.each do |investment|
-      event_history = investment.event.concluded_transactions
-      current_value = event_history.count.positive? ? investment.event.current_price : 50
-      portfolio_value += investment.n_actions * current_value
+    investments.each do |i|
+      portfolio_value += i.n_actions * i.event.current_price
     end
     portfolio_value
   end

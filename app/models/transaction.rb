@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
   belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :seller, class_name: 'User'
   belongs_to :event
-  validates :price, numericality: { in: 0..100 }
+  validates :price, numericality: { in: 1..100 }
   validate :actions_validator
   validate :points_validator
 
@@ -25,7 +25,10 @@ class Transaction < ApplicationRecord
 
   def update_portfolio_values
     User.all.each do |user|
-      Portfolio.create!(user: user, pv: user.compute_portfolio_value)
+      Portfolio.create!(
+        user: user,
+        pv: user.compute_portfolio_value
+      )
     end
   end
 

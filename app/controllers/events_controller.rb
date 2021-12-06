@@ -68,7 +68,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.pay_due(params["outcome"])
     @event.archived = true
-    @event.save
+    # @event.save # WARNING - THIS WILL ADD INITIAL PORTFOLIO TO ALL USERS!
     redirect_to(events_path)
   end
 

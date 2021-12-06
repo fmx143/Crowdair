@@ -20,16 +20,23 @@ class Event < ApplicationRecord
     # Called when event ends (when admin presses yes/no in events index)
     end_action_price = outcome == "yes" ? 100 : 0
     bank = User.find_by(email: 'crowdair@gmail.com')
+    offers.destroy_all
     User.all.each do |user|
       actions_held = user.investments.where(event_id: id).first.n_actions
-      Transaction.create!(
-        buyer_id: bank.id,
+      t = Transaction.create!(
         seller_id: user.id,
         price: end_action_price,
         n_actions: actions_held,
         event_id: id
       )
+      t.update(buyer_id: bank.id)
     end
+    # User.all.each do |user|
+    #   Portfolio.create!(
+    #     user: user,
+    #     pv: user.compute_portfolio_value
+    #   )
+    # end
   end
 
   def last_hour_change
@@ -54,7 +61,7 @@ class Event < ApplicationRecord
   end
 
   def current_price
-    concluded_transactions.last.price
+    concluded_transactions.empty? ? 50 : concluded_transactions.last.price
   end
 
   private
