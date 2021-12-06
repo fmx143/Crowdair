@@ -83,3 +83,20 @@
   border: 1px solid $dark-blue;
   text-decoration: none;
 }
+
+.button-landing {
+  padding: 5px 15px;
+  border-radius: 1em;
+  border: 1px solid white;
+  color: white;
+  text-align: center;
+}
+
+.button-landing:hover {
+  background-color: $dark-blue;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 1em;
+  border: 1px solid white;
+  text-decoration: none;
+}

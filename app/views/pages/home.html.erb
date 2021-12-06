@@ -1,5 +1,166 @@
-<div class="landing">
-    <div class="">
-      <a href="/events">Go to events</a>
+<div class="landing" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(https://static.vecteezy.com/ti/vecteur-libre/p1/695297-bougie-bougie-graphique-de-l-39-investissement-boursier-gratuit-vectoriel.jpg);">
+  <div class="container">
+    <h1> Welcome to Crowdair !</h1>
+    <h4>Before your journey starts, let us explain how this website works in 3 simple steps. </h4>
+
+    <div class="row">
+      <div class="row justify-content-between">
+        <div class="col-12 col-md-4">
+          <div class="home-infos">
+            <h3 class="text-center mb-3">📅 Choose event</h3>
+            <h5>After creating your account, go to the list of events and choose some that your familiar with or know about.</h5>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="home-infos">
+            <h3 class="text-center mb-3">📆 Event</h3>
+            <h5>Once on the event, analyse the supply and demand from others users and the graphic to know what is the current general opinion. </h5>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="home-infos">
+            <h3 class="text-center mb-3">📈 Trade</h3>
+            <h5>Made your choice?</h5>
+            <h5>Then make an offer to sell your well deserved actions or buy more actions</h5>
+            <h5>🪙Either way, the goal is to gain as much coins as possible!🪙</h5>
+          </div>
+        </div>
+      </div>
+    <div>
+
+    <h4>Doubts? Click the buttons below to get more informations.</h4>
+
+      <p class="justify-content-between">
+        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample">
+          👨‍💻Account
+        </a>
+
+        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample">
+          📢Events list
+        </a>
+
+        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapseExample">
+          📊Dasboard
+        </a>
+
+        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse4" role="button" aria-expanded="false" aria-controls="collapseExample">
+          📑Event page
+        </a>
+
+        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse5" role="button" aria-expanded="false" aria-controls="collapseExample">
+          🪙Placing a trade
+        </a>
+
+        <%= link_to "Go to events", events_path, style: "texte-decoration: none; color: white;" %>
+      </p>
     </div>
+
+    <div class="collapse" id="collapse1">
+      <div class="home-card row">
+        <div class="col-12 col-md-6">
+          <%= image_tag('invest.png', class: "home-card-img") %>
+        </div>
+        <div class="col-6 mt-3">
+          <h2>👨‍💻Account</h2>
+          <ul>
+            <li>
+              <h5>After creating your account, you will receive a sum of 1000 coins🪙 to be able to buy and sell actions on events.</h5>
+            </li>
+            <li>
+              <h5>For every newly created event, you will get a total of 🔟 actions, for free, to be traded. </h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse" id="collapse2">
+      <div class="home-card row">
+        <div class="col-12 col-md-6">
+          <%= image_tag('card event.png', class: "home-card-img") %>
+        </div>
+        <div class="col-6 mt-3">
+          <h2>📢Events list</h2>
+          <ul>
+            <li>
+              <h5>Once on the list of events, feel free to choose any event that you think will happen in a near future or not.</h5>
+            </li>
+            <li>
+              <h5>Pay attention to the "likelyhood to happend" which already can indicates the current state of the event realization.</h5>
+            </li>
+            <li>
+              <h5>📉You can also see the tendency of "likelyhood to happend" during the last hour.<h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse" id="collapse3">
+      <div class="home-card row">
+        <div class="col-12 col-md-6">
+          <%= image_tag('dashboard.png', class: "home-card-img") %>
+        </div>
+        <div class="col-6 mt-3">
+          <h2>📊Dasboard</h2>
+          <h5>Find relevant informations about your account like:</h5>
+          <ul>
+            <li>
+              <h5>📉The graphic about your points.</h5>
+            </li>
+            <li>
+              <h5>🪙Your total amount of coins made with your coins and current value(in coins) of your actions placed into events.</h5>
+            </li>
+            <li>
+              <h5>✅The events your are still involved in or placing an offer.</h5>
+            </li>
+            <li>
+              <h5>💸A list of your last transactions and coins your have earn or loose.</h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse" id="collapse4">
+      <div class="home-card-big row">
+        <div class="col-12 col-md-6">
+          <%= image_tag('event.png', class: "home-card-event-img") %>
+        </div>
+        <div class="col-6 mt-3">
+          <h2>📑Event page</h2>
+          <h5>⚠️PAY ATTENTION, because these informations are relevant for your understanding!</h5>
+          <h5>On the event page, you have access to multiple informations:</h5>
+          <ul>
+            <li>
+              <h5>The graphic show you the percentage's possibility of the event to realize in near future.</h5>
+            </li>
+            <li>
+              <h5>❗️REMEMBER❗️, this percentage is also the current price, in COINS🪙, of 1 action for this specific event.</h5>
+            </li>
+            <li>
+              <h5>On the right of the graph, you have the trading board. Here you can see informations about your amount of actions, points and offers.</h5>
+            </li>
+            <li>
+              <h5>This is the transaction panel, where users can place offers for action with current price. Your future offers will be place here.</h5>
+            </li>
+            <li>
+              <h5>At the bottom, if you’re unsure of the event, there is a list of news📰 about the event to make the best possible decision.</h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse" id="collapse5">
+      <div class="home-card-big">
+        <%= image_tag('speculate.png', class: "home-card-big-img") %>
+        <h2>🪙Placing a trade</h2>
+        <h5>🤷How the hell can i make a decision about an event ?</h5>
+          <h5>📈Think that the event will happend at the ending date? Then you should try to buy actions at LOW price to gain value(coins) as the percentage of realization will increase (supposed the event will happend)</h5>
+          <h5>📉Think that the event will NOT happend at the ending date? Then you should try to sell your actions at HIGH price to gain value as the percentage of realization will decrease (supposed the event will not happend)</h5>
+          <h5>Either way, the main goal is to increase your coins🪙 amout to be the best user!</h5>
+      </div>
+    </div>
+  </div>
 </div>
