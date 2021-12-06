@@ -6,10 +6,10 @@ class TransactionsController < ApplicationController
 
   def create
     event_show_method()
-    @transaction = Transaction.new(create_transaction_params)
-    @transaction.event = @event
-    @transaction.seller = current_user
-    @transaction.save ? redirect_to(event_path(@event)) : (render 'events/show')
+    @new_transaction = Transaction.new(create_transaction_params)
+    @new_transaction.event = @event
+    @new_transaction.seller = current_user
+    @new_transaction.save ? redirect_to(event_path(@event)) : (render 'events/show')
   end
 
   # def edit
@@ -18,17 +18,20 @@ class TransactionsController < ApplicationController
 
 
   def buy
-    @initial_transaction = Transaction.find(params[:id])
-    if buy_transaction_params[:n_actions].to_i < @initial_transaction.n_actions
-      initial_n_actions = @initial_transaction.n_actions
-      new_transaction = @initial_transaction.dup
-      @initial_transaction.update_attribute(:n_actions, buy_transaction_params[:n_actions].to_i)
-      new_transaction.update_attribute(:n_actions, (initial_n_actions - buy_transaction_params[:n_actions].to_i))
-    elsif buy_transaction_params[:n_actions].to_i > @initial_transaction.n_actions
-      @initial_transaction.errors.add(:n_actions, "The seller is not selling more than #{@initial_transaction.n_actions}")
-    end
+    @offer = Transaction.find(params[:id])
     event_show_method()
-    @initial_transaction.update(buyer_id: current_user.id) ? redirect_to(event_path(@initial_transaction.event)) : (render 'events/show')
+    if buy_transaction_params[:n_actions].to_i < @offer.n_actions
+      initial_n_actions = @offer.n_actions
+      new_offer = @offer.dup
+      @offer.update_attribute(:n_actions, buy_transaction_params[:n_actions].to_i)
+      new_offer.update_attribute(:n_actions, (initial_n_actions - buy_transaction_params[:n_actions].to_i))
+      @offer.update(buyer_id: current_user.id) ? redirect_to(event_path(@offer.event)) : (render 'events/show')
+    elsif buy_transaction_params[:n_actions].to_i > @offer.n_actions
+      @offer.errors.add(:n_actions, "The seller is not selling more than #{@offer.n_actions}")
+      render 'events/show'
+    else
+      @offer.update(buyer_id: current_user.id) ? redirect_to(event_path(@offer.event)) : (render 'events/show')
+    end
   end
 
   def destroy
@@ -55,8 +58,7 @@ class TransactionsController < ApplicationController
     @event = Event.find(params[:event_id])
     @offers = @event.transactions.includes([:seller]).where(buyer_id: nil).order(price: :asc)
     @new_transaction = Transaction.new
-    @user = current_user
-    @actions_held = @user.investments.find_by(event: @event).n_actions
+    @actions_held = current_user.investments.find_by(event: @event).n_actions
     @actions_on_offer = @event.transactions.where(buyer_id: nil, seller_id: current_user.id).sum(:n_actions)
 
     # @new_offer = Transaction.new
