@@ -31,8 +31,18 @@ class User < ApplicationRecord
     transactions.where.not(buyer_id: nil).order(updated_at: :desc)
   end
 
-  def portfolio_values
+  def portfolio_history
     Portfolio.where(user_id: id).order(created_at: :desc).pluck(:created_at, :pv)
+  end
+
+  def compute_portfolio_value
+    portfolio_value = points
+    investments.each do |investment|
+      event_history = investment.event.concluded_transactions
+      current_value = event_history.count.positive? ? investment.event.current_price : 50
+      portfolio_value += investment.n_actions * current_value
+    end
+    portfolio_value
   end
 
   def ranking_position

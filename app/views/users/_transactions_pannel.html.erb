@@ -21,7 +21,7 @@
           <% end %>
           <tr>
             <td class="td-centered td-updated_at"><%= t.updated_at.strftime("%H:%M") %></td>
-            <td class="td-centered"><%= link_to("# #{t.event.id}", event_path(t.event_id)) %></td>
+            <td class="td-centered"><%= link_to("##{t.event.id}", event_path(t.event_id)) %></td>
             <td><%= User.find((current_user == t.buyer ? t.seller_id : t.buyer_id)).username %></td>
             <td class="td-centered"><%= t.n_actions %></td>
             <td class="td-centered"><%= '%.1f' % t.price %></td>

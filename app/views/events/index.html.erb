@@ -21,7 +21,7 @@
           <div class="badge-change">
             Last hour change
             <%
-              diff = event.compute_last_hour_diff
+              diff = event.last_hour_change
               if diff == 0
                 badge_class = 'badge-secondary'
                 sign = '+'

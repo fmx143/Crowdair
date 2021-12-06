@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @ranking_position = @user.ranking_position
     @total_participants = User.count
     @points_history = @user.points_history
-    @portfolio_values = @user.portfolio_values
+    @portfolio_values = @user.portfolio_history
   end
 
   def update
