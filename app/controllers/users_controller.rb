@@ -7,23 +7,10 @@ class UsersController < ApplicationController
     @day = @transactions.first.updated_at.day if @transactions.length >= 1
     @offers = current_user.transactions.where(buyer_id: nil)
     @ranking_position = User.order(points: :desc).pluck(:id).find_index(@user.id) + 1
-<<<<<<< HEAD
 
-    # Compute data for portfolio graph in dashboard /!\ Not accurate! /!\
-    balance = @user.points
-    @points_history = {}
-    @points_history[Time.now] = balance
-    @transactions.each do |transaction|
-      @points_history[transaction.updated_at] = balance
-      factor = transaction.buyer == @user ? 1 : -1 # subtract if buying, add if selling
-      balance += transaction.n_actions * transaction.price * factor
-    end
-
-    @portfolio_values = Portfolio.where(user_id: @user.id).order(created_at: :desc).pluck(:created_at, :pv)
-=======
     @total_participants = User.count
     @points_history = compute_points_history
->>>>>>> master
+    @portfolio_values = Portfolio.where(user_id: @user.id).order(created_at: :desc).pluck(:created_at, :pv)
   end
 
   def update

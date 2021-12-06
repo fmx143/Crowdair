@@ -13,26 +13,13 @@
       </div>
       <div class="event-actions-data">
         <div class="badge-value">
-          Likelihood
+          Likelihood to happen
           <strong class="current-price"><%= "#{investment.event.transactions.where.not(buyer_id: nil).last.price}%" %></strong>
         </div>
         <div class="badge-change">
           Last hour change
           <%
-            # Note: This should be outside the view - but how?
-            all_transactions = investment.event.transactions.where.not(buyer_id: nil)
-            p0 = 0
-            p1 = 0
-            if all_transactions.count > 0
-              recent_transactions = all_transactions
-                .order(updated_at: :desc)
-                .where("updated_at >= ?", 1.hour.ago)
-              if recent_transactions.count > 1
-                p0 = recent_transactions.last.price
-                p1 = recent_transactions.first.price
-              end
-            end
-            diff = p1 - p0
+            diff = investment.event.compute_last_hour_diff
             if diff == 0
               badge_class = 'badge-secondary'
               sign = '+'
