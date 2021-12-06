@@ -1,12 +1,12 @@
 require 'faker'
 require 'json'
 
-number_of_users = 20
+number_of_users = 6
 number_of_events = 12
-number_of_transactions = 500
+number_of_transactions = 300
 number_of_offers = number_of_events * number_of_users
-min_points = 100
-max_points = 1000
+# min_points = 100
+# max_points = 1000
 
 filepath = 'app/assets/data/kalshi.json'
 kalshi_json = File.read(filepath)
@@ -71,14 +71,14 @@ users_list = [
     username: "marcel",
     email: "mbower@gmail.com",
     password: "abcdef",
-    points: 1000,
+    # points: 1000,
     admin: true
   },
   {
     username: "jane",
     email: "janetarzan@hotmail.com",
     password: "abcdef",
-    points: 1000
+    # points: 1000
   }
 ]
 
@@ -86,7 +86,7 @@ users_list = [
   users_list << {
     username: Faker::Internet.unique.username,
     email: Faker::Internet.email,
-    points: rand(min_points..max_points),
+    # points: rand(min_points..max_points),
     password: "abcdef"
   }
 end
