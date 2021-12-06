@@ -1,5 +1,5 @@
 
-<div class="row" id="event-<%= @event.id %>">
+<div class="row" id="technical" data-event-id="<%= @event.id %>"> <%# to check %>
   <div class="col-12 col-sm-6 mb-2">
     <%= line_chart(
       @event.transactions.where.not(buyer_id: nil).pluck(:updated_at, :price),
@@ -12,12 +12,13 @@
       height: "100%"
       )%>
   </div>
-  <div class="col-12 col-sm-6 mb-2 trading" style="overflow: auto">
+  <div class="col-12 col-sm-6 mb-2 trading" style="overflow: overlay">
     <div class='seller-card'>
       <div>You currently hold <strong><%= @actions_held %></strong> actions in this event. Of which <strong><%= @actions_on_offer %></strong> are on sale.</div>
       <div>
-        <%= simple_form_for [@event, @transaction],
+        <%= simple_form_for [@event, @new_transaction],
         wrapper: :inline_form,
+        url: event_transactions_url(@event, @new_transaction),
         html: {
           class: "inline-form"
         },
@@ -47,7 +48,17 @@
           coins.
         </div>
         <% if first == 1 %>
-          <%= link_to('Buy', event_transaction_buy_path(@event, offer), class: "button-buy") %>
+          <%= simple_form_for [@event, offer],
+          wrapper: :inline_form,
+          url: event_transaction_buy_url(@event, offer),
+          html: {
+            class: "inline-form"
+          },
+          wrapper_mappings: { boolean: :inline_boolean} do |f| %>
+            <%= f.input :n_actions, placeholder: 'Actions', label: false, input_html: {class: 'form-input'}%>
+            <%= f.submit "Buy", class: "button-buy" %>
+          <% end %>
+          <%# <%= link_to('Buy', event_transaction_buy_path(@event, offer), class: "button-buy") %>
         <% elsif offer.seller == current_user %>
           <%= link_to("Cancel offer", event_transaction_path(@event, offer), method: :delete, class: "button-sell") %>
         <% end %>
