@@ -14,6 +14,43 @@ class User < ApplicationRecord
     buyer_transactions.or(seller_transactions)
   end
 
+  def engaged_investments
+    engaged_investments = []
+    investments.each do |investment|
+      n = transactions.where(event_id: investment.event.id).count
+      engaged_investments.push(investment) if n > 1
+    end
+    engaged_investments
+  end
+
+  def offers
+    transactions.where(buyer_id: nil)
+  end
+
+  def latest_transactions
+    transactions.where.not(buyer_id: nil).order(updated_at: :desc)
+  end
+
+  def portfolio_values
+    Portfolio.where(user_id: id).order(created_at: :desc).pluck(:created_at, :pv)
+  end
+
+  def ranking_position
+    User.order(points: :desc).pluck(:id).find_index(id) + 1
+  end
+
+  def points_history
+    balance = points
+    points_history = {}
+    points_history[Time.now] = balance
+    latest_transactions.each do |transaction|
+      points_history[transaction.updated_at] = balance
+      factor = transaction.buyer == @user ? 1 : -1 # subtract if buying, add if selling
+      balance += transaction.n_actions * transaction.price * factor
+    end
+    points_history
+  end
+
   def add_initial_portfolio
     Event.all.each do |event|
       Investment.create!({

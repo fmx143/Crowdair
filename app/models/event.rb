@@ -30,6 +30,10 @@ class Event < ApplicationRecord
     p1 - p0
   end
 
+  def current_price
+    transactions.where.not(buyer_id: nil).last.price
+  end
+
   private
 
   def add_initial_investment

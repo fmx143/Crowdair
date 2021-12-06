@@ -8,22 +8,22 @@
     <div class="stats-table">
       <table>
         <tr>
-          <td>Points balance</td>
+          <td>Coins value</td>
           <td><%= @user.points %></td>
         </tr>
         <tr>
-          <td>Assets valuation</td>
-          <td>+<%= @portfolio_values.last[1] - @user.points %></td>
+          <td>Actions value</td>
+          <td>+<%= @portfolio_values.first[1] - @user.points %></td>
         </tr>
         <tr>
           <td>Portfolio valuation</td>
-          <td><%= @portfolio_values.last[1] %></td>
+          <td><%= @portfolio_values.first[1] %></td>
         </tr>
       </table>
     </div>
   </div>
   <div class="points-info flex-container">
-    <p class="ranking-info">Ranking on portfolio valuation</p>
+    <p class="ranking-info">Ranking</p>
     <strong id="user-ranking"><%= @ranking_position %> / <%= @total_participants %></strong>
 
     <%= image_tag('podium-blue.png', id:'podium-icon') %>

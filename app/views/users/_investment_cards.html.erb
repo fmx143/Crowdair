@@ -9,12 +9,14 @@
     <div class="card-investment-content">
       <div class="event-text-data">
         <%= link_to(investment.event.title, event_path(investment.event), class:"event-title") %>
-        <p>You hold <strong class="user-n_actions"><%= investment.n_actions %></strong> actions in this event.</p>
+        <p>You hold
+          <strong class="user-n_actions"><%= investment.n_actions %></strong>
+           actions in this event (value: <strong class="user-n_actions"><%= investment.n_actions * investment.event.current_price %></strong> coins).</p>
       </div>
       <div class="event-actions-data">
         <div class="badge-value">
           Likelihood to happen
-          <strong class="current-price"><%= "#{investment.event.transactions.where.not(buyer_id: nil).last.price}%" %></strong>
+          <strong class="current-price"><%= "#{investment.event.current_price}%" %></strong>
         </div>
         <div class="badge-change">
           Last hour change
