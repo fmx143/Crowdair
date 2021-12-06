@@ -13,11 +13,11 @@
         </tr>
         <tr>
           <td>Actions value</td>
-          <td>+<%= @portfolio_values.first[1] - @user.points %></td>
+          <td>+<%= @portfolio_values.last[1] - @user.points %></td>
         </tr>
         <tr>
           <td>Portfolio valuation</td>
-          <td><%= @portfolio_values.first[1] %></td>
+          <td><%= @portfolio_values.last[1] %></td>
         </tr>
       </table>
     </div>

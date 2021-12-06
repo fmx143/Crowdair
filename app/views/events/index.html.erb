@@ -15,8 +15,7 @@
         <div class="events-data-badge">
           <div class="badge-value">
             Likelihood to happen
-            <strong class="current-price"><%= "#{event.transactions.where.not(buyer_id: nil).last.price}%" %></strong>
-
+            <strong class="current-price"><%= "#{event.current_price}%" %></strong>
           </div>
           <div class="badge-change">
             Last hour change

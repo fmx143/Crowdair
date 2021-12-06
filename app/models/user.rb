@@ -32,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def portfolio_history
-    Portfolio.where(user_id: id).order(created_at: :desc).pluck(:created_at, :pv)
+    Portfolio.where(user_id: id).order(created_at: :asc).pluck(:created_at, :pv)
   end
 
   def compute_portfolio_value

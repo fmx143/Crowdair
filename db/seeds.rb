@@ -1,8 +1,8 @@
 require 'faker'
 require 'json'
 
-number_of_users = 6
-number_of_events = 12
+number_of_users = 4
+number_of_events = 6
 number_of_transactions = 300
 number_of_offers = number_of_events * number_of_users
 # min_points = 100
@@ -33,7 +33,7 @@ dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample
   price = real_price(event)
-  n_actions = rand(1..20)
+  n_actions = rand(1..5)
   buyer, seller = User.all.sample(2)
   actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
   seller_investments = seller.investments.find_by(event: event).n_actions

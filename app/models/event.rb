@@ -30,7 +30,7 @@ class Event < ApplicationRecord
   end
 
   def concluded_transactions
-    transactions.where.not(buyer_id: nil).order(updated_at: :desc)
+    transactions.where.not(buyer_id: nil).order(updated_at: :asc)
   end
 
   def offers
