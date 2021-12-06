@@ -18,7 +18,7 @@ class User < ApplicationRecord
     engaged_investments = []
     investments.each do |investment|
       n = transactions.where(event_id: investment.event.id).count
-      engaged_investments.push(investment) if n > 1
+      engaged_investments.push(investment) unless n.zero? || investment.event.archived
     end
     engaged_investments
   end

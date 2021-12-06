@@ -4,7 +4,8 @@ class EventsController < ApplicationController
   require 'net/http'
 
   def index
-    @events = Event.all
+    # @events = Event.all
+    @event = Event.all_active
     # @past_events = Event.where("end_date < ?", Time.now)    # Event.all.where(Date.today = Event.end_date)
     # @events[1].end_date
   end

@@ -16,12 +16,16 @@ class Event < ApplicationRecord
   validates :title, presence: true, length: { in: 5..100 }
   validates :description, presence: true, length: { in: 10..300 }
 
+  def all_active
+    Event.all.where.not(:archived)
+  end
+
   def pay_due(outcome)
     # Called when event ends (when admin presses yes/no in events index)
-    end_action_price = outcome == "yes" ? 1.0 : 0.0
+    end_action_price = outcome == "yes" ? 100 : 0
     bank = User.find_by(email: 'crowdair@gmail.com')
     User.all.each do |user|
-      actions_held = user.investments.where(event_id: id).n_actions
+      actions_held = user.investments.where(event_id: id).first.n_actions
       Transaction.create!(
         buyer_id: bank.id,
         seller_id: user.id,
@@ -30,6 +34,7 @@ class Event < ApplicationRecord
         event_id: id
       )
     end
+  end
 
   def last_hour_change
     p0 = 0
