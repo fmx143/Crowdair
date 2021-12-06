@@ -134,3 +134,12 @@ puts "#{number_of_transactions} offers created"
 puts ""
 puts "Users table now contains #{Transaction.count} Transactions."
 puts "Users table now contains #{Investment.count} Investments."
+
+User.create!(
+  username: "Crowdair",
+  email: "crowdair@gmail.com",
+  password: "abcdef",
+  points: 10_000_000,
+  admin: true
+)
+puts "Created the Bank admin!"

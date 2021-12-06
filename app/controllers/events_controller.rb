@@ -65,9 +65,9 @@ class EventsController < ApplicationController
 
   def archive
     @event = Event.find(params[:id])
+    @event.pay_due(params["outcome"])
     @event.archived = true
-    
-    raise
+    redirect_to event_path(@event)
   end
 
   private
