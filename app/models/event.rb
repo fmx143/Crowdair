@@ -30,6 +30,30 @@ class Event < ApplicationRecord
         event_id: id
       )
     end
+
+  def last_hour_change
+    p0 = 0
+    p1 = 0
+    if concluded_transactions.count.positive?
+      recent_transactions = concluded_transactions.where("updated_at >= ?", 1.hour.ago)
+      if recent_transactions.count.positive?
+        p0 = recent_transactions.last.price
+        p1 = recent_transactions.first.price
+      end
+    end
+    p1 - p0
+  end
+
+  def concluded_transactions
+    transactions.where.not(buyer_id: nil).order(updated_at: :asc)
+  end
+
+  def offers
+    transactions.where(buyer_id: nil).order(price: :asc)
+  end
+
+  def current_price
+    concluded_transactions.last.price
   end
 
   private
