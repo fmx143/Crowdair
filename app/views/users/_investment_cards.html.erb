@@ -5,19 +5,47 @@
   <% id_collapse = "collapse#{i}" %>
   <% event_offers = @offers.where(event: investment.event) %>
 
-  <div class="card-investment">
+  <div class="card-investment shadowed-blue">
     <div class="card-investment-content">
       <div class="event-text-data">
         <%= link_to(investment.event.title, event_path(investment.event), class:"event-title") %>
         <p>You hold <strong class="user-n_actions"><%= investment.n_actions %></strong> actions in this event.</p>
       </div>
       <div class="event-actions-data">
-        <p>
-          <i class="fas fa-chart-line" style="margin: 0px 5px"></i>current value:
-          <strong class="current-price"><%= investment.event.transactions.where.not(buyer_id: nil).last.price %></strong>
-          <% p0, p1 = investment.event.transactions.where.not(buyer_id: nil).last(2).pluck(:price) %>
-          <span style="margin: 0px 5px;" class="badge <%= p1 >= p0 ? 'badge-success' : 'badge-danger' %>"><%= p1 >= p0 ? '+' : '' %><%= p1 - p0 %></span>
-        </p>
+        <div class="badge-value">
+          Likelihood
+          <strong class="current-price"><%= "#{investment.event.transactions.where.not(buyer_id: nil).last.price}%" %></strong>
+        </div>
+        <div class="badge-change">
+          Last hour change
+          <%
+            # Note: This should be outside the view - but how?
+            all_transactions = investment.event.transactions.where.not(buyer_id: nil)
+            p0 = 0
+            p1 = 0
+            if all_transactions.count > 0
+              recent_transactions = all_transactions
+                .order(updated_at: :desc)
+                .where("updated_at >= ?", 1.hour.ago)
+              if recent_transactions.count > 1
+                p0 = recent_transactions.last.price
+                p1 = recent_transactions.first.price
+              end
+            end
+            diff = p1 - p0
+            if diff == 0
+              badge_class = 'badge-secondary'
+              sign = '+'
+            elsif diff > 0
+              badge_class = 'badge-success'
+              sign = '+'
+            else
+              badge_class = 'badge-danger'
+              sign = ''
+            end
+          %>
+          <span style="margin: 0px 5px;" class="custom-badge badge <%= badge_class %>"><%= sign %><%= "#{diff} %" %></span>
+        </div>
       </div>
     </div>
     <div class="accordion" id=<%= id_name %>>
@@ -40,13 +68,18 @@
             <% end %>
             <% event_offers.each do |offer| %>
               <div class="offer-row">
-                <div class="offer-content">
+                <div>
                   <strong><%= offer.n_actions %></strong> actions for
                   <strong><%= offer.price %></strong> coins.
                 </div>
-                <div class="cancel-offer">
-                  <%= link_to('Cancel <i class="fas fa-ban"></i>'.html_safe, event_transaction_path(offer.event, offer), method: :delete, data: { confirm: "Are you sure?" }) %>
-                </div>
+                <%=
+                link_to(
+                  'Cancel <i class="fas fa-ban"></i>'.html_safe,
+                  event_transaction_path(offer.event, offer),
+                  method: :delete, data: { confirm: "Are you sure?" },
+                  class: "cancel-offer-btn"
+                )
+                %>
               </div>
             <% end %>
           </div>

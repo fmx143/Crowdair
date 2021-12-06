@@ -1,37 +1,57 @@
+// SHARED ELEMENTS (COULD BE MOVED TO "SHARED" OR STH)
+
 .flex-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.shadowed-blue {
+  box-shadow: 1px 2px 8px rgba(86, 114, 148, 0.2);
+}
+
+.section-header {
+  display: block;
+  width: 100%;
+  padding: 18px 12px;
+  margin-bottom: 0px;
+  font-weight: bold;
+  font-size: 30px;
+  background-color: $dark-blue;
+  color: white;
+  border-radius: 5px 5px 0px 0px;
+  text-align: center;
+}
+
+// DASHBOARD LAYOUT
+
+.dashboard-header {
+  margin: 20px 0px;
+}
+
 .dashboard-content {
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
-}
 
-.positions_pannel_container,
-.transactions_pannel_container {
-  flex-direction: column;
-  align-items: flex-start;
-}
+  .positions_pannel_container {
+    flex-direction: column;
+    align-items: flex-start;
 
-.transactions_pannel_container table {
-  height: 600px;
-  box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.2);
-}
+    .positions_pannel {
+      width: 100%;
+      height: 630px;
+      overflow: auto;
+      background-color: white;
+    }
+  }
 
-.positions_pannel {
-  width: 100%;
-  height: 630px;
-  overflow: auto;
-  margin: 0px;
-  background-color: $light-gray;
-}
+  .transactions_pannel_container {
+    flex-direction: column;
+    align-items: flex-start;
 
-.dashboard-content h3,
-.dashboard-header h3 {
-  padding: 18px 12px;
-  padding-top: 18px;
-  font-weight: bold;
+    .transactions_pannel {
+      width: 100%;
+    }
+  }
 }

@@ -1,21 +1,21 @@
 <div class="container">
 
   <div class="dashboard-header">
-    <h3>Stats</h3>
+    <h3 class="section-header">Stats</h3>
     <div class="dashboard-header-content row">
       <%= render('dashboard_header') %>
     </div>
   </div>
 
   <div class="dashboard-content row">
-    <div class="positions_pannel_container flex-container  col-12 col-md-6">
-      <h3>Positions</h3>
+    <div class="positions_pannel_container flex-container  col-12 col-lg-6">
+      <h3 class="section-header">Positions</h3>
       <div class="positions_pannel">
         <%= render('investment_cards') %>
       </div>
     </div>
-    <div class="transactions_pannel_container flex-container  col-12 col-md-6">
-      <h3>Latest transactions</h3>
+    <div class="transactions_pannel_container flex-container  col-12 col-lg-6">
+      <h3 class="section-header">Transactions</h3>
       <%= render('transactions_pannel') %>
     </div>
   </div>

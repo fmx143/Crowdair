@@ -66,3 +66,20 @@
   color: $dark-orange;
   text-decoration: none;
 }
+
+.button-classy {
+  padding: 5px 15px;
+  border-radius: 1em;
+  border: 1px solid $dark-blue;
+  color: $dark-blue;
+  text-align: center;
+}
+
+.button-classy:hover {
+  background-color: $dark-blue;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 1em;
+  border: 1px solid $dark-blue;
+  text-decoration: none;
+}
