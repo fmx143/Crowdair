@@ -13,9 +13,7 @@
   margin: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
-  background-image: url("https://media.istockphoto.com/photos/dark-blue-defocused-blurred-motion-abstract-background-picture-id1138740533?b=1&k=20&m=1138740533&s=170667a&w=0&h=6lC-tk4xLy4j0P47D_TflXhoQ1UkxG7Au69UjSXmqZk=");
-  background-position: center;
-  background-size: cover;
+  background-color: whitesmoke;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,60 +25,92 @@
 }
 
 .top-h3 {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: "Raleway", "sans-serif";
   font-weight: bold;
-  color: #0c59ac;
+  color: #567294;
   text-align: center;
   margin-bottom: 30px;
   margin-top: 20px;
-  text-decoration: underline;
+}
+
+.numerotation {
+  font-family: "Raleway", "sans-serif";
+  font-weight: bold;
+  color: #567294;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 .username-p {
-  color: whitesmoke;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  font-weight: bold;
+  font-family: "Raleway", "sans-serif";
+  color: #567294;
   flex-grow: 1;
   font-size: 20px;
   margin-left: 20px;
 }
 
 .points-p {
-  color: whitesmoke;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  font-weight: bold;
+  font-family: "Raleway", "sans-serif";
   font-size: 20px;
+  color: #567294;
   margin-top: 10px;
   margin-right: 15px;
 }
 
 .ranking-li:nth-child(1) .username-p {
   color: gold;
+  font-weight: bold;
 }
 
 .ranking-li:nth-child(2) .username-p {
   color: silver;
+  font-weight: bold;
 }
 
 .ranking-li:nth-child(3) .username-p {
   color: #cb7a01;
+  font-weight: bold;
 }
 
 .ranking-li:nth-child(1) .points-p {
   color: gold;
+  font-weight: bold;
 }
 
 .ranking-li:nth-child(2) .points-p {
   color: silver;
+  font-weight: bold;
 }
 
 .ranking-li:nth-child(3) .points-p {
+  color: #cb7a01;
+  font-weight: bold;
+}
+
+.ranking-li:nth-child(1) .numerotation {
+  color: gold;
+}
+
+.ranking-li:nth-child(2) .numerotation {
+  color: silver;
+}
+
+.ranking-li:nth-child(3) .numerotation {
   color: #cb7a01;
 }
 
 .medal {
   width: 20px;
   height: 20px;
+}
+
+.top {
+  width: 50px;
+  height: 50px;
+}
+
+.me {
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: #567294;
 }
