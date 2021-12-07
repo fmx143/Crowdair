@@ -30,7 +30,7 @@ class User < ApplicationRecord
     transactions.where.not(buyer_id: nil).order(updated_at: :desc)
   end
 
-  def update_all_portfolios
+  def self.update_all_portfolios
     User.all.each do |user|
       Portfolio.create!(
         user: user,
