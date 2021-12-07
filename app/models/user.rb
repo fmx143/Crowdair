@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :seller_transactions, class_name: 'Transaction', foreign_key: 'seller_id'
   has_many :investments
 
-  # validates :username, presence: true, length: { maximum: 50 }
+  validates :username, presence: true, length: { maximum: 50 }
 
   def transactions
     buyer_transactions.or(seller_transactions)

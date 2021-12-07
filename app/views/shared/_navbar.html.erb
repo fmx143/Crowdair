@@ -24,6 +24,9 @@
         <li class="nav-item active">
           <%= link_to "Top 20", ranking_path, class: "nav-link" %>
         </li>
+        <li class="nav-item active">
+          <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+        </li>
 
         <li class="nav-item dropdown">
           <%= image_tag "https://source.unsplash.com/random?/face", class: "avatar1 dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -34,7 +37,7 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          <%= link_to "Login", new_user_session_path, class: "nav-link button-classy" %>
         </li>
       <% end %>
     </ul>

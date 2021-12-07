@@ -19,16 +19,21 @@ class UsersController < ApplicationController
     @points_history = compute_points_history
   end
 
-  def update
-    @user = User.find(params[:id])
-    @user.update(user_params)
-    @user.save
-    redirect_to(user_path)
-  end
+  # def update
+  #   @user = User.find(params[:id])
+  #   @user.update(user_params)
+  #   @user.save
+  #   raise
+  #   redirect_to(user_path(:id))
+  # end
 
-  def edit
-    @user = current_user
-  end
+  # def edit
+  #   @user = current_user
+  #   @user.update(user_params)
+  #   @user.save
+  #   raise
+  #   redirect_to(user_path)
+  # end
 
   private
 
@@ -52,7 +57,4 @@ class UsersController < ApplicationController
     end
     points_history
   end
-
-
-
 end
