@@ -4,8 +4,7 @@ class EventsController < ApplicationController
   require 'net/http'
 
   def index
-    @events = Event.all.where(archived: false)
-
+    @events = Event.all
     # @past_events = Event.where("end_date < ?", Time.now)    # Event.all.where(Date.today = Event.end_date)
     # @events[1].end_date
   end
@@ -58,15 +57,6 @@ class EventsController < ApplicationController
     data_news = JSON.parse(news_json)
     @data = data_news["data"]
     # @news["data"][0]["title"] --> accéder au titre du Hash dans array dans Data
-  end
-
-  def archive
-    @event = Event.find(params[:id])
-    @event.pay_due(params["outcome"])
-    @event.update_attribute(archived: true) # This does not work...
-    # @event.archived = true
-    # @event.save
-    redirect_to(events_path)
   end
 
   private
