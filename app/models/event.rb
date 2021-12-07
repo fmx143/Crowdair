@@ -75,6 +75,7 @@ class Event < ApplicationRecord
         event: self
       )
       t.update(buyer_id: user.id, updated_at: 1.day.ago)
+      # modif
     end
   end
 end
