@@ -22,5 +22,8 @@ import "bootstrap";
 import "chartkick/chart.js";
 
 // Internal imports, e.g:
+import { initDynamicChart } from "../channels/dynacharts";
 
-// document.addEventListener("turbolinks:load", () => {});
+document.addEventListener("turbolinks:load", () => {
+  initDynamicChart();
+});

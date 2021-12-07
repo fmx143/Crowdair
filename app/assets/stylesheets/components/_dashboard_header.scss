@@ -8,9 +8,33 @@
     border-radius: 5px;
     margin: 10px 0px;
     padding: 0px;
+
     .points-graph-container {
       margin: 10px;
       height: 100%;
+      flex-direction: column;
+
+      .buttons-chart {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        .btn-timing {
+          border: 1px solid $dark-blue;
+          background-color: white;
+          padding: 5px 10px;
+          border-radius: 1em;
+          margin: 10px;
+          color: $dark-blue;
+          width: 60px;
+        }
+
+        .btn-timing:hover {
+          color: white;
+          background-color: $dark-blue;
+        }
+      }
     }
   }
 
@@ -81,4 +105,8 @@
       font-size: 20px;
     }
   }
+}
+
+.hidden-chart {
+  display: none;
 }

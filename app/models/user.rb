@@ -43,6 +43,10 @@ class User < ApplicationRecord
     Portfolio.where(user_id: id).order(created_at: :asc).pluck(:created_at, :pv)
   end
 
+  def portfolio_history_1h
+    Portfolio.where(user_id: id).order(created_at: :asc).where("created_at >= ?", 1.hour.ago).pluck(:created_at, :pv)
+  end
+
   def compute_portfolio_value
     portfolio_value = points
     investments.each do |i|
