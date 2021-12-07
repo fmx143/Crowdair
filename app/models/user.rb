@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :buyer_transactions, class_name: 'Transaction', foreign_key: 'buyer_id'
   has_many :seller_transactions, class_name: 'Transaction', foreign_key: 'seller_id'
   has_many :investments
+
   has_many :portfolios, dependent: :destroy
 
   # validates :username, length: { in: 3..60 }
@@ -17,7 +18,7 @@ class User < ApplicationRecord
     engaged_investments = []
     investments.each do |investment|
       n = transactions.where(event_id: investment.event.id).count
-      engaged_investments.push(investment) if n > 1
+      engaged_investments.push(investment) unless n.zero? || investment.event.archived
     end
     engaged_investments
   end
@@ -31,15 +32,13 @@ class User < ApplicationRecord
   end
 
   def portfolio_history
-    Portfolio.where(user_id: id).order(created_at: :desc).pluck(:created_at, :pv)
+    Portfolio.where(user_id: id).order(created_at: :asc).pluck(:created_at, :pv)
   end
 
   def compute_portfolio_value
     portfolio_value = points
-    investments.each do |investment|
-      event_history = investment.event.concluded_transactions
-      current_value = event_history.count.positive? ? investment.event.current_price : 50
-      portfolio_value += investment.n_actions * current_value
+    investments.each do |i|
+      portfolio_value += i.n_actions * i.event.current_price
     end
     portfolio_value
   end
@@ -61,12 +60,20 @@ class User < ApplicationRecord
   end
 
   def add_initial_portfolio
+    bank = User.find_by(email: 'crowdair@gmail.com')
     Event.all.each do |event|
-      Investment.create!({
+      Investment.create!(
         user: self,
         event: event,
-        n_actions: 10
-      })
+        n_actions: 0
+      )
+      t = Transaction.create!(
+        seller_id: bank.id,
+        price: 0,
+        n_actions: 10,
+        event: event
+      )
+      t.update(buyer_id: id)
     end
   end
 end
