@@ -1,29 +1,90 @@
 // Specific CSS for your home-page
-body {
-  background-color: $light-gray;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+// body {
+//   background-color: $light-gray;
+//   min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+// }
 
 .landing {
-  background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p1/695297-bougie-bougie-graphique-de-l-39-investissement-boursier-gratuit-vectoriel.jpg");
+  // background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p1/695297-bougie-bougie-graphique-de-l-39-investissement-boursier-gratuit-vectoriel.jpg");
   background-position: center;
   background-size: cover;
-  height: 100vh;
   width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.landing a {
-  font-size: 100px;
+.container h1 {
   color: white;
+  margin-bottom: 20px;
+  font-weight: 800;
 }
 
-.landing a:hover {
-  text-decoration: none;
-  font-size: 140px;
+.container h4 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.home-infos {
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  height: 480px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  overflow: scroll;
+  position: relative;
+}
+
+.home-info-logo {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 70px;
+  bottom: 50px;
+}
+
+.home-card {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  height: 500px;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: justify;
+  border-radius: 10px;
+  overflow: scroll;
+}
+
+.home-card-big {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  height: 700px;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: justify;
+  border-radius: 10px;
+  overflow: scroll;
+}
+
+.home-card-img {
+  height: 450px;
+  width: 100%;
+  object-fit: center;
+}
+
+.home-card-event-img {
+  height: 650px;
+  width: 100%;
+  object-fit: center;
+}
+
+.home-card-big-img {
+  height: 400px;
+  width: 100%;
+  object-fit: center;
+  margin-bottom: 10px;
 }
