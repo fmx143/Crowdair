@@ -1,7 +1,10 @@
+<%# NE PAS UTILISER, IL S'AGIT DE LA MAUVAISE EDIT DU USER. LA BONNE EST DANS DEVISE/REGISTRATIONS/EDIT %>
+
+
 <div class="container">
   <div class="">
 
-    <h2> Hey <%= @user.username %>, let's edit your profile 🧐 pas la bonne edit!!</h2>
+    <h2> Hey <%= @user.username %>, let's edit your profile 🧐 pas la bonne!!!</h2>
 
     <%= simple_form_for(@user, url: registration_path(@user), html: { method: :put }, class: "form-edit") do |f| %>
       <%= f.error_notification %>
