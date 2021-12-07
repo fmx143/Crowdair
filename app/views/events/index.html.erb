@@ -8,6 +8,12 @@
     <% @events.each do |event| %>
     <div class="col-12 col-md-4">
       <div class="card-products">
+        <% if current_user.admin %>
+          <div class="archive">
+            <%= link_to("End (as YES)", event_archive_path(event, outcome: "yes"), method: :post, class: "event-end-action") %>
+            <%= link_to("End (as NO)", event_archive_path(event, outcome: "no"), method: :post, class: "event-end-action") %>
+          </div>
+        <% end %>
         <img src="<%= event.img_url %>", class="card-product-img" />
         <div class="title">
           <%= link_to event.title, event_path(event.id) %>
@@ -15,8 +21,7 @@
         <div class="events-data-badge">
           <div class="badge-value">
             Likelihood to happen
-            <strong class="current-price"><%= "#{event.transactions.where.not(buyer_id: nil).last.price}%" %></strong>
-
+            <strong class="current-price"><%= "#{event.current_price}%" %></strong>
           </div>
           <div class="badge-change">
             Last hour change
