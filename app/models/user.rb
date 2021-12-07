@@ -39,6 +39,18 @@ class User < ApplicationRecord
     end
   end
 
+  def self.user_ranking
+    ranking = []
+    User.all.where(admin: false).each do |user|
+      ranking << {
+        username: user.username,
+        pv: user.portfolio_history.last[1],
+        email: user.email
+      }
+    end
+    ranking.sort_by! { |elem| elem[:pv] }.reverse!
+  end
+
   def portfolio_history
     Portfolio.where(user_id: id).order(created_at: :asc).pluck(:created_at, :pv)
   end
@@ -52,7 +64,8 @@ class User < ApplicationRecord
   end
 
   def ranking_position
-    User.order(points: :desc).pluck(:id).find_index(id) + 1
+    ranking = User.user_ranking
+    ranking.find_index { |r| r[:email] == email } + 1
   end
 
   def points_history
