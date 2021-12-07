@@ -20,7 +20,7 @@
 <div class='position-fixed p-3' aria-live="polite" aria-atomic="true" style="z-index: 5; right: 0;">
   <!-- Position it -->
   <div>
-
+<%#
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
         <img src="..." class="rounded me-2" alt="...">
@@ -28,9 +28,10 @@
         <small class="text-muted">just now</small>
       </div>
       <div class="toast-body">
-        <%= event %> "1"
+        <%= event %>
+        <%# "1"
       </div>
-    </div>
+    </div> %>
 
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
@@ -39,7 +40,7 @@
         <small class="text-muted">2 seconds ago</small>
       </div>
       <div class="toast-body">
-        <%= event %> "2"
+        <%= event %>
       </div>
     </div>
   </div>
