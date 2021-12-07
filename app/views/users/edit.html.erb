@@ -1,7 +1,7 @@
 <div class="container">
   <div class="">
 
-    <h2>Edit my profile</h2>
+    <h2> Hey <%= @user.username %>, let's edit your profile 🧐 pas la bonne edit!!</h2>
 
     <%= simple_form_for(@user, url: registration_path(@user), html: { method: :put }, class: "form-edit") do |f| %>
       <%= f.error_notification %>
@@ -20,7 +20,7 @@
                     input_html: { autocomplete: "current-password" } %>
       </div>
         <%= f.input :password,
-                    hint: "leave it blank if you don't want to change it",
+                    hint: "leave it blank if no change",
                     required: false,
                     input_html: { autocomplete: "new-password" } %>
         <%= f.input :password_confirmation,
@@ -32,7 +32,7 @@
       </div>
     <% end %>
 
-    <h6>Unhappy? <%= link_to "Delete my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></h6>
+    <h6><%= link_to "Delete my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, style:"color: red;" %></h6>
 
     <%= link_to "Back to Dashboard", user_path(current_user) %>
   </div>

@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  def new
+    @user = User.new(user_params)
+  end
+
+  def create
+    @user = current_user
+  end
+
   def show
     @user = current_user
     Event.joins(buyer_transactions: :current_user)
@@ -10,13 +18,6 @@ class UsersController < ApplicationController
     @total_participants = User.count
     @points_history = @user.points_history
     @portfolio_values = @user.portfolio_history
-  end
-
-  def update
-    @user = User.find(params[:id])
-    @user.update(user_params)
-
-    redirect_to(user_path)
   end
 
   def edit
