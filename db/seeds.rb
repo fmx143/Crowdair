@@ -1,12 +1,10 @@
 require 'faker'
 require 'json'
 
-
-number_of_users = 20
-number_of_events = 12
-number_of_transactions = 500
-min_points = 100
-max_points = 1000
+number_of_users = 4
+number_of_events = 6
+number_of_transactions = 300
+number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
 kalshi_json = File.read(filepath)
@@ -33,8 +31,8 @@ dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample
   price = real_price(event)
-  n_actions = rand(1..20)
-  buyer, seller = User.all.sample(2)
+  n_actions = rand(1..5)
+  buyer, seller = User.all.where.not(admin: true).sample(2)  # Filter out the bank here
   actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
   seller_investments = seller.investments.find_by(event: event).n_actions
 
@@ -42,7 +40,7 @@ def valid_transaction_params
     event = Event.all.sample
     price = real_price(event)
     n_actions = rand(1..20)
-    buyer, seller = User.all.sample(2)
+    buyer, seller = User.all.where.not(admin: true).sample(2) # Same
     actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
     seller_investments = seller.investments.find_by(event: event).n_actions
   end
@@ -68,17 +66,21 @@ Event.destroy_all
 
 users_list = [
   {
+    username: "Crowdair",
+    email: "crowdair@gmail.com",
+    password: "abcdef",
+    points: 10_000_000,
+    admin: true
+  },
+  {
     username: "marcel",
     email: "mbower@gmail.com",
-    password: "abcdef",
-    points: 1000,
-    admin: true
+    password: "abcdef"
   },
   {
     username: "jane",
     email: "janetarzan@hotmail.com",
-    password: "abcdef",
-    points: 1000
+    password: "abcdef"
   }
 ]
 
@@ -86,7 +88,6 @@ users_list = [
   users_list << {
     username: Faker::Internet.unique.username,
     email: Faker::Internet.email,
-    points: rand(min_points..max_points),
     password: "abcdef"
   }
 end
@@ -110,7 +111,7 @@ number_of_events.times do |i|
     img_url: kalshi_event["image_url"]
   })
 end
-puts "Users table now contains #{Event.count} users."
+puts "Events table now contains #{Event.count} events."
 
 puts "Creating a seed of #{number_of_transactions*2} fake transactions..."
 

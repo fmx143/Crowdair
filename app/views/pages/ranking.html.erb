@@ -1,17 +1,17 @@
 <div class="container">
-  <h3 class="top-h3"> <%= image_tag("top20.png", :class => "top")%> Ranking <%= image_tag("top20.png", :class => "top")%> </h3>
-  <ol>
-    <% @users.each_with_index do |user,index| %>
-      <li class="ranking-li <%= 'me' if user == current_user %>">
-      <p class="numerotation"><%= index + 1 %> . </p>
+  <h3 class="top-h3"> Top 20 users </h3>
+  <ol type="1">
+    <% @ranking.each_with_index do |rkg, index| %>
+      <li class="ranking-li">
       <%= image_tag "https://i.pravatar.cc/5#{rand(1..9)}", class: "avatar-ranking" %>
       <p class="username-p">
-        <%= user.username %>
+        <%= index + 1 %>.
+        <%= rkg[:username] %>
         <%= image_tag("medal.png", :class => "medal") if index == 0 %>
         <%= image_tag("medal (1).png", :class => "medal") if index == 1 %>
         <%= image_tag("medal (2).png", :class => "medal") if index == 2 %>
       </p>
-      <p class="points-p"> <%= user.points %> </p>
+      <p class="points-p"> <%= rkg[:pv] %> </p>
       </li>
     <% end %>
   </ol>
