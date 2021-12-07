@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
   belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :seller, class_name: 'User'
   belongs_to :event
-  validates :price, numericality: { in: 1..100 } #TO CHECK
+  validates :price, numericality: { in: 1..100 }
   validate :actions_validator
   validate :points_validator
 
@@ -23,14 +23,18 @@ class Transaction < ApplicationRecord
 
   def points_validator
     if buyer_id_changed?
+      return 0 if buyer.admin
+
       if buyer.points < (price * n_actions)
-        errors.add(:n_actions, "You don't have enough points")
+        errors.add(:buyer, "You don't have enough points")
       end
     end
   end
 
   def actions_validator
     unless buyer_id_changed?
+      return 0 if seller.admin
+
       seller_actions = seller.investments.find_by(event: event).n_actions
       actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
       if seller_actions - actions_on_offer < n_actions

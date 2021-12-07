@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_12_07_091739) do
 
+# ActiveRecord::Schema.define(version: 2021_12_07_115937) do
+
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +35,14 @@ ActiveRecord::Schema.define(version: 2021_12_07_091739) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_investments_on_event_id"
     t.index ["user_id"], name: "index_investments_on_user_id"
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.float "pv"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -56,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_12_07_091739) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "points"
+    t.integer "points", default: 1000
     t.string "username"
     t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -65,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_12_07_091739) do
 
   add_foreign_key "investments", "events"
   add_foreign_key "investments", "users"
+  add_foreign_key "portfolios", "users"
   add_foreign_key "transactions", "events"
   add_foreign_key "transactions", "users", column: "buyer_id"
   add_foreign_key "transactions", "users", column: "seller_id"

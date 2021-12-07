@@ -1,7 +1,16 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   add_flash_types :event
+  before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :check_notifications
+
+  protected
+
+  def configure_permitted_parameters
+    attributes = [:username, :email, :avatar, :password]
+    devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
+    devise_parameter_sanitizer.permit(:account_update, keys: attributes)
+  end
 
   def check_notifications
     if user_signed_in?

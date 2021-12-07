@@ -4,7 +4,8 @@ class EventsController < ApplicationController
   require 'net/http'
 
   def index
-    @events = Event.all
+    @events = Event.all.where(archived: false)
+
     # @past_events = Event.where("end_date < ?", Time.now)    # Event.all.where(Date.today = Event.end_date)
     # @events[1].end_date
   end
@@ -30,11 +31,12 @@ class EventsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @event = Event.find(params[:id])
-    @actions_held = current_user.investments.find_by(event: @event).n_actions
+    @actions_held = @user.investments.find_by(event: @event).n_actions
     @actions_on_offer = @event.transactions.where(buyer_id: nil, seller_id: current_user.id).sum(:n_actions)
     @offers = @event.transactions.includes([:seller]).where(buyer_id: nil).order(price: :asc)
-    @new_transaction = Transaction.new
+    @transaction = Transaction.new
 
     #REAL API
 
@@ -57,6 +59,17 @@ class EventsController < ApplicationController
     data_news = JSON.parse(news_json)
     @data = data_news["data"]
     # @news["data"][0]["title"] --> accéder au titre du Hash dans array dans Data
+
+    @new_offer = Transaction.new
+
+  end
+
+  def archive
+    @event = Event.find(params[:id])
+    @event.pay_due(params["outcome"])
+    @event.archived = true
+    @event.save
+    redirect_to(events_path)
   end
 
   private
