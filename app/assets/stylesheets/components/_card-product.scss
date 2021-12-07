@@ -43,6 +43,7 @@
   display: flex;
   justify-content: space-between;
   background-color: $super-light-gray;
+  font-size: 0.8em;
 }
 
 .events-data-badge p {
@@ -51,4 +52,24 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 0px;
+}
+
+.archive {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  background-color: $light-gray;
+  opacity: 0.9;
+
+  .event-end-action {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    color: $almost-black;
+    font-weight: bold;
+  }
 }

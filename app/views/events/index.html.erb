@@ -8,33 +8,25 @@
     <% @events.each do |event| %>
     <div class="col-12 col-md-4">
       <div class="card-products">
+        <% if current_user.admin %>
+          <div class="archive">
+            <%= link_to("End (as YES)", event_archive_path(event, outcome: "yes"), method: :post, class: "event-end-action") %>
+            <%= link_to("End (as NO)", event_archive_path(event, outcome: "no"), method: :post, class: "event-end-action") %>
+          </div>
+        <% end %>
         <img src="<%= event.img_url %>", class="card-product-img" />
         <div class="title">
           <%= link_to event.title, event_path(event.id) %>
         </div>
         <div class="events-data-badge">
           <div class="badge-value">
-            Likelihood
-            <strong class="current-price"><%= "#{event.transactions.where.not(buyer_id: nil).last.price}%" %></strong>
-
+            Likelihood to happen
+            <strong class="current-price"><%= "#{event.current_price}%" %></strong>
           </div>
           <div class="badge-change">
-            Last hour
+            Last hour change
             <%
-              # Note: This should be outside the view - but how?
-              all_transactions = event.transactions.where.not(buyer_id: nil)
-              p0 = 0
-              p1 = 0
-              if all_transactions.count > 0
-                recent_transactions = all_transactions
-                  .order(updated_at: :desc)
-                  .where("updated_at >= ?", 1.hour.ago)
-                if recent_transactions.count > 1
-                  p0 = recent_transactions.last.price
-                  p1 = recent_transactions.first.price
-                end
-              end
-              diff = p1 - p0
+              diff = event.last_hour_change
               if diff == 0
                 badge_class = 'badge-secondary'
                 sign = '+'
