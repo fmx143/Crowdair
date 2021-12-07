@@ -5,7 +5,8 @@ class User < ApplicationRecord
   has_many :buyer_transactions, class_name: 'Transaction', foreign_key: 'buyer_id'
   has_many :seller_transactions, class_name: 'Transaction', foreign_key: 'seller_id'
   has_many :investments
-
+  has_many :portfolios, dependent: :destroy
+  
   validates :username, presence: true, length: { maximum: 50 }
 
   def transactions

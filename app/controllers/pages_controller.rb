@@ -5,13 +5,10 @@ class PagesController < ApplicationController
   end
 
   def ranking
-    @ranking = []
-    User.all.where(admin: false).each do |user|
-      @ranking << {
-        username: user.username,
-        pv: user.portfolio_history.last[1]
-      }
-    end
-    @ranking.sort_by! { |elem| elem[:pv] }.reverse!
+    @users = User.order(points: :desc)
+
+    #@users_points = User.all(points)
+    # @user_up = User.first(3).where(User.points >= current_user.points)
+    # @user_down = User.first(3).where(User.points <= current_user.points)
   end
 end

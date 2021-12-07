@@ -24,22 +24,9 @@
             <strong class="current-price"><%= "#{event.current_price}%" %></strong>
           </div>
           <div class="badge-change">
-            Last hour
+            Last hour change
             <%
-              # Note: This should be outside the view - but how?
-              all_transactions = event.transactions.where.not(buyer_id: nil)
-              p0 = 0
-              p1 = 0
-              if all_transactions.count > 0
-                recent_transactions = all_transactions
-                  .order(updated_at: :desc)
-                  .where("updated_at >= ?", 1.hour.ago)
-                if recent_transactions.count > 1
-                  p0 = recent_transactions.last.price
-                  p1 = recent_transactions.first.price
-                end
-              end
-              diff = p1 - p0
+              diff = event.last_hour_change
               if diff == 0
                 badge_class = 'badge-secondary'
                 sign = '+'
