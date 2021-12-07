@@ -1,6 +1,14 @@
 <div class="points-content col-12 col-lg-8">
   <div class="points-graph-container flex-container">
     <%= line_chart(@portfolio_values, ytitle: "Portfolio valuation", curve: false, points: false, colors: ["#fa7b2d"] ) %>
+
+  <div data-controller="figure" data-figure-url-value="<%= user_chart_path(@user) %>">
+    <div data-figure-target="chart" class="points-graph-container flex-container">
+      <%# <%= line_chart(@points_history, ytitle: "Points", curve: false, points: false) %>
+    </div>
+    <button data-figure-target="button" data-action="click->figure#update" >Start</button>
+  </div>
+
   </div>
 </div>
 <div class="ranking-content flex-container col-12 col-lg-4">
