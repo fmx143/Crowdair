@@ -60,12 +60,20 @@ class User < ApplicationRecord
   end
 
   def add_initial_portfolio
+    bank = User.find_by(email: 'crowdair@gmail.com')
     Event.all.each do |event|
-      Investment.create!({
+      Investment.create!(
         user: self,
         event: event,
-        n_actions: 10
-      })
+        n_actions: 0
+      )
+      t = Transaction.create!(
+        seller_id: bank.id,
+        price: 0,
+        n_actions: 10,
+        event: event
+      )
+      t.update(buyer_id: id)
     end
   end
 end

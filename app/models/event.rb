@@ -7,7 +7,7 @@ class EndDateValidator < ActiveModel::Validator
 end
 
 class Event < ApplicationRecord
-  after_save :add_initial_investment
+  after_create :add_initial_investment
   has_many :transactions
   has_many :investments
 
@@ -31,12 +31,6 @@ class Event < ApplicationRecord
       )
       t.update(buyer_id: bank.id)
     end
-    # User.all.each do |user|
-    #   Portfolio.create!(
-    #     user: user,
-    #     pv: user.compute_portfolio_value
-    #   )
-    # end
   end
 
   def last_hour_change
@@ -67,12 +61,20 @@ class Event < ApplicationRecord
   private
 
   def add_initial_investment
+    bank = User.find_by(email: 'crowdair@gmail.com')
     User.all.each do |user|
-      Investment.create!({
+      Investment.create!(
         user: user,
         event: self,
-        n_actions: 10
-      })
+        n_actions: 0
+      )
+      t = Transaction.create!(  # Note: requires investment to exist (created above with 0 actions)
+        seller_id: bank.id,
+        price: 0,
+        n_actions: 10,
+        event: self
+      )
+      t.update(buyer_id: user.id, updated_at: 1.day.ago)
     end
   end
 end
