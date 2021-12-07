@@ -119,6 +119,7 @@ number_of_transactions.times do |i|
   transaction_params = valid_transaction_params
   transaction = Transaction.create!(transaction_params[:params])
   transaction.update(buyer_id: transaction_params[:buyer].id, updated_at: dates[i])
+  User.update_all_portfolios
   print "#{i + 1} transactions created \r"
 end
 
