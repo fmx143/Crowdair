@@ -44,6 +44,7 @@ class Event < ApplicationRecord
   private
 
   def add_initial_investment
+    bank = User.find_by(email: 'crowdair@gmail.com')
     User.all.each do |user|
       Investment.create!(
         user: user,
