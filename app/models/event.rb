@@ -7,7 +7,7 @@ class EndDateValidator < ActiveModel::Validator
 end
 
 class Event < ApplicationRecord
-  after_save :add_initial_investment
+  after_create :add_initial_investment
   has_many :transactions
   has_many :investments
 
@@ -15,6 +15,23 @@ class Event < ApplicationRecord
   validates_with EndDateValidator # End date must be in the future!
   validates :title, presence: true, length: { in: 5..100 }
   validates :description, presence: true, length: { in: 10..300 }
+
+  def pay_due(outcome)
+    # Called when event ends (when admin presses yes/no in events index)
+    end_action_price = outcome == "yes" ? 100 : 0
+    bank = User.find_by(email: 'crowdair@gmail.com')
+    offers.destroy_all
+    User.all.each do |user|
+      actions_held = user.investments.where(event_id: id).first.n_actions
+      t = Transaction.create!(
+        seller_id: user.id,
+        price: end_action_price,
+        n_actions: actions_held,
+        event_id: id
+      )
+      t.update(buyer_id: bank.id)
+    end
+  end
 
   def last_hour_change
     p0 = 0
@@ -30,7 +47,7 @@ class Event < ApplicationRecord
   end
 
   def concluded_transactions
-    transactions.where.not(buyer_id: nil).order(updated_at: :desc)
+    transactions.where.not(buyer_id: nil).order(updated_at: :asc)
   end
 
   def offers
@@ -38,7 +55,7 @@ class Event < ApplicationRecord
   end
 
   def current_price
-    concluded_transactions.last.price
+    concluded_transactions.empty? ? 50 : concluded_transactions.last.price
   end
 
   private
