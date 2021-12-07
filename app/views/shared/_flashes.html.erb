@@ -6,6 +6,7 @@
     </button>
   </div>
 <% end %>
+
 <% if alert %>
   <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
     <%= alert %>
@@ -14,3 +15,14 @@
     </button>
   </div>
 <% end %>
+
+<% if event %>
+  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+    <%= event %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+
