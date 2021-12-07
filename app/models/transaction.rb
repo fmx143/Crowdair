@@ -4,7 +4,8 @@ class Transaction < ApplicationRecord
   belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :seller, class_name: 'User'
   belongs_to :event
-  validates :price, numericality: { in: 1..100 }
+
+  validates :price, numericality: { in: 1..100 } #TO CHECK
   validate :actions_validator
   validate :points_validator
 
@@ -37,7 +38,7 @@ class Transaction < ApplicationRecord
       return 0 if buyer.admin
 
       if buyer.points < (price * n_actions)
-        errors.add(:buyer, "You don't have enough points")
+        errors.add(:n_actions, "You don't have enough points")
       end
     end
   end
