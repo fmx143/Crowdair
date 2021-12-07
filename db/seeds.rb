@@ -12,9 +12,9 @@ kalshi_markets = JSON.parse(kalshi_json)
 
 def real_price(event)
   if event.transactions.last
-    new_price = event.transactions.last.price + (rand(0...4) * [-1,1].sample)
+    new_price = event.current_price + (rand(0...4) * [-1, 1].sample)
     while new_price > 100 || new_price < 1
-      new_price = event.transactions.last.price + (rand(0...4)* [-1,1].sample)
+      new_price = event.current_price + (rand(0...4) * [-1, 1].sample)
     end
     price = new_price
   else
@@ -84,7 +84,7 @@ users_list = [
   }
 ]
 
-(number_of_users-2).times do
+(number_of_users - 2).times do
   users_list << {
     username: Faker::Internet.unique.username,
     email: Faker::Internet.email,
@@ -102,7 +102,7 @@ end
 puts "Users table now contains #{User.count} users."
 
 puts "Creating a seed of #{number_of_events} fake events..."
-number_of_events.times do |i|
+number_of_events.times do
   kalshi_event = kalshi_markets["markets"].sample
   Event.create!({
     title: kalshi_event["title"].truncate(100),
@@ -115,12 +115,11 @@ puts "Events table now contains #{Event.count} events."
 
 puts "Creating a seed of #{number_of_transactions*2} fake transactions..."
 
-
 number_of_transactions.times do |i|
   transaction_params = valid_transaction_params
   transaction = Transaction.create!(transaction_params[:params])
   transaction.update(buyer_id: transaction_params[:buyer].id, updated_at: dates[i])
-  print "#{i+1} transactions created \r"
+  print "#{i + 1} transactions created \r"
 end
 
 puts "#{number_of_transactions} transactions created"
@@ -128,7 +127,7 @@ puts "#{number_of_transactions} transactions created"
 number_of_offers.times do |i|
   transaction = Transaction.create!(valid_transaction_params[:params])
   transaction.update(updated_at: dates[i])
-  print "#{i+1} offers created \r"
+  print "#{i + 1} offers created \r"
 end
 
 puts "#{number_of_offers} offers created"
