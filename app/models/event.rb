@@ -20,23 +20,18 @@ class Event < ApplicationRecord
 
   def add_initial_investment
     User.all.each do |user|
-      Investment.create!({
+      Investment.create!(
         user: user,
         event: self,
-        n_actions: 10
-      })
-
-      ### This should be a Transaction with the 'bank' so that it is recorded
-      ### in the user's history. Something like:
-      # t = Transaction.create!(
-      #   {
-      #     price: 0.5,
-      #     n_actions: 10,
-      #     seller: User.find(user_id: 0), # The Bank
-      #     event: self
-      #   }
-      # )
-      # t.update(buyer_id: user.id)
+        n_actions: 0
+      )
+      t = Transaction.create!(  # Note: requires investment to exist (created above with 0 actions)
+        seller_id: bank.id,
+        price: 0,
+        n_actions: 10,
+        event: self
+      )
+      t.update(buyer_id: user.id, updated_at: 1.day.ago)
     end
   end
 end
