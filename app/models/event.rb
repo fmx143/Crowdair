@@ -31,6 +31,7 @@ class Event < ApplicationRecord
       )
       t.update(buyer_id: bank.id)
     end
+    User.update_all_portfolios
   end
 
   def last_hour_change
@@ -55,7 +56,7 @@ class Event < ApplicationRecord
   end
 
   def current_price
-    concluded_transactions.empty? ? 50 : concluded_transactions.last.price
+    concluded_transactions.empty? || concluded_transactions.last.price.zero? ? 50 : concluded_transactions.last.price
   end
 
   private
@@ -76,5 +77,6 @@ class Event < ApplicationRecord
       )
       t.update(buyer_id: user.id, updated_at: 1.day.ago)
     end
+    User.update_all_portfolios
   end
 end

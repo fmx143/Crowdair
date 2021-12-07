@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :seller_transactions, class_name: 'Transaction', foreign_key: 'seller_id'
   has_many :investments
   has_many :portfolios, dependent: :destroy
-  
+
   validates :username, presence: true, length: { maximum: 50 }
 
   def transactions
@@ -28,6 +28,15 @@ class User < ApplicationRecord
 
   def latest_transactions
     transactions.where.not(buyer_id: nil).order(updated_at: :desc)
+  end
+
+  def self.update_all_portfolios
+    User.all.each do |user|
+      Portfolio.create!(
+        user: user,
+        pv: user.compute_portfolio_value
+      )
+    end
   end
 
   def portfolio_history
@@ -74,5 +83,6 @@ class User < ApplicationRecord
       )
       t.update(buyer_id: id)
     end
+    User.update_all_portfolios
   end
 end

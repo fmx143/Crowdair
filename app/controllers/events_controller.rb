@@ -67,7 +67,6 @@ class EventsController < ApplicationController
   def archive
     @event = Event.find(params[:id])
     @event.pay_due(params["outcome"])
-    # @event.update_attributes(archived: true) This does not work...
     @event.archived = true
     @event.save
     redirect_to(events_path)
