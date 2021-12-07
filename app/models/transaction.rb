@@ -4,7 +4,6 @@ class Transaction < ApplicationRecord
   belongs_to :buyer, class_name: 'User', optional: true
   belongs_to :seller, class_name: 'User'
   belongs_to :event
-
   validates :price, numericality: { in: 1..100 } #TO CHECK
   validate :actions_validator
   validate :points_validator
@@ -19,24 +18,11 @@ class Transaction < ApplicationRecord
       seller_invest_actions.update(n_actions: seller_invest_actions.n_actions - n_actions)
       buyer.update(points: buyer.points - (price * n_actions))
       seller.update(points: seller.points + (price * n_actions))
-
-      update_portfolio_values
-    end
-  end
-
-  def update_portfolio_values
-    User.all.each do |user|
-      Portfolio.create!(
-        user: user,
-        pv: user.compute_portfolio_value
-      )
     end
   end
 
   def points_validator
     if buyer_id_changed?
-      return 0 if buyer.admin
-
       if buyer.points < (price * n_actions)
         errors.add(:n_actions, "You don't have enough points")
       end
@@ -45,8 +31,6 @@ class Transaction < ApplicationRecord
 
   def actions_validator
     unless buyer_id_changed?
-      return 0 if seller.admin
-
       seller_actions = seller.investments.find_by(event: event).n_actions
       actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
       if seller_actions - actions_on_offer < n_actions
