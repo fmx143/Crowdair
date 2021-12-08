@@ -3,7 +3,7 @@ require 'json'
 
 number_of_users = 4
 number_of_events = 6
-number_of_transactions = 20
+number_of_transactions = 200
 number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
@@ -126,13 +126,13 @@ end
 
 puts "#{number_of_transactions} transactions created"
 
-# number_of_offers.times do |i|
-#   transaction = Transaction.create!(valid_transaction_params[:params])
-#   transaction.update(updated_at: dates[i])
-#   print "#{i + 1} offers created \r"
-# end
+number_of_offers.times do |i|
+  transaction = Transaction.create!(valid_transaction_params[:params])
+  transaction.update(updated_at: dates[i])
+  print "#{i + 1} offers created \r"
+end
 
-# puts "#{number_of_offers} offers created"
+puts "#{number_of_offers} offers created"
 
 puts ""
 puts "Users table now contains #{Transaction.count} Transactions."
