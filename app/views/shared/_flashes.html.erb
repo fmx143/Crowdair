@@ -16,36 +16,21 @@
   </div>
 <% end %>
 
-<% if event %>
-<div class='position-fixed p-3' aria-live="polite" aria-atomic="true" style="z-index: 5; right: 0;">
-  <!-- Position it -->
-  <div>
-<%#
+<% if messages && user_signed_in?%>
+  <% messages.each do |message| %>
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
-        <strong class="me-auto">Bootstrap</strong>
-        <small class="text-muted">just now</small>
+      <div class="toast-header d-flex justify-content-between">
+        <%# <img src="..." class="rounded me-2" alt="..."> %>
+        <a class="me-auto" href=<%= message['url']  %> ><%= message['title']  %></a>
+        <small class="text-muted"><%= message['time']%></small>
       </div>
       <div class="toast-body">
-        <%= event %>
-        <%# "1"
-      </div>
-    </div> %>
-
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
-        <strong class="me-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-      </div>
-      <div class="toast-body">
-        <%= event %>
+        <%= message['content_start']%>
+        <strong><%=  message['strong'] %></strong>
+        <%= message['content_end'] %>
       </div>
     </div>
-  </div>
-</div>
-
+  <% end %>
 <% end %>
 
 <% if false %>
