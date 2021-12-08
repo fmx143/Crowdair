@@ -22,10 +22,5 @@ import "bootstrap";
 import "chartkick/chart.js";
 
 // Internal imports, e.g:
-import { initEventCable } from "../channels/event_channel";
 
-document.addEventListener("turbolinks:load", () => {
-  initEventCable();
-});
-
-
+// document.addEventListener("turbolinks:load", () => {});
