@@ -54,6 +54,9 @@
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
   margin: 8px 0px 8px 0px;
   text-align: center;
+  h1 {
+    color: black;
+  }
 }
 
 .calendar {
@@ -72,4 +75,19 @@
 
 .button-buy {
   max-height: 2em;
+}
+
+
+// timer over the show
+.timer {
+  margin: 5px;
+  font-weight: bolder;
+}
+
+#clockdiv {
+  justify-content: center;
+}
+
+h1 {
+  color: black;
 }
