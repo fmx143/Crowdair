@@ -6,9 +6,51 @@
     </button>
   </div>
 <% end %>
+
 <% if alert %>
   <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
     <%= alert %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+<% if event %>
+<div class='position-fixed p-3' aria-live="polite" aria-atomic="true" style="z-index: 5; right: 0;">
+  <!-- Position it -->
+  <div>
+<%#
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="..." class="rounded me-2" alt="...">
+        <strong class="me-auto">Bootstrap</strong>
+        <small class="text-muted">just now</small>
+      </div>
+      <div class="toast-body">
+        <%= event %>
+        <%# "1"
+      </div>
+    </div> %>
+
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="..." class="rounded me-2" alt="...">
+        <strong class="me-auto">Bootstrap</strong>
+        <small class="text-muted">2 seconds ago</small>
+      </div>
+      <div class="toast-body">
+        <%= event %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+<% if false %>
+  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+    <%= event %>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
