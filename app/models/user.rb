@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def engaged_investments
-    Investment.joins(:event).where(event: { archived: false }).where.not(n_actions: 0)
+    Investment.joins(:event).where(user_id: id).where(event: { archived: false }).where.not(n_actions: 0)
     # engaged_investments = []
     # investments.includes([:event]).each do |investment|
     #   n = transactions.where(event_id: investment.event.id).count
