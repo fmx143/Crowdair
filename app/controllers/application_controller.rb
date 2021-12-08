@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  add_flash_types :event
-  after_action :check_notifications
+  add_flash_types :messages
+  before_action :check_notifications
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -15,9 +15,28 @@ class ApplicationController < ActionController::Base
    def check_notifications
     if user_signed_in?
       not_notified_transactions = current_user.seller_transactions.where.not(buyer_id: nil).where(notified: nil).order(updated_at: :desc)
-      unless not_notified_transactions.nil?
+      unless not_notified_transactions.empty?
+        flash[:messages] = [] if flash[:messages].nil?
         not_notified_transactions.each do |transaction|
-          flash[:event] = "#{transaction.buyer.username} bought from you: #{transaction.n_actions} actions of the event \"#{transaction.event.title}\""
+          if transaction.buyer == User.find_by(email: 'crowdair@gmail.com')
+            flash[:messages] << {
+              'title'=> "Event ##{transaction.event.id} ended !",
+              'content_start'=> "The Bank has bought #{transaction.n_actions} actions for a total of ",
+              'content_end'=> " coins.",
+              'strong'=> (transaction.n_actions *  transaction.price),
+              'url'=> event_path(transaction.event),
+              'time'=> transaction.updated_at.strftime("%H:%M")
+              }
+          else
+            flash[:messages] << {
+              'title'=> "Action sold ! - Event ##{transaction.event.id}",
+              'content_start'=> "#{transaction.buyer.username} has bought #{transaction.n_actions} actions for a total of ",
+              'content_end'=> " coins.",
+              'strong'=> (transaction.n_actions *  transaction.price),
+              'url'=> event_path(transaction.event),
+              'time'=> transaction.updated_at.strftime("%H:%M")
+              }
+          end
           transaction.update_attribute(:notified, true)
         end
       end

@@ -49,7 +49,8 @@ def valid_transaction_params
       price: price,
       n_actions: n_actions,
       seller: seller,
-      event: event
+      event: event,
+      notified: true
     },
     buyer: buyer
   }
