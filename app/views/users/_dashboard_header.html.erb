@@ -1,11 +1,15 @@
 <div class="points-content col-12 col-lg-8">
   <div class="points-graph-container flex-container">
     <div class="buttons-chart">
-      <button id="set-day" class="btn-timing">All-time</button>
+      <button id="set-day" class="btn-timing highlighted">All-time</button>
       <button id="set-hour" class="btn-timing">Last 4 hours</button>
     </div>
-    <%= line_chart(@portfolio_values, id:"chart-all", ytitle: "Portfolio valuation", curve: false, points: false, colors: ["#fa7b2d"] ) %>
-    <%= line_chart(@portfolio_values_1h, id:"chart-1h", class: 'hidden-chart', ytitle: "Portfolio valuation", curve: false, points: false, colors: ["#fa7b2d"] ) %>
+    <div class="graph-wrapper" id="chart-all">
+      <%= line_chart(@portfolio_values, ytitle: "Portfolio valuation", curve: false, points: false, colors: ["#fa7b2d"] ) %>
+    </div>
+    <div id="chart-1h" class="graph-wrapper hidden-chart">
+      <%= line_chart(@portfolio_values_1h, ytitle: "Portfolio valuation", curve: false, points: false, colors: ["#fa7b2d"] ) %>
+    </div>
   </div>
 </div>
 
