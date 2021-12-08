@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 class="top-h3"> <%= image_tag("top20.png", :class => "top")%> Ranking <%= image_tag("top20.png", :class => "top")%> </h3>
+  <h3 class="top-h3"> <%= image_tag("ranking.png", :class => "top")%> Leaderboard <%= image_tag("ranking.png", :class => "top")%> </h3>
   <ol>
     <% @ranking.each_with_index do |rkg, index| %>
       <li class="ranking-li <%= 'me' if current_user.username == rkg[:username] %>">

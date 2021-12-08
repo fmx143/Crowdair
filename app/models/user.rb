@@ -14,12 +14,13 @@ class User < ApplicationRecord
   end
 
   def engaged_investments
-    engaged_investments = []
-    investments.each do |investment|
-      n = transactions.where(event_id: investment.event.id).count
-      engaged_investments.push(investment) unless n.zero? || investment.event.archived
-    end
-    engaged_investments
+    Investment.joins(:event).where(event: { archived: false }).where.not(n_actions: 0)
+    # engaged_investments = []
+    # investments.includes([:event]).each do |investment|
+    #   n = transactions.where(event_id: investment.event.id).count
+    #   engaged_investments.push(investment) unless n.zero? || investment.event.archived
+    # end
+    # engaged_investments
   end
 
   def offers
@@ -30,12 +31,13 @@ class User < ApplicationRecord
     transactions.where.not(buyer_id: nil).order(updated_at: :desc)
   end
 
-  def self.update_all_portfolios
+  def self.update_all_portfolios(timestamp)
     User.all.each do |user|
-      Portfolio.create!(
+      p = Portfolio.create!(
         user: user,
         pv: user.compute_portfolio_value
       )
+      p.update(updated_at: timestamp)
     end
   end
 
@@ -52,7 +54,15 @@ class User < ApplicationRecord
   end
 
   def portfolio_history
-    Portfolio.where(user_id: id).order(created_at: :asc).pluck(:created_at, :pv)
+    ph = Portfolio.where(user_id: id).order(updated_at: :asc).pluck(:updated_at, :pv)
+    ph.pop(User.count - 1)
+    ph
+  end
+
+  def portfolio_history_1h
+    ph = Portfolio.where(user_id: id).order(updated_at: :asc).where("updated_at >= ?", 4.hours.ago).pluck(:updated_at, :pv)
+    ph.pop(User.count - 1)
+    ph
   end
 
   def compute_portfolio_value
@@ -72,7 +82,7 @@ class User < ApplicationRecord
     balance = points
     points_history = {}
     points_history[Time.now] = balance
-    latest_transactions.each do |transaction|
+    latest_transactions.includes([:buyer]).each do |transaction|
       points_history[transaction.updated_at] = balance
       factor = transaction.buyer == @user ? 1 : -1 # subtract if buying, add if selling
       balance += transaction.n_actions * transaction.price * factor
@@ -96,6 +106,6 @@ class User < ApplicationRecord
       )
       t.update(buyer_id: id)
     end
-    User.update_all_portfolios
+    User.update_all_portfolios(Time.now)
   end
 end

@@ -1,0 +1,19 @@
+<div class="row" id="technical" data-event-id="<%= @event.id %>"> <%# to check %>
+  <div class="col-12 col-sm-6 mb-2">
+    <%= line_chart(
+      @event.transactions.where.not(buyer_id: nil).pluck(:updated_at, :price),
+      xtitle: "Time",
+      ytitle: "Price",
+      curve: false,
+      points: false,
+      id: "price-chart",
+      width: "100%",
+      height: "100%"
+      )%>
+  </div>
+  <div class="col-12 col-sm-6 mb-2 trading" style="overflow: overlay">
+    <div class='seller-card'>
+      <div>You were holding <strong><%= @actions_held %></strong> actions at the end of this event.</div>
+    </div>
+  </div>
+</div>
