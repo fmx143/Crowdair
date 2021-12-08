@@ -2,35 +2,39 @@
   <div class="event-image" style="background-image: url(<%=@event.img_url%>);"></div>
   <div class="event-text">
     <h1><%= @event.title %></h1>
-    <h5 class="calendar">
-      Ends on
-      <i class="far fa-calendar-alt", style="padding-left: 5px; padding-right: 5px"></i>
-      <strong>
-        <%= @event.end_date.strftime("%d.%m.%Y") %>
-      </strong>
-    </h5>
 
-    <div id="clockdiv" data-endDate=<%= @event.end_date %> class="row">
-      <div class="row" style="border-style: solid; border-radius: 5px;" >
-        <div class="timer">
-          <span class="days"></span>
-          <div class="smalltext"><%= t(".days") %></div>
-        </div>
-        <div class="timer">
-          <span class="hours"></span>
-          <div class="smalltext"><%= t(".hours") %></div>
-        </div>
-        <div class="timer">
-          <span class="minutes"></span>
-          <div class="smalltext"><%= t(".minutes") %></div>
-        </div>
-        <div class="timer">
-          <span class="seconds"></span>
-          <div class="smalltext"><%= t(".seconds") %></div>
+    <% if @event.archived == false %>
+      <h5 class="calendar">
+        Ends on
+        <i class="far fa-calendar-alt", style="padding-left: 5px; padding-right: 5px"></i>
+        <strong>
+          <%= @event.end_date.strftime("%d.%m.%Y") %>
+        </strong>
+      </h5>
+
+      <div id="clockdiv" data-endDate=<%= @event.end_date %> class="row">
+        <div class="row" style="border-style: solid; border-radius: 5px;" >
+          <div class="timer">
+            <span class="days"></span>
+            <div class="smalltext"><%= t(".days") %></div>
+          </div>
+          <div class="timer">
+            <span class="hours"></span>
+            <div class="smalltext"><%= t(".hours") %></div>
+          </div>
+          <div class="timer">
+            <span class="minutes"></span>
+            <div class="smalltext"><%= t(".minutes") %></div>
+          </div>
+          <div class="timer">
+            <span class="seconds"></span>
+            <div class="smalltext"><%= t(".seconds") %></div>
+          </div>
         </div>
       </div>
-    </div>
-
+    <% else %>
+      <%=  %>
+    <% end %>
     <div class="mt-4">
       <h5>Event description</h5>
       <p><%= @event.description %></p>
@@ -38,15 +42,15 @@
   </div>
 
   <% if @event.archived == false %>
-  <%= render('events/technical_container') %>
-  <div class='d-flex justify-content-center m-3'>
-    <%= link_to("Back to Events", events_path, class: "button-main") %>
-  </div>
+    <%= render('events/technical_container') %>
+    <div class='d-flex justify-content-center m-3'>
+      <%= link_to("Back to Events", events_path, class: "button-main") %>
+    </div>
   <% else %>
-  <%= render('events/end_technical_container') %>
-  <div class='d-flex justify-content-center m-3'>
-    <%= link_to("Back to Events", events_path, class: "button-main") %>
-  </div>
+    <%= render('events/end_technical_container') %>
+    <div class='d-flex justify-content-center m-3'>
+      <%= link_to("Back to Events", events_path, class: "button-main") %>
+    </div>
   <% end %>
 
 <div class="d-flex justify-content-between">
@@ -64,5 +68,4 @@
       </div>
     <% end %>
   </div>
-</div>
 </div>
