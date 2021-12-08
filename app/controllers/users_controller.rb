@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @day = @transactions.first.updated_at.day if @transactions.length >= 1
     @offers = current_user.offers
     @ranking_position = @user.ranking_position
-    @total_participants = User.count
+    @total_participants = User.where(admin: false).count
     @points_history = @user.points_history
     @portfolio_values = @user.portfolio_history
   end
