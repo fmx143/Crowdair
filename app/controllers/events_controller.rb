@@ -36,6 +36,8 @@ class EventsController < ApplicationController
     @offers = @event.transactions.includes([:seller]).where(buyer_id: nil).order(price: :asc)
     @new_transaction = Transaction.new
 
+    
+
     #REAL API
 
     # uri = URI("http://api.mediastack.com/v1/news")
