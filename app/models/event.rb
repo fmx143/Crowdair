@@ -69,13 +69,15 @@ class Event < ApplicationRecord
         event: self,
         n_actions: 0
       )
+    end
+    User.all.where(admin: false).each do |user|
       t = Transaction.create!(  # Note: requires investment to exist (created above with 0 actions)
         seller_id: bank.id,
         price: 0,
         n_actions: 10,
         event: self
       )
-      t.update(buyer_id: user.id, updated_at: 1.day.ago)
+      t.update(buyer_id: user.id, updated_at: 2.days.ago)
     end
     User.update_all_portfolios
   end
