@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_12_07_145601) do
     t.string "img_url"
     t.boolean "archived", default: false, null: false
   end
-  
+
   create_table "investments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "event_id", null: false
