@@ -37,12 +37,17 @@
     </div>
   </div>
 
-  <%= render('events/technical_container')  %>
+  <% if @event.archived == false %>
+  <%= render('events/technical_container') %>
   <div class='d-flex justify-content-center m-3'>
     <%= link_to("Back to Events", events_path, class: "button-main") %>
   </div>
-
-
+  <% else %>
+  <%= render('events/end_technical_container') %>
+  <div class='d-flex justify-content-center m-3'>
+    <%= link_to("Back to Events", events_path, class: "button-main") %>
+  </div>
+  <% end %>
 
 <div class="d-flex justify-content-between">
   <div class="row">
