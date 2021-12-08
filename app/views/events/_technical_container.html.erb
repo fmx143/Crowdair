@@ -17,7 +17,7 @@
       <div>You currently hold <strong><%= @actions_held %></strong> actions in this event. Of which <strong><%= @actions_on_offer %></strong> are on sale.</div>
       <div>
         <%= simple_form_for [@event, @new_transaction],
-        #wrapper: :inline_form,
+        wrapper: :inline_form,
         url: event_transactions_url(@event, @new_transaction),
         html: {
           class: "inline-form"
