@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @points_history = @user.points_history
     @portfolio_values = @user.portfolio_history
     @portfolio_values_1h = @user.portfolio_history_1h
+    @portfolio_value = @user.compute_portfolio_value
   end
 
   def edit

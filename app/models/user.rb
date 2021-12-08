@@ -46,7 +46,7 @@ class User < ApplicationRecord
     User.all.where(admin: false).each do |user|
       ranking << {
         username: user.username,
-        pv: user.portfolio_history.last[1],
+        pv: user.compute_portfolio_value,
         email: user.email
       }
     end
