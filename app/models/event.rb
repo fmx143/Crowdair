@@ -77,7 +77,7 @@ class Event < ApplicationRecord
         n_actions: 10,
         event: self
       )
-      t.update(buyer_id: user.id, updated_at: 2.days.ago)
+      t.update(buyer_id: user.id, updated_at: 1.day.ago)
     end
     User.update_all_portfolios
   end
