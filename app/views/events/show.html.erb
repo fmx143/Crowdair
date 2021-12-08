@@ -11,21 +11,23 @@
     </h5>
 
     <div id="clockdiv" data-endDate=<%= @event.end_date %> class="row">
-      <div class="timer">
-        <span class="days"></span>
-        <div class="smalltext"><%= t(".days") %></div>
-      </div>
-      <div class="timer">
-        <span class="hours"></span>
-        <div class="smalltext"><%= t(".hours") %></div>
-      </div>
-      <div class="timer">
-        <span class="minutes"></span>
-        <div class="smalltext"><%= t(".minutes") %></div>
-      </div>
-      <div class="timer">
-        <span class="seconds"></span>
-        <div class="smalltext"><%= t(".seconds") %></div>
+      <div class="row" style="border-style: solid; border-radius: 5px;" >
+        <div class="timer">
+          <span class="days"></span>
+          <div class="smalltext"><%= t(".days") %></div>
+        </div>
+        <div class="timer">
+          <span class="hours"></span>
+          <div class="smalltext"><%= t(".hours") %></div>
+        </div>
+        <div class="timer">
+          <span class="minutes"></span>
+          <div class="smalltext"><%= t(".minutes") %></div>
+        </div>
+        <div class="timer">
+          <span class="seconds"></span>
+          <div class="smalltext"><%= t(".seconds") %></div>
+        </div>
       </div>
     </div>
 
