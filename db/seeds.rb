@@ -3,7 +3,7 @@ require 'json'
 
 number_of_users = 4
 number_of_events = 6
-number_of_transactions = 300
+number_of_transactions = 200
 number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
@@ -27,6 +27,7 @@ dates = []
 number_of_transactions.times do
   dates << Faker::Time.between(from: 1.day.ago, to: DateTime.now)
 end
+
 dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample

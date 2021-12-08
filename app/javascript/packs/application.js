@@ -23,7 +23,9 @@ import "chartkick/chart.js";
 
 // Internal imports, e.g:
 import { initDynamicChart } from "../channels/dynacharts";
+import { initializeClock } from "./timer";
 
 document.addEventListener("turbolinks:load", () => {
+  initializeClock()
   initDynamicChart();
 });

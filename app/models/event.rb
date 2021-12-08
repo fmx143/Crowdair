@@ -69,6 +69,8 @@ class Event < ApplicationRecord
         event: self,
         n_actions: 0
       )
+    end
+    User.all.where(admin: false).each do |user|
       t = Transaction.create!(  # Note: requires investment to exist (created above with 0 actions)
         seller_id: bank.id,
         price: 0,

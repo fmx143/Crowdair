@@ -19,7 +19,6 @@
   font-size: 30px;
   background-color: $dark-blue;
   color: white;
-  border-radius: 5px 5px 0px 0px;
   text-align: center;
 }
 
@@ -27,6 +26,7 @@
 
 .dashboard-header {
   margin: 20px 0px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .dashboard-content {
@@ -43,6 +43,8 @@
       height: 630px;
       overflow: auto;
       background-color: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
     }
   }
 
@@ -52,6 +54,8 @@
 
     .transactions_pannel {
       width: 100%;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
     }
   }
 }
