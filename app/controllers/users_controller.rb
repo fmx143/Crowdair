@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     @total_participants = User.where(admin: false).count
     @points_history = @user.points_history
     @portfolio_values = @user.portfolio_history
+    @portfolio_values_1h = @user.portfolio_history_1h
   end
 
   def edit

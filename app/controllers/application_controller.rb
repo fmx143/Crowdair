@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  add_flash_types :event
+  after_action :check_notifications
   add_flash_types :messages
-  before_action :check_notifications
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
