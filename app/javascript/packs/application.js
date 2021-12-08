@@ -26,6 +26,6 @@ import { initDynamicChart } from "../channels/dynacharts";
 import { initializeClock } from "./timer";
 
 document.addEventListener("turbolinks:load", () => {
-  // initializeClock()
+  initializeClock()
   initDynamicChart();
 });
