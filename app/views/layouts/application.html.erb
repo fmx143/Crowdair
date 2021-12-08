@@ -16,14 +16,14 @@
 
     <%= render 'shared/navbar' %>
 
-    <div class='position-fixed p-3' aria-live="polite" aria-atomic="true" style="z-index: 5; right: 0;">
-    <!-- Position it -->
-      <div>
-        <%= render 'shared/flashes' %>
+    <div>
+      <div class='position-fixed p-3' aria-live="polite" aria-atomic="true" style="z-index: 5; right: 0;">
+        <div>
+          <%= render 'shared/flashes' %>
+        </div>
       </div>
+      <%=yield%>
     </div>
-
-    <%= yield %>
 
     <%= render 'shared/footer' %>
   </body>
