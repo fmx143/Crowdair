@@ -14,12 +14,13 @@ class User < ApplicationRecord
   end
 
   def engaged_investments
-    engaged_investments = []
-    investments.each do |investment|
-      n = transactions.where(event_id: investment.event.id).count
-      engaged_investments.push(investment) unless n.zero? || investment.event.archived
-    end
-    engaged_investments
+    Investment.joins(:event).where(event: { archived: false }).where.not(n_actions: 0)
+    # engaged_investments = []
+    # investments.includes([:event]).each do |investment|
+    #   n = transactions.where(event_id: investment.event.id).count
+    #   engaged_investments.push(investment) unless n.zero? || investment.event.archived
+    # end
+    # engaged_investments
   end
 
   def offers
@@ -72,7 +73,7 @@ class User < ApplicationRecord
     balance = points
     points_history = {}
     points_history[Time.now] = balance
-    latest_transactions.each do |transaction|
+    latest_transactions.includes([:buyer]).each do |transaction|
       points_history[transaction.updated_at] = balance
       factor = transaction.buyer == @user ? 1 : -1 # subtract if buying, add if selling
       balance += transaction.n_actions * transaction.price * factor

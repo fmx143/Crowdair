@@ -1,9 +1,9 @@
-<% @engaged_investments.each_with_index do |investment, i| %>
+<% @engaged_investments.includes([:event]).each_with_index do |investment, i| %>
 
   <% id_name = "activeOffers#{i}" %>
   <% id_heading = "headingOffers#{i}" %>
   <% id_collapse = "collapse#{i}" %>
-  <% event_offers = @offers.where(event: investment.event) %>
+  <% event_offers = @offers.where(event: investment.event).includes([:event]) %>
 
   <div class="card-investment shadowed-blue">
     <div class="card-investment-content">

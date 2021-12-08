@@ -49,7 +49,7 @@
           coins.
         </div>
 
-        <% if first == 1 %>
+        <% if first == 1 && offer.seller != current_user%>
           <% @offer = offer if @offer.nil?%>
           <%= simple_form_for [@event, @offer],
           wrapper: :inline_form,
