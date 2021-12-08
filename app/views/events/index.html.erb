@@ -17,6 +17,14 @@
           <% end %>
         <% end %>
         <img src="<%= event.img_url %>", class="card-product-img" />
+        <h6 class="calendar", style="padding-left: 5px; font-size: 12px;" >
+          Ends on
+          <i class="far fa-calendar-alt", style="padding-left: 5px; padding-right: 5px"></i>
+          <strong>
+            <%= event.end_date.strftime("%d.%m.%Y") %>
+          </strong>
+          (<%= (event.end_date.to_datetime - Date.today).to_i %> days left)
+        </h6>
         <div class="title">
           <%= link_to event.title, event_path(event.id) %>
         </div>

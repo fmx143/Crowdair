@@ -10,6 +10,13 @@ class TransactionsController < ApplicationController
     @new_transaction.event = @event
     @new_transaction.seller = current_user
     @new_transaction.save ? redirect_to(event_path(@event)) : (render 'events/show')
+    flash[:messages] = [] if flash[:messages].nil?
+    flash[:messages] << {
+      "title" => "Offer placed!",
+      'content_start' => "You have put #{@new_transaction.n_actions} actions for a price of ",
+      'content_end' => " coins on sale.",
+      'strong' => @new_transaction.price,
+      }
   end
 
   # def edit
@@ -31,8 +38,15 @@ class TransactionsController < ApplicationController
       @offer.errors.add(:n_actions, "The seller is not selling more than #{@offer.n_actions}")
       render 'events/show'
     else
-      @offer.update(buyer_id: current_user.id) ? redirect_to(event_path(@offer.event)) : (render 'events/show')
       User.update_all_portfolios(Time.now)
+      @offer.update(buyer_id: current_user.id) ? redirect_to(event_path(@offer.event)) : (render 'events/show')
+        flash[:messages] = [] if flash[:messages].nil?
+        flash[:messages] << {
+          "title" => "Actions bought!",
+          'content_start' => "You have bought #{@offer.n_actions} actions for a total price of ",
+          'content_end' => " coins.",
+          'strong' => (@offer.n_actions *  @offer.price),
+          }
     end
   end
 
