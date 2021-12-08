@@ -54,15 +54,11 @@ class User < ApplicationRecord
   end
 
   def portfolio_history
-    ph = Portfolio.where(user_id: id).order(updated_at: :asc).pluck(:updated_at, :pv)
-    ph.pop(User.count - 1)
-    ph
+    Portfolio.where(user_id: id).order(updated_at: :asc).pluck(:updated_at, :pv)
   end
 
   def portfolio_history_1h
-    ph = Portfolio.where(user_id: id).order(updated_at: :asc).where("updated_at >= ?", 4.hours.ago).pluck(:updated_at, :pv)
-    ph.pop(User.count - 1)
-    ph
+    Portfolio.where(user_id: id).order(updated_at: :asc).where("updated_at >= ?", 4.hours.ago).pluck(:updated_at, :pv)
   end
 
   def compute_portfolio_value
@@ -106,6 +102,6 @@ class User < ApplicationRecord
       )
       t.update(buyer_id: id)
     end
-    User.update_all_portfolios(Time.now)
+    User.update_all_portfolios(1.day.ago)
   end
 end

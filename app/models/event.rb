@@ -75,7 +75,8 @@ class Event < ApplicationRecord
         seller_id: bank.id,
         price: 0,
         n_actions: 10,
-        event: self
+        event: self,
+        notified: true
       )
       t.update(buyer_id: user.id, updated_at: 1.day.ago)
     end

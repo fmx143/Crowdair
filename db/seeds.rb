@@ -5,6 +5,7 @@ number_of_users = 12
 number_of_events = 6
 number_of_transactions = 50
 number_of_offers = number_of_events * number_of_users
+SEED_TRANSACTIONS = number_of_transactions
 
 filepath = 'app/assets/data/kalshi.json'
 kalshi_json = File.read(filepath)
