@@ -17,7 +17,7 @@
       .buttons-chart {
         display: flex;
         width: 100%;
-        justify-content: center;
+        justify-content: right;
         align-items: center;
 
         .btn-timing {
@@ -27,7 +27,7 @@
           border-radius: 1em;
           margin: 10px;
           color: $dark-blue;
-          width: 60px;
+          width: 120px;
         }
 
         .btn-timing:hover {

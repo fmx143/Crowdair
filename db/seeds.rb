@@ -1,9 +1,9 @@
 require 'faker'
 require 'json'
 
-number_of_users = 4
+number_of_users = 12
 number_of_events = 6
-number_of_transactions = 200
+number_of_transactions = 50
 number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
@@ -120,7 +120,7 @@ number_of_transactions.times do |i|
   transaction_params = valid_transaction_params
   transaction = Transaction.create!(transaction_params[:params])
   transaction.update(buyer_id: transaction_params[:buyer].id, updated_at: dates[i])
-  User.update_all_portfolios
+  User.update_all_portfolios(dates[i])
   print "#{i + 1} transactions created \r"
 end
 
@@ -128,7 +128,7 @@ puts "#{number_of_transactions} transactions created"
 
 number_of_offers.times do |i|
   transaction = Transaction.create!(valid_transaction_params[:params])
-  transaction.update(updated_at: dates[i])
+  transaction.update(updated_at: Faker::Time.between(from: 1.day.ago, to: DateTime.now))
   print "#{i + 1} offers created \r"
 end
 

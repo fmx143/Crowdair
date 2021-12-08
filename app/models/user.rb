@@ -30,12 +30,13 @@ class User < ApplicationRecord
     transactions.where.not(buyer_id: nil).order(updated_at: :desc)
   end
 
-  def self.update_all_portfolios
+  def self.update_all_portfolios(timestamp)
     User.all.each do |user|
-      Portfolio.create!(
+      p = Portfolio.create!(
         user: user,
         pv: user.compute_portfolio_value
       )
+      p.update(updated_at: timestamp)
     end
   end
 
@@ -52,11 +53,15 @@ class User < ApplicationRecord
   end
 
   def portfolio_history
-    Portfolio.where(user_id: id).order(created_at: :asc).pluck(:created_at, :pv)
+    ph = Portfolio.where(user_id: id).order(updated_at: :asc).pluck(:updated_at, :pv)
+    ph.pop(User.count - 1)
+    ph
   end
 
   def portfolio_history_1h
-    Portfolio.where(user_id: id).order(created_at: :asc).where("created_at >= ?", 1.hour.ago).pluck(:created_at, :pv)
+    ph = Portfolio.where(user_id: id).order(updated_at: :asc).where("updated_at >= ?", 4.hours.ago).pluck(:updated_at, :pv)
+    ph.pop(User.count - 1)
+    ph
   end
 
   def compute_portfolio_value
@@ -100,6 +105,6 @@ class User < ApplicationRecord
       )
       t.update(buyer_id: id)
     end
-    User.update_all_portfolios
+    User.update_all_portfolios(Time.now)
   end
 end

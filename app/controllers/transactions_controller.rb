@@ -26,13 +26,13 @@ class TransactionsController < ApplicationController
       @offer.update_attribute(:n_actions, buy_transaction_params[:n_actions].to_i)
       new_offer.update_attribute(:n_actions, (initial_n_actions - buy_transaction_params[:n_actions].to_i))
       @offer.update(buyer_id: current_user.id) ? redirect_to(event_path(@offer.event)) : (render 'events/show')
-      User.update_all_portfolios
+      User.update_all_portfolios(Time.now)
     elsif buy_transaction_params[:n_actions].to_i > @offer.n_actions
       @offer.errors.add(:n_actions, "The seller is not selling more than #{@offer.n_actions}")
       render 'events/show'
     else
       @offer.update(buyer_id: current_user.id) ? redirect_to(event_path(@offer.event)) : (render 'events/show')
-      User.update_all_portfolios
+      User.update_all_portfolios(Time.now)
     end
   end
 
