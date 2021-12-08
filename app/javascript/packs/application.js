@@ -22,5 +22,8 @@ import "bootstrap";
 import "chartkick/chart.js";
 
 // Internal imports, e.g:
+import { initializeClock } from "./timer";
 
-// document.addEventListener("turbolinks:load", () => {});
+document.addEventListener("turbolinks:load", () => {
+  initializeClock()
+});

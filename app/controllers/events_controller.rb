@@ -36,6 +36,8 @@ class EventsController < ApplicationController
     @offers = @event.transactions.includes([:seller]).where(buyer_id: nil).order(price: :asc)
     @new_transaction = Transaction.new
 
+    @t = Time.new(0)
+    @countdown_time_in_seconds = 100 # change this value
 
     #REAL API
 

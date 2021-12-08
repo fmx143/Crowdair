@@ -6,10 +6,29 @@
       Ends on
       <i class="far fa-calendar-alt", style="padding-left: 5px; padding-right: 5px"></i>
       <strong>
-        <%= @event.end_date.strftime("%m.%d.%Y") %>
+        <%= @event.end_date.strftime("%d.%m.%Y") %>
       </strong>
-      (<%= (@event.end_date.to_datetime - Date.today).to_i %> days left)
     </h5>
+
+    <div id="clockdiv" data-endDate=<%= @event.end_date %> class="row">
+      <div class="timer">
+        <span class="days"></span>
+        <div class="smalltext"><%= t(".days") %></div>
+      </div>
+      <div class="timer">
+        <span class="hours"></span>
+        <div class="smalltext"><%= t(".hours") %></div>
+      </div>
+      <div class="timer">
+        <span class="minutes"></span>
+        <div class="smalltext"><%= t(".minutes") %></div>
+      </div>
+      <div class="timer">
+        <span class="seconds"></span>
+        <div class="smalltext"><%= t(".seconds") %></div>
+      </div>
+    </div>
+
     <div class="mt-4">
       <h5>Event description</h5>
       <p><%= @event.description %></p>
