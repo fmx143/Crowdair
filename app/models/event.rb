@@ -60,6 +60,28 @@ class Event < ApplicationRecord
     concluded_transactions.empty? ? 50 : concluded_transactions.last.price
   end
 
+  def news
+    # REAL API
+    words = title.split.sort_by(&:length).last(3)
+    keywords = words.join(" ")
+    uri = URI("http://api.mediastack.com/v1/news")
+    params = {
+      'access_key' => ENV["MEDIASTACK_ACCESS_KEY"],
+      'keywords' => keywords,
+      'limit' => 6,
+      'languages' => 'en'
+    }
+    uri.query = URI.encode_www_form(params)
+    response = Net::HTTP.get_response(uri)
+    news_json = response.read_body
+    # TEMPORARY JSON
+    # news_json = File.read('app/assets/data/news.json')
+    #---------------
+    data_news = JSON.parse(news_json)
+    return data_news["data"]
+    # @news["data"][0]["title"] --> accéder au titre du Hash dans array dans Data
+  end
+
   private
 
   def add_initial_investment
@@ -83,4 +105,6 @@ class Event < ApplicationRecord
     end
     User.update_all_portfolios(1.day.ago)
   end
+
+
 end
