@@ -1,22 +1,20 @@
 require 'faker'
 require 'json'
-require 'digest/md5'
 
 number_of_users = 12
 number_of_events = 6
-number_of_transactions = 50
+number_of_transactions = 500
 number_of_offers = number_of_events * number_of_users
-SEED_TRANSACTIONS = number_of_transactions
 
 filepath = 'app/assets/data/kalshi.json'
 kalshi_json = File.read(filepath)
 kalshi_markets = JSON.parse(kalshi_json)
 
-def real_price(event)
+def real_price(event, up_down)
   if event.transactions.last
-    new_price = event.current_price + (rand(0...4) * [-1, 1].sample)
+    new_price = event.current_price + (rand(4...10) * [-1, 1, up_down].sample)
     while new_price > 100 || new_price < 1
-      new_price = event.current_price + (rand(0...4) * [-1, 1].sample)
+      new_price = event.current_price + (rand(4...10) * [-1, 1, up_down].sample)
     end
     price = new_price
   else
@@ -33,7 +31,7 @@ end
 dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample
-  price = real_price(event)
+  price = real_price(event, ((event.id % 3) -1))
   n_actions = rand(1..5)
   buyer, seller = User.all.where.not(admin: true).sample(2)  # Filter out the bank here
   actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
@@ -41,8 +39,8 @@ def valid_transaction_params
 
   while (price * n_actions) > buyer.points || n_actions > seller_investments - actions_on_offer
     event = Event.all.sample
-    price = real_price(event)
-    n_actions = rand(1..20)
+    price = real_price(event, ((event.id % 3) -1))
+    n_actions = rand(1..5)
     buyer, seller = User.all.where.not(admin: true).sample(2) # Same
     actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
     seller_investments = seller.investments.find_by(event: event).n_actions
@@ -70,7 +68,7 @@ Event.destroy_all
 
 users_list = [
   {
-    username: "Crowdair",
+    username: "End of event",
     email: "crowdair@gmail.com",
     password: "abcdef",
     points: 10_000_000,
@@ -121,7 +119,7 @@ number_of_events.times do
 end
 puts "Events table now contains #{Event.count} events."
 
-puts "Creating a seed of #{number_of_transactions*2} fake transactions..."
+puts "Creating a seed of #{number_of_transactions} fake transactions..."
 
 number_of_transactions.times do |i|
   transaction_params = valid_transaction_params
@@ -132,6 +130,8 @@ number_of_transactions.times do |i|
 end
 
 puts "#{number_of_transactions} transactions created"
+puts "Creating a seed of #{number_of_offers} fake offers..."
+
 
 number_of_offers.times do |i|
   transaction = Transaction.create!(valid_transaction_params[:params])
@@ -144,4 +144,24 @@ puts "#{number_of_offers} offers created"
 puts ""
 puts "Users table now contains #{Transaction.count} Transactions."
 puts "Users table now contains #{Investment.count} Investments."
-puts "Portfolio table now contains #{Portfolio.count} Investments."
+puts "Portfolio table now contains #{Portfolio.count} portfolio counts."
+
+
+def end_event(event)
+  time = event.latest_transactions.created_at
+  end_action_price = #to code
+  bank = User.find_by(email: 'crowdair@gmail.com')
+  offers.destroy_all
+  User.all.each do |user|
+    actions_held = user.investments.where(event_id: id).first.n_actions
+    t = Transaction.create!(
+      seller_id: user.id,
+      price: end_action_price,
+      n_actions: actions_held,
+      event_id: id
+    )
+    t.update(buyer_id: bank.id, updated_at: time)
+
+  end
+  User.update_all_portfolios(time)
+end

@@ -48,8 +48,7 @@ class Event < ApplicationRecord
   end
 
   def concluded_transactions
-    bank = User.find_by(email: 'crowdair@gmail.com')
-    transactions.where.not(buyer_id: nil).where.not(seller_id: bank.id).order(updated_at: :asc)
+    transactions.where.not(buyer_id: nil).order(updated_at: :asc)
   end
 
   def offers
@@ -57,7 +56,7 @@ class Event < ApplicationRecord
   end
 
   def current_price
-    concluded_transactions.empty? ? 50 : concluded_transactions.last.price
+    concluded_transactions.empty? || concluded_transactions.last.price.zero? ? 50 : concluded_transactions.last.price
   end
 
   private

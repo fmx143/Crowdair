@@ -83,28 +83,6 @@ class TransactionsController < ApplicationController
     @new_transaction = Transaction.new
     @actions_held = current_user.investments.find_by(event: @event).n_actions
     @actions_on_offer = @event.transactions.where(buyer_id: nil, seller_id: current_user.id).sum(:n_actions)
-
-    # @new_offer = Transaction.new
-    #REAL API
-
-    # uri = URI("http://api.mediastack.com/v1/news")
-    # params = {
-    #   'access_key' => ENV["MEDIASTACK_ACCESS_KEY"],
-    #   'search' => @event.title,
-    #   'limit' => 6,
-    #   'languages' => 'en'
-    # }
-    # uri.query = URI.encode_www_form(params)
-    # response = Net::HTTP.get_response(uri)
-    # news_json = response.read_body
-
-    # TEMPORARY JSON
-    news_json = File.read('app/assets/data/news.json')
-
-    #---------------
-
-    data_news = JSON.parse(news_json)
-    @data = data_news["data"]
-    # @news["data"][0]["title"] --> accéder au titre du Hash dans array dans Data
+    @news = @event.news
   end
 end
