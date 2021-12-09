@@ -4,7 +4,7 @@
       <tr>
         <th><i class="fas fa-clock"></i><br>Time</th>
         <th><i class="fas fa-star"></i><br>Event</th>
-        <th><i class="fas fa-user-friends"></i><br>Partner</th>
+        <th><i class="fas fa-user-friends"></i><br>Buyer/Seller</th>
         <th><i class="fas fa-chart-line"></i><br>Actions</th>
         <th><i class="fas fa-tag"></i><br>Price</th>
         <th><i class="fas fa-coins"></i><br>Coins</th>
@@ -24,7 +24,7 @@
             <td class="td-centered"><%= link_to("##{t.event.id}", event_path(t.event_id)) %></td>
             <td><%= User.find((current_user == t.buyer ? t.seller_id : t.buyer_id)).username %></td>
             <td class="td-centered"><%= t.n_actions %></td>
-            <td class="td-centered"><%= '%.1f' % t.price %></td>
+            <td class="td-centered"><%= '%.0f' % t.price %></td>
             <td class="td-centered <%= current_user == t.buyer ? 'td-flow-neg' : 'td-flow-pos' %>">
                 <%= "#{current_user == t.buyer ? '-' : '+'}#{'%.1f' % (t.n_actions * t.price)}" %>
             </td>
