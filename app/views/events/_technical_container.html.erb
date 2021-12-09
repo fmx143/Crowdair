@@ -1,8 +1,9 @@
 
 <div class="row" id="technical" data-event-id="<%= @event.id %>"> <%# to check %>
   <div class="col-12 col-sm-6 mb-2">
+    <% bank = User.find_by(email: 'crowdair@gmail.com') %>
     <%= line_chart(
-      @event.transactions.where.not(buyer_id: nil).pluck(:updated_at, :price),
+      @event.transactions.where.not(buyer_id: nil).where.not(seller_id: bank.id).pluck(:updated_at, :price),
       xtitle: "Time",
       ytitle: "Price",
       curve: false,

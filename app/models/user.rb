@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def engaged_investments
-    Investment.joins(:event).where(event: { archived: false }).where.not(n_actions: 0)
+    Investment.joins(:event).where(user_id: id).where(event: { archived: false }).where.not(n_actions: 0)
     # engaged_investments = []
     # investments.includes([:event]).each do |investment|
     #   n = transactions.where(event_id: investment.event.id).count
@@ -46,7 +46,7 @@ class User < ApplicationRecord
     User.all.where(admin: false).each do |user|
       ranking << {
         username: user.username,
-        pv: user.portfolio_history.last[1],
+        pv: user.compute_portfolio_value,
         email: user.email,
         avatar: user.avatar
       }
