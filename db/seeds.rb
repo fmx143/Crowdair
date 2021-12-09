@@ -3,7 +3,7 @@ require 'json'
 
 number_of_users = 12
 number_of_events = 12
-number_of_transactions = 10
+number_of_transactions = 500
 number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
