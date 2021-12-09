@@ -1,4 +1,4 @@
-<div class='container'>
+<div class='container withmargins'>
   <div class="event-image" style="background-image: url(<%=@event.img_url%>);"></div>
   <div class="event-text">
     <h1><%= @event.title %></h1>
@@ -33,7 +33,7 @@
         </div>
       </div>
     <% else %>
-      <%=  %>
+      <h5 class="calendar">This event ended on <%= @event.end_date.strftime("%d.%m.%Y") %>.</h5>
     <% end %>
     <div class="mt-4">
       <h5 id="description">Event description</h5>
@@ -43,29 +43,26 @@
 
   <% if @event.archived == false %>
     <%= render('events/technical_container') %>
-    <div class='d-flex justify-content-center m-3'>
-      <%= link_to("Back to Events", events_path, class: "button-main") %>
+    <div class="d-flex justify-content-between">
+      <div class="row">
+        <% @data.each do |new| %>
+          <div class="col">
+            <div class="card mx-auto" style="width: 18rem; height: 200px; margin-bottom: 8px;">
+              <div class="card-body" style='overflow: auto;'>
+                <h5 class="card-title"> <%= new['title'] %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"> <%= new['source'] %> </h6>
+                <p class="card-text"> <%= new['description'] %></p>
+                <a href="<%= new['url'] %>" class="card-link"> Access this article</a>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% else %>
     <%= render('events/end_technical_container') %>
-    <div class='d-flex justify-content-center m-3'>
-      <%= link_to("Back to Events", events_path, class: "button-main") %>
-    </div>
   <% end %>
 
-<div class="d-flex justify-content-between">
-  <div class="row">
-    <% @data.each do |new| %>
-      <div class="col">
-        <div class="card mx-auto" style="width: 18rem; height: 200px; margin-bottom: 8px;">
-          <div class="card-body" style='overflow: auto;'>
-            <h5 class="card-title"> <%= new['title'] %></h5>
-            <h6 class="card-subtitle mb-2 text-muted"> <%= new['source'] %> </h6>
-            <p class="card-text"> <%= new['description'] %></p>
-            <a href="<%= new['url'] %>" class="card-link"> Access this article</a>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+<div class='d-flex justify-content-center m-3'>
+  <%= link_to("Back to Events", events_path, class: "button-classy") %>
 </div>
