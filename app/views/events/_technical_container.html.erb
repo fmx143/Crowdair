@@ -1,5 +1,5 @@
 
-<div class="row" id="technical" data-event-id="<%= @event.id %>"> <%# to check %>
+<div class="row" id="technical" data-event-id="<%= @event.id %>">
   <div class="col-12 col-sm-6 mb-2">
     <%= line_chart(
       @event.transactions.where.not(buyer_id: nil).pluck(:updated_at, :price),
@@ -19,7 +19,7 @@
       <div>
         <%= simple_form_for [@event, @new_transaction],
         wrapper: :inline_form,
-        url: event_transactions_url(@event, @new_transaction),
+        url: event_transactions_url(@event, @new_transaction, anchor: "description"),
         html: {
           class: "inline-form"
         },
@@ -53,7 +53,7 @@
           <% @offer = offer if @offer.nil?%>
           <%= simple_form_for [@event, @offer],
           wrapper: :inline_form,
-          url: event_transaction_buy_url(@event, @offer),
+          url: event_transaction_buy_url(@event, @offer, anchor: "description"),
           html: {
             class: "inline-form"
           },
@@ -63,7 +63,7 @@
           <% end %>
 
         <% elsif offer.seller == current_user %>
-          <%= link_to("Cancel offer", event_transaction_path(@event, offer), method: :delete, class: "button-sell") %>
+          <%= link_to("Cancel offer", event_transaction_path(@event, offer, anchor: "description"), method: :delete, class: "button-sell") %>
         <% end %>
       </div>
     <% end %>
