@@ -44,24 +44,26 @@
   <% if @event.archived == false %>
     <%= render('events/technical_container') %>
     <div class="d-flex justify-content-between">
-      <div class="row">
-        <% @data.each do |new| %>
-          <div class="col">
-            <div class="card mx-auto" style="width: 18rem; height: 200px; margin-bottom: 8px;">
-              <div class="card-body" style='overflow: auto;'>
-                <h5 class="card-title"> <%= new['title'] %></h5>
-                <h6 class="card-subtitle mb-2 text-muted"> <%= new['source'] %> </h6>
-                <p class="card-text"> <%= new['description'] %></p>
-                <a href="<%= new['url'] %>" class="card-link"> Access this article</a>
-              </div>
+  <div class="row">
+    <% unless @news.nil? %>
+      <% @news.each do |new| %>
+        <div class="col">
+          <div class="card mx-auto" style="width: 18rem; height: 200px; margin-bottom: 8px;">
+            <div class="card-body" style='overflow: auto;'>
+              <h5 class="card-title"> <%= new['title'] %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"> <%= new['source'] %> </h6>
+              <p class="card-text"> <%= new['description'] %></p>
+              <a href="<%= new['url'] %>" class="card-link"> Access this article</a>
             </div>
           </div>
-        <% end %>
-      </div>
-    </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
   <% else %>
     <%= render('events/end_technical_container') %>
   <% end %>
+
 
 <div class='d-flex justify-content-center m-3'>
   <%= link_to("Back to Events", events_path, class: "button-classy") %>
