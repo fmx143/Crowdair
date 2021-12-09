@@ -1,12 +1,7 @@
-<div class="container">
-  <%# <div>
-    <div class="index-header-content">
-      <h2 class="mt-4 mb-3"> Start to trade</h2>
-    </div>
-  </div> %>
-    <div class="row mt-4">
+<div class="container withmargins">
+  <div class="row mt-4">
     <% @events.each do |event| %>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4 custom-index-column">
       <div class="card-products">
         <% if current_user %>
           <% if current_user.admin %>
@@ -17,7 +12,7 @@
           <% end %>
         <% end %>
         <img src="<%= event.img_url %>", class="card-product-img" />
-        <h6 class="calendar", style="padding-left: 5px; font-size: 12px;" >
+        <h6 id="end-date" >
           Ends on
           <i class="far fa-calendar-alt", style="padding-left: 5px; padding-right: 5px"></i>
           <strong>

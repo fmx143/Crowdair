@@ -2,8 +2,9 @@
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  height: 360px;
-  margin-bottom: 10px;
+  height: 400px;
+  margin: 18px 0px;
+  padding: 0px;
   position: relative;
 }
 
@@ -24,7 +25,6 @@
 .title a {
   text-decoration: none;
   color: $almost-black;
-  margin-bottom: 400px;
 }
 
 .title a:hover {
@@ -72,4 +72,16 @@
     color: $almost-black;
     font-weight: bold;
   }
+}
+
+#end-date {
+  padding-top: 8px;
+  color: $dark-orange;
+  text-align: center;
+  font-size: 14px;
+}
+
+.custom-index-column {
+  padding: 0 8px;
+  margin: 0;
 }
