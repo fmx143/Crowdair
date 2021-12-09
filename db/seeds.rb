@@ -1,20 +1,44 @@
 require 'faker'
 require 'json'
 
-number_of_users = 12
-number_of_events = 12
-number_of_transactions = 500
+
+number_of_users = 3
+number_of_events = 6
+number_of_transactions = 250
 number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
 kalshi_json = File.read(filepath)
 kalshi_markets = JSON.parse(kalshi_json)
 
+
+def end_event(event)
+  last_transaction = event.concluded_transactions.last
+  time = last_transaction.updated_at
+  end_action_price = event.current_price >= 50 ? 100 : 0
+  bank = User.find_by(email: 'crowdair@gmail.com')
+  event.offers.destroy_all
+  User.all.each do |user|
+    actions_held = user.investments.where(event_id: event.id).first.n_actions
+    t = Transaction.create!(
+      seller_id: user.id,
+      price: end_action_price,
+      n_actions: actions_held,
+      event_id: event.id,
+      notified: true
+    )
+    t.update(buyer_id: bank.id, updated_at: time)
+  end
+  User.update_all_portfolios(time)
+  event.archived = true
+  event.save
+end
+
 def real_price(event, up_down)
   if event.transactions.last
-    new_price = event.current_price + (rand(4...10) * [-1, 1, up_down].sample)
+    new_price = event.current_price + (rand(1...4) * [-1, 1, up_down].sample)
     while new_price > 100 || new_price < 1
-      new_price = event.current_price + (rand(4...10) * [-1, 1, up_down].sample)
+      new_price = event.current_price + (rand(1...4) * [-1, 1, up_down].sample)
     end
     price = new_price
   else
@@ -25,13 +49,13 @@ end
 
 dates = []
 number_of_transactions.times do
-  dates << Faker::Time.between(from: 1.day.ago, to: DateTime.now)
+  dates << Faker::Time.between(from: 7.days.ago, to: DateTime.now)
 end
 
 dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample
-  price = real_price(event, ((event.id % 3) -1))
+  price = real_price(event, ((((event.id % 5)) %2) *-2) +1)
   n_actions = rand(1..5)
   buyer, seller = User.all.where.not(admin: true).sample(2)  # Filter out the bank here
   actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
@@ -39,7 +63,7 @@ def valid_transaction_params
 
   while (price * n_actions) > buyer.points || n_actions > seller_investments - actions_on_offer
     event = Event.all.sample
-    price = real_price(event, ((event.id % 3) -1))
+    price = real_price(event, ((((event.id % 5)) %2) *-2) +1)
     n_actions = rand(1..5)
     buyer, seller = User.all.where.not(admin: true).sample(2) # Same
     actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
@@ -119,6 +143,46 @@ number_of_events.times do
 end
 puts "Events table now contains #{Event.count} events."
 
+#-----
+puts "Creating OUR events..."
+
+kalshi_event = kalshi_markets["markets"].sample
+event_list = [
+  {
+    title: "Test0",
+    end_date: Faker::Time.forward(days: 100),
+    description: kalshi_event["settle_details"].truncate(300),
+    img_url: kalshi_event["image_url"]
+  },
+  {
+    title: "Test1",
+    end_date: Faker::Time.forward(days: 100),
+    description: kalshi_event["settle_details"].truncate(300),
+    img_url: kalshi_event["image_url"]
+  },
+  {
+    title: "Test2",
+    end_date: Faker::Time.forward(days: 100),
+    description: kalshi_event["settle_details"].truncate(300),
+    img_url: kalshi_event["image_url"]
+  },
+  {
+    title: "Test3",
+    end_date: Faker::Time.forward(days: 100),
+    description: kalshi_event["settle_details"].truncate(300),
+    img_url: kalshi_event["image_url"]
+  }
+]
+
+our_events_id = []
+event_list.each do |event|
+  event_obj = Event.create!(event)
+  our_events_id << event_obj.id
+end
+
+puts "Events table now contains #{Event.count} events."
+
+#-----
 puts "Creating a seed of #{number_of_transactions} fake transactions..."
 
 number_of_transactions.times do |i|
@@ -142,26 +206,17 @@ end
 puts "#{number_of_offers} offers created"
 
 puts ""
+
+# puts "Ending events"
+
+# (number_of_events / 3).times do
+#   event = Event.all.sample
+#   while our_events_id.include?(event.id) || event.archived == true
+#     event = Event.all.sample
+#   end
+#   end_event(event)
+# end
+
 puts "Users table now contains #{Transaction.count} Transactions."
 puts "Users table now contains #{Investment.count} Investments."
 puts "Portfolio table now contains #{Portfolio.count} portfolio counts."
-
-
-def end_event(event)
-  time = event.latest_transactions.created_at
-  end_action_price = #to code
-  bank = User.find_by(email: 'crowdair@gmail.com')
-  offers.destroy_all
-  User.all.each do |user|
-    actions_held = user.investments.where(event_id: id).first.n_actions
-    t = Transaction.create!(
-      seller_id: user.id,
-      price: end_action_price,
-      n_actions: actions_held,
-      event_id: id
-    )
-    t.update(buyer_id: bank.id, updated_at: time)
-
-  end
-  User.update_all_portfolios(time)
-end

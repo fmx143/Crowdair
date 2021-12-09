@@ -1,22 +1,24 @@
-<div class="container">
+<div class="container-dashboard">
+  <div class="withmargins widehorizontal">
 
-  <div class="dashboard-header">
-    <h3 class="section-header">Stats</h3>
-    <div class="dashboard-header-content row">
-      <%= render('dashboard_header') %>
-    </div>
-  </div>
-
-  <div class="dashboard-content row">
-    <div class="positions_pannel_container flex-container  col-12 col-lg-6">
-      <h3 class="section-header">Positions</h3>
-      <div class="positions_pannel">
-        <%= render('investment_cards') %>
+    <div class="dashboard-header">
+      <h3 class="section-header">Stats</h3>
+      <div class="dashboard-header-content row">
+        <%= render('dashboard_header') %>
       </div>
     </div>
-    <div class="transactions_pannel_container flex-container  col-12 col-lg-6">
-      <h3 class="section-header">Past transactions</h3>
-      <%= render('transactions_pannel') %>
+
+    <div class="dashboard-content row">
+      <div class="positions_pannel_container flex-container  col-12 col-lg-6">
+        <h3 class="section-header">Positions</h3>
+        <div class="positions_pannel">
+          <%= render('investment_cards') %>
+        </div>
+      </div>
+      <div class="transactions_pannel_container flex-container  col-12 col-lg-6">
+        <h3 class="section-header">Past transactions</h3>
+        <%= render('transactions_pannel') %>
+      </div>
     </div>
   </div>
 </div>

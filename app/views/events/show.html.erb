@@ -48,12 +48,15 @@
     <% unless @news.nil? %>
       <% @news.each do |new| %>
         <div class="col">
-          <div class="card mx-auto" style="width: 18rem; height: 200px; margin-bottom: 8px;">
-            <div class="card-body" style='overflow: auto;'>
+          <div class="news-cards" >
+            <div>
               <h5 class="card-title"> <%= new['title'] %></h5>
-              <h6 class="card-subtitle mb-2 text-muted"> <%= new['source'] %> </h6>
-              <p class="card-text"> <%= new['description'] %></p>
-              <a href="<%= new['url'] %>" class="card-link"> Access this article</a>
+              <div>
+                <p class="card-text"> <%= new['description'] %></p>
+              </div>
+              <div>
+                  <a href="<%= new['url'] %>" class="button-news"> Article</a>
+              </div>
             </div>
           </div>
         </div>
@@ -64,7 +67,8 @@
     <%= render('events/end_technical_container') %>
   <% end %>
 
-
-<div class='d-flex justify-content-center m-3'>
+<div class='d-flex justify-content-center m-3' style="align-items: center;">
   <%= link_to("Back to Events", events_path, class: "button-classy") %>
+</div>
+
 </div>
