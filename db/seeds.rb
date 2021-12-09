@@ -76,6 +76,7 @@ users_list = [
     points: 10_000_000,
     admin: true,
     avatar: Faker::Avatar.image
+  },
   {
     username: "marcel",
     email: "mbower@gmail.com",
