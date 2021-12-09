@@ -1,9 +1,9 @@
 require 'faker'
 require 'json'
 
-number_of_users = 12
-number_of_events = 12
-number_of_transactions = 500
+number_of_users = 3
+number_of_events = 6
+number_of_transactions = 250
 number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
@@ -48,13 +48,13 @@ end
 
 dates = []
 number_of_transactions.times do
-  dates << Faker::Time.between(from: 1.day.ago, to: DateTime.now)
+  dates << Faker::Time.between(from: 7.days.ago, to: DateTime.now)
 end
 
 dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample
-  price = real_price(event, ((event.id % 3) -1))
+  price = real_price(event, ((((event.id % 5)) %2) *-2) +1)
   n_actions = rand(1..5)
   buyer, seller = User.all.where.not(admin: true).sample(2)  # Filter out the bank here
   actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
@@ -62,7 +62,7 @@ def valid_transaction_params
 
   while (price * n_actions) > buyer.points || n_actions > seller_investments - actions_on_offer
     event = Event.all.sample
-    price = real_price(event, ((event.id % 3) -1))
+    price = real_price(event, ((((event.id % 5)) %2) *-2) +1)
     n_actions = rand(1..5)
     buyer, seller = User.all.where.not(admin: true).sample(2) # Same
     actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
