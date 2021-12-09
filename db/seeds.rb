@@ -1,5 +1,6 @@
 require 'faker'
 require 'json'
+require 'digest/md5'
 
 number_of_users = 12
 number_of_events = 6
@@ -73,17 +74,19 @@ users_list = [
     email: "crowdair@gmail.com",
     password: "abcdef",
     points: 10_000_000,
-    admin: true
-  },
+    admin: true,
+    avatar: Faker::Avatar.image
   {
     username: "marcel",
     email: "mbower@gmail.com",
-    password: "abcdef"
+    password: "abcdef",
+    avatar: Faker::Avatar.image
   },
   {
     username: "jane",
     email: "janetarzan@hotmail.com",
-    password: "abcdef"
+    password: "abcdef",
+    avatar: Faker::Avatar.image
   }
 ]
 
@@ -91,7 +94,8 @@ users_list = [
   users_list << {
     username: Faker::Internet.unique.username,
     email: Faker::Internet.email,
-    password: "abcdef"
+    password: "abcdef",
+    avatar: Faker::Avatar.image
   }
 end
 
