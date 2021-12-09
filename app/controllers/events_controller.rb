@@ -29,6 +29,21 @@ class EventsController < ApplicationController
     redirect_to event_path(@event)
   end
 
+  def show
+    @event = Event.find(params[:id])
+    @actions_held = current_user.investments.find_by(event: @event).n_actions
+    @actions_on_offer = @event.transactions.where(buyer_id: nil, seller_id: current_user.id).sum(:n_actions)
+    @offers = @event.transactions.includes([:seller]).where(buyer_id: nil).order(price: :asc)
+    @new_transaction = Transaction.new
+    bank = User.find_by(email: 'crowdair@gmail.com')
+    @price_history = @event.transactions.where.not(buyer_id: nil).where.not(seller_id: bank.id).pluck(:updated_at, :price)
+
+    @t = Time.new(0)
+    @countdown_time_in_seconds = 100 # change this value
+    
+    @news = @event.news
+  end
+  
   def archive
     @event = Event.find(params[:id])
     @event.pay_due(params["outcome"])

@@ -34,15 +34,13 @@ class Event < ApplicationRecord
     User.update_all_portfolios(Time.now)
   end
 
-  def last_hour_change
+  def last_change
     p0 = 0
     p1 = 0
-    if concluded_transactions.count.positive?
-      recent_transactions = concluded_transactions.where("updated_at >= ?", 1.hour.ago)
-      if recent_transactions.count.positive?
-        p0 = recent_transactions.last.price
-        p1 = recent_transactions.first.price
-      end
+    if concluded_transactions.count > 1
+      recent_transactions = concluded_transactions.last(2)
+      p0 = recent_transactions.first.price
+      p1 = recent_transactions.last.price
     end
     p1 - p0
   end
