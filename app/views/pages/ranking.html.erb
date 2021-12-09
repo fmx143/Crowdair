@@ -4,7 +4,7 @@
     <% @ranking.each_with_index do |rkg, index| %>
       <li class="ranking-li <%= 'me' if current_user.username == rkg[:username] %>">
       <p class="numerotation"><%= index + 1 %> . </p>
-      <%= image_tag "https://i.pravatar.cc/5#{rand(1..9)}", class: "avatar-ranking" %>
+      <%= image_tag rkg[:avatar], class: "avatar-ranking" %>
       <p class="username-p">
         <%= rkg[:username] %>
         <%= image_tag("medal.png", :class => "medal") if index == 0 %>

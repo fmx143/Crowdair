@@ -47,7 +47,8 @@ class User < ApplicationRecord
       ranking << {
         username: user.username,
         pv: user.compute_portfolio_value,
-        email: user.email
+        email: user.email,
+        avatar: user.avatar
       }
     end
     ranking.sort_by! { |elem| elem[:pv] }.reverse!
