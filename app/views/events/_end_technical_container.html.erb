@@ -1,5 +1,5 @@
 <div class="row" id="technical" data-event-id="<%= @event.id %>"> <%# to check %>
-  <div class="col-12 col-sm-6 mb-2">
+  <div class="col-12 mb-2">
     <%= line_chart(
       @price_history,
       xtitle: "Time",
@@ -10,12 +10,8 @@
       id: "price-chart",
       width: "100%",
       height: "100%",
-      library: { scales: { y: { max: 100 } } }
+      library: { scales: { y: { max: 100 } } },
+      colors: ["#fa7b2d"] # 567294
       )%>
-  </div>
-  <div class="col-12 col-sm-6 mb-2 trading" style="overflow: overlay">
-    <div class='seller-card'>
-      <div>You were holding <strong><%= @actions_held %></strong> actions at the end of this event.</div>
-    </div>
   </div>
 </div>

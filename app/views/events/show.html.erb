@@ -1,4 +1,4 @@
-<div class='container'>
+<div class='container withmargins'>
   <div class="event-image" style="background-image: url(<%=@event.img_url%>);"></div>
   <div class="event-text">
     <h1><%= @event.title %></h1>
@@ -33,7 +33,7 @@
         </div>
       </div>
     <% else %>
-      <%=  %>
+      <h5 class="calendar">This event ended on <%= @event.end_date.strftime("%d.%m.%Y") %>.</h5>
     <% end %>
     <div class="mt-4">
       <h5 id="description">Event description</h5>
@@ -43,17 +43,7 @@
 
   <% if @event.archived == false %>
     <%= render('events/technical_container') %>
-    <div class='d-flex justify-content-center m-3'>
-      <%= link_to("Back to Events", events_path, class: "button-main") %>
-    </div>
-  <% else %>
-    <%= render('events/end_technical_container') %>
-    <div class='d-flex justify-content-center m-3'>
-      <%= link_to("Back to Events", events_path, class: "button-main") %>
-    </div>
-  <% end %>
-
-<div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between">
   <div class="row">
     <% unless @news.nil? %>
       <% @news.each do |new| %>
@@ -70,4 +60,11 @@
       <% end %>
     <% end %>
   </div>
+  <% else %>
+    <%= render('events/end_technical_container') %>
+  <% end %>
+
+
+<div class='d-flex justify-content-center m-3'>
+  <%= link_to("Back to Events", events_path, class: "button-classy") %>
 </div>
