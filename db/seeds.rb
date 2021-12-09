@@ -2,8 +2,8 @@ require 'faker'
 require 'json'
 
 
-number_of_users = 3
-number_of_events = 6
+number_of_users = 12
+number_of_events = 8
 number_of_transactions = 250
 number_of_offers = number_of_events * number_of_users
 
@@ -12,10 +12,7 @@ kalshi_json = File.read(filepath)
 kalshi_markets = JSON.parse(kalshi_json)
 
 
-def end_event(event)
-  last_transaction = event.concluded_transactions.last
-  time = last_transaction.updated_at
-  end_action_price = event.current_price >= 50 ? 100 : 0
+def end_event(event, time, end_action_price)
   bank = User.find_by(email: 'crowdair@gmail.com')
   event.offers.destroy_all
   User.all.each do |user|
@@ -191,6 +188,25 @@ number_of_transactions.times do |i|
   transaction.update(buyer_id: transaction_params[:buyer].id, updated_at: dates[i])
   User.update_all_portfolios(dates[i])
   print "#{i + 1} transactions created \r"
+
+  # Close events at pre-selected transaction indeces
+  if [38, 105, 208].include?(i)
+    event = Event.all.sample
+    while our_events_id.include?(event.id) || event.archived == true || event.current_price >= 50
+      event = Event.all.sample
+    end
+    end_action_price = 100
+    end_event(event, dates[i], end_action_price)
+    puts "Closed an event with YES"
+  elsif [60, 162].include?(i)
+    event = Event.all.sample
+    while our_events_id.include?(event.id) || event.archived == true || event.current_price < 50
+      event = Event.all.sample
+    end
+    end_action_price = 0
+    end_event(event, dates[i], end_action_price)
+    puts "Closed an event with NO"
+  end
 end
 
 puts "#{number_of_transactions} transactions created"
@@ -204,19 +220,6 @@ number_of_offers.times do |i|
 end
 
 puts "#{number_of_offers} offers created"
-
-puts ""
-
-# puts "Ending events"
-
-# (number_of_events / 3).times do
-#   event = Event.all.sample
-#   while our_events_id.include?(event.id) || event.archived == true
-#     event = Event.all.sample
-#   end
-#   end_event(event)
-# end
-
 puts "Users table now contains #{Transaction.count} Transactions."
 puts "Users table now contains #{Investment.count} Investments."
 puts "Portfolio table now contains #{Portfolio.count} portfolio counts."
