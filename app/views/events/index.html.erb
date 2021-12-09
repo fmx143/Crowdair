@@ -30,13 +30,14 @@
         </div>
         <div class="events-data-badge">
           <div class="badge-value">
-            Likelihood to happen
-            <strong class="current-price"><%= "#{event.current_price}%" %></strong>
+            Price:
+            <strong class="current-price"><%= "#{event.current_price}" %></strong>
+            coins/action
           </div>
           <div class="badge-change">
-            Last hour change
+            Last change:
             <%
-              diff = event.last_hour_change
+              diff = event.last_change
               if diff == 0
                 badge_class = 'badge-secondary'
                 sign = '+'
@@ -48,7 +49,7 @@
                 sign = ''
               end
             %>
-            <span style="margin: 0px 5px;" class="badge <%= badge_class %>"><%= sign %><%= "#{diff} %" %></span>
+            <span style="margin: 0px 5px;" class="badge <%= badge_class %>"><%= sign %><%= "#{diff}" %></span>
           </div>
         </div>
       </div>

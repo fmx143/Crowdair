@@ -35,6 +35,8 @@ class EventsController < ApplicationController
     @actions_on_offer = @event.transactions.where(buyer_id: nil, seller_id: current_user.id).sum(:n_actions)
     @offers = @event.transactions.includes([:seller]).where(buyer_id: nil).order(price: :asc)
     @new_transaction = Transaction.new
+    bank = User.find_by(email: 'crowdair@gmail.com')
+    @price_history = @event.transactions.where.not(buyer_id: nil).where.not(seller_id: bank.id).pluck(:updated_at, :price)
 
     @t = Time.new(0)
     @countdown_time_in_seconds = 100 # change this value
