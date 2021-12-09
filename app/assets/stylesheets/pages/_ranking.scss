@@ -57,48 +57,6 @@
   margin-right: 15px;
 }
 
-.ranking-li:nth-child(1) .username-p {
-  color: gold;
-  font-weight: bold;
-}
-
-.ranking-li:nth-child(2) .username-p {
-  color: silver;
-  font-weight: bold;
-}
-
-.ranking-li:nth-child(3) .username-p {
-  color: #cb7a01;
-  font-weight: bold;
-}
-
-.ranking-li:nth-child(1) .points-p {
-  color: gold;
-  font-weight: bold;
-}
-
-.ranking-li:nth-child(2) .points-p {
-  color: silver;
-  font-weight: bold;
-}
-
-.ranking-li:nth-child(3) .points-p {
-  color: #cb7a01;
-  font-weight: bold;
-}
-
-.ranking-li:nth-child(1) .numerotation {
-  color: gold;
-}
-
-.ranking-li:nth-child(2) .numerotation {
-  color: silver;
-}
-
-.ranking-li:nth-child(3) .numerotation {
-  color: #cb7a01;
-}
-
 .medal {
   width: 20px;
   height: 20px;
@@ -111,17 +69,19 @@
 
 .me {
   font-weight: bold;
-  background-color: #567294;
+  border-style: solid;
+  border-width: medium;
+  border-color: #567294;
 }
 
 .me .username-p {
-  color:whitesmoke;
+  color:#567294;
 }
 
 .me .points-p {
-  color: whitesmoke;
+  color: #567294;
 }
 
 .me .numerotation {
-  color: whitesmoke;
+  color: #567294;
 }
