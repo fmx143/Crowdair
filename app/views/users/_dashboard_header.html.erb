@@ -23,11 +23,11 @@
         </tr>
         <tr>
           <td>Actions value</td>
-          <td>+<%= @portfolio_values.empty? ? '-' : @portfolio_values.last[1] - @user.points %></td>
+          <td>+<%= @portfolio_values.empty? ? '-' : @portfolio_value - @user.points %></td>
         </tr>
         <tr>
           <td>Portfolio valuation</td>
-          <td><%= @portfolio_values.empty? ? @user.points : @portfolio_values.last[1] %></td>
+          <td><%= @portfolio_values.empty? ? @user.points : @portfolio_value %></td>
         </tr>
       </table>
     </div>
