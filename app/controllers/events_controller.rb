@@ -37,33 +37,11 @@ class EventsController < ApplicationController
     @new_transaction = Transaction.new
     bank = User.find_by(email: 'crowdair@gmail.com')
     @price_history = @event.transactions.where.not(buyer_id: nil).where.not(seller_id: bank.id).pluck(:updated_at, :price)
-
     @t = Time.new(0)
     @countdown_time_in_seconds = 100 # change this value
-
-    #REAL API
-
-    # uri = URI("http://api.mediastack.com/v1/news")
-    # params = {
-    #   'access_key' => ENV["MEDIASTACK_ACCESS_KEY"],
-    #   'search' => @event.title,
-    #   'limit' => 6,
-    #   'languages' => 'en'
-    # }
-    # uri.query = URI.encode_www_form(params)
-    # response = Net::HTTP.get_response(uri)
-    # news_json = response.read_body
-
-    # TEMPORARY JSON
-    news_json = File.read('app/assets/data/news.json')
-
-    #---------------
-
-    data_news = JSON.parse(news_json)
-    @data = data_news["data"]
-    # @news["data"][0]["title"] --> accéder au titre du Hash dans array dans Data
+    @news = @event.news
   end
-
+  
   def archive
     @event = Event.find(params[:id])
     @event.pay_due(params["outcome"])
