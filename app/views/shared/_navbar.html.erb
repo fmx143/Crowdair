@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
 
-  <%= link_to "/events", class: "navbar-brand d-flex align-items-center" do %>
-    <%= image_tag('logo.jpg') %> <p class="navbar-title"> CROWDAIR </p>
+  <%= link_to "/", class: "navbar-brand d-flex align-items-center" do %>
+    <p class="navbar-title"> CROWDAIR </p>
   <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,24 +12,23 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-        <li class="nav-item active">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to "Events", events_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to "Dashboard", user_path(:id), class: "nav-link" %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to "Leaderboard", ranking_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to "#{current_user.points}💰", user_path(:id), class: "nav-link" %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
-        </li>
+        <div class="navbar-links">
+          <li class="nav-item active">
+            <a href="/events"> Events <i class="fas fa-calendar-alt"></i></a>
+          </li>
+          <li class="nav-item active">
+            <a href="/users/id"> Dashboard <i class="fas fa-chart-line"></i></a>
+          </li>
+        </div>
+        <div class="navbar-info">
+          <li class="nav-item active">
+            <a href="/users/id"> <%= "#{current_user.points}" %> <i class="fas fa-coins"></i></a>
+          </li>
+          <li class="nav-item active">
+            <a href="/users/id"> <%= "#{current_user.username}" %> <i class="fas fa-user"></i></a>
+          </li>
+        </div>
+
 
         <li class="nav-item dropdown">
           <%= image_tag current_user.avatar, class: "avatar1 dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
