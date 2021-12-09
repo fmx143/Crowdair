@@ -1,6 +1,7 @@
 require 'faker'
 require 'json'
 
+
 number_of_users = 3
 number_of_events = 6
 number_of_transactions = 250
