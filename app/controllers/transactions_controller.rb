@@ -34,12 +34,19 @@ class TransactionsController < ApplicationController
       new_offer.update_attribute(:n_actions, (initial_n_actions - buy_transaction_params[:n_actions].to_i))
       @offer.update(buyer_id: current_user.id) ? redirect_to(event_path(@offer.event)) : (render 'events/show')
       User.update_all_portfolios(Time.now)
+        flash[:messages] = [] if flash[:messages].nil?
+        flash[:messages] << {
+          "title" => "Actions bought!",
+          'content_start' => "You have bought #{@offer.n_actions} actions for a total price of ",
+          'content_end' => " coins.",
+          'strong' => (@offer.n_actions *  @offer.price),
+          }
     elsif buy_transaction_params[:n_actions].to_i > @offer.n_actions
       @offer.errors.add(:n_actions, "The seller is not selling more than #{@offer.n_actions}")
       render 'events/show'
     else
-      User.update_all_portfolios(Time.now)
       @offer.update(buyer_id: current_user.id) ? redirect_to(event_path(@offer.event)) : (render 'events/show')
+      User.update_all_portfolios(Time.now)
         flash[:messages] = [] if flash[:messages].nil?
         flash[:messages] << {
           "title" => "Actions bought!",
