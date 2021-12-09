@@ -23,3 +23,33 @@
   margin-top: 5px;
   margin-bottom: 0;
 }
+
+.navbar-links {
+  display: flex;
+  padding-right: 25px;
+}
+
+.navbar-info {
+  display: flex;
+  padding-left: 25px;
+  border-left-width: medium;
+  border-left-style: solid;
+}
+
+.nav-item {
+  display: flex;
+}
+
+.fas {
+  padding-left: 5px;
+}
+
+.nav-item a {
+  color: black;
+  padding-left: 25px;
+  padding-top: 10px;
+}
+
+.fa-user {
+  padding-right: 25px;
+}
