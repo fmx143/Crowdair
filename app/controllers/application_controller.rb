@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
           if transaction.buyer == User.find_by(email: 'crowdair@gmail.com')
             flash[:messages] << {
               'title'=> "Event ##{transaction.event.id} ended !",
-              'content_start'=> "The Bank has bought #{transaction.n_actions} actions for a total of ",
+              'content_start'=> "An event has ended and you cashed in ",
               'content_end'=> " coins.",
               'strong'=> (transaction.n_actions *  transaction.price),
               'url'=> event_path(transaction.event),

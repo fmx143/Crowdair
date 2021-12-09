@@ -9,15 +9,15 @@
   opacity: 1;
 }
 
-.toast {
-  animation: hide 1s linear 15s 1 forwards;
-}
+// .toast {
+//   animation: hide 1s linear 15s 1 forwards;
+// }
 
-@keyframes hide {
-  to {
-    opacity: 0;
-  }
-}
+// @keyframes hide {
+//   to {
+//     opacity: 0;
+//   }
+// }
 
 .toast strong {
   color: $orange;
