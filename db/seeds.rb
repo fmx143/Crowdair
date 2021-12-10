@@ -146,29 +146,23 @@ puts "Creating OUR events..."
 kalshi_event = kalshi_markets["markets"].sample
 event_list = [
   {
-    title: "Test0",
-    end_date: Faker::Time.forward(days: 100),
-    description: kalshi_event["settle_details"].truncate(300),
-    img_url: kalshi_event["image_url"]
+    title: "La laponie fermera-t-elle ses frontières avant Noël ?",
+    end_date: DateTime.civil_from_format( :local, 2021, 12, 25),
+    description: "Le Premier ministre a annoncé l'exclusion des lutins des usines de production et a mentionné une possible fermeture des frontières avant Noël. Le pays ayant interdit la vaccination aux citoyens de plus de 300 ans, la tournée du père Noël pourrait être compromise cette année.",
+    img_url: "https://cdn.unitycms.io/image/ocroped/2001,2000,1000,1000,0,0/UZ4OkoSwoYw/9sPE-eRJqesBCHFh0-tUJr.jpg"
   },
   {
-    title: "Test1",
-    end_date: Faker::Time.forward(days: 100),
-    description: kalshi_event["settle_details"].truncate(300),
-    img_url: kalshi_event["image_url"]
+    title: "La suisse gagnera-t-elle la coupe du monde 2022 ?",
+    end_date: DateTime.civil_from_format( :local, 2022, 12, 22, 16),
+    description: "Lors des derniers matchs de qualifications, l'équipe féminine suisse a dominé ses adversaires et s'est hissée au sommet du classement. Suisse et USA sont pressentis pour la finale, à moins qu'un énième accord secret avec la FIFA permette à d'autres pays de briller.",
+    img_url: "https://www.football.ch/fr/PortalData/27/Resources/bilder/nationalteams/a-team-frauen/wm_quali/sui_sco/SUISCO_News.jpg"
   },
   {
-    title: "Test2",
-    end_date: Faker::Time.forward(days: 100),
-    description: kalshi_event["settle_details"].truncate(300),
-    img_url: kalshi_event["image_url"]
+    title: "Le batch 732 du Wagon Lausanne sera-il le dernier ?",
+    end_date: DateTime.civil_from_format( :local, 2021, 12, 10, 18),
+    description: "Une conférence de presse de M. Jaime est attendue en fin d'après-midi. Un employé a témoigné anonymement du ras-le-bol du directeur général de l'école lausannoise. Selon diverses sources, un conflit latent avec la soufflerie du bâtiment l'aurait poussé à bout de nerfs.",
+    img_url: "https://blog.hopitalvs.ch/wp-content/uploads/2030/07/Burnout-epuisement-professionnel.jpg"
   },
-  {
-    title: "Test3",
-    end_date: Faker::Time.forward(days: 100),
-    description: kalshi_event["settle_details"].truncate(300),
-    img_url: kalshi_event["image_url"]
-  }
 ]
 
 our_events_id = []

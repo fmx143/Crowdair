@@ -4,20 +4,20 @@
   right: 16px;
   z-index: 1000;
 }
-
 .toast {
   opacity: 1;
+  font-size: larger;
 }
 
-.toast {
-  animation: hide 1s linear 15s 1 forwards;
-}
+// .toast {
+//   animation: hide 1s linear 15s 1 forwards;
+// }
 
-@keyframes hide {
-  to {
-    opacity: 0;
-  }
-}
+// @keyframes hide {
+//   to {
+//     opacity: 0;
+//   }
+// }
 
 .toast strong {
   color: $orange;
