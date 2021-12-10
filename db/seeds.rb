@@ -185,7 +185,7 @@ event_list = [
     title: "SpaceX va annoncer son intention de créer une base lunaire avant Février 2022.",
     end_date: DateTime.civil_from_format( :local, 2022, 01, 31),
     description: "L'ambitieux dirigeant Elon Musk à la tête de son entreprise SpaceX a toujours exprimé son envie de visiter les étoiles. Ce projet passera-t-il par la fondation d'une base lunaire?",
-    img_url: "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2019/07/artist_im[…]/19471139-2-eng-GB/Artist_impression_of_a_Moon_Base_concept.jpg"
+    img_url: "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2019/07/artist_impression_of_a_moon_base_concept/19471139-2-eng-GB/Artist_impression_of_a_Moon_Base_concept.jpg"
   }
 ]
 
