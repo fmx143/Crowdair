@@ -67,7 +67,7 @@ class Event < ApplicationRecord
       'access_key' => ENV["MEDIASTACK_ACCESS_KEY"],
       'keywords' => keywords,
       'limit' => 6,
-      'languages' => 'en'
+      'languages' => 'fr'
     }
     uri.query = URI.encode_www_form(params)
     response = Net::HTTP.get_response(uri)
