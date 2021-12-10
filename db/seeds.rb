@@ -1,9 +1,10 @@
 require 'faker'
 require 'json'
 
+
 number_of_users = 12
-number_of_events = 2
-number_of_transactions = 40
+number_of_events = 8
+number_of_transactions = 250
 number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
@@ -11,10 +12,7 @@ kalshi_json = File.read(filepath)
 kalshi_markets = JSON.parse(kalshi_json)
 
 
-def end_event(event)
-  last_transaction = event.concluded_transactions.last
-  time = last_transaction.updated_at
-  end_action_price = event.current_price >= 50 ? 100 : 0
+def end_event(event, time, end_action_price)
   bank = User.find_by(email: 'crowdair@gmail.com')
   event.offers.destroy_all
   User.all.each do |user|
@@ -48,13 +46,13 @@ end
 
 dates = []
 number_of_transactions.times do
-  dates << Faker::Time.between(from: 1.day.ago, to: DateTime.now)
+  dates << Faker::Time.between(from: 7.days.ago, to: DateTime.now)
 end
 
 dates.sort_by! { |s| s}
 def valid_transaction_params
   event = Event.all.sample
-  price = real_price(event, ((event.id % 3) -1))
+  price = real_price(event, ((((event.id % 5)) %2) *-2) +1)
   n_actions = rand(1..5)
   buyer, seller = User.all.where.not(admin: true).sample(2)  # Filter out the bank here
   actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
@@ -62,7 +60,7 @@ def valid_transaction_params
 
   while (price * n_actions) > buyer.points || n_actions > seller_investments - actions_on_offer
     event = Event.all.sample
-    price = real_price(event, ((event.id % 3) -1))
+    price = real_price(event, ((((event.id % 5)) %2) *-2) +1)
     n_actions = rand(1..5)
     buyer, seller = User.all.where.not(admin: true).sample(2) # Same
     actions_on_offer = event.transactions.where(buyer_id: nil, seller_id: seller.id).sum(:n_actions)
@@ -184,6 +182,25 @@ number_of_transactions.times do |i|
   transaction.update(buyer_id: transaction_params[:buyer].id, updated_at: dates[i])
   User.update_all_portfolios(dates[i])
   print "#{i + 1} transactions created \r"
+
+  # Close events at pre-selected transaction indeces
+  if [38, 105, 208].include?(i)
+    event = Event.all.sample
+    while our_events_id.include?(event.id) || event.archived == true || event.current_price >= 50
+      event = Event.all.sample
+    end
+    end_action_price = 100
+    end_event(event, dates[i], end_action_price)
+    puts "Closed an event with YES"
+  elsif [60, 162].include?(i)
+    event = Event.all.sample
+    while our_events_id.include?(event.id) || event.archived == true || event.current_price < 50
+      event = Event.all.sample
+    end
+    end_action_price = 0
+    end_event(event, dates[i], end_action_price)
+    puts "Closed an event with NO"
+  end
 end
 
 puts "#{number_of_transactions} transactions created"
@@ -197,19 +214,6 @@ number_of_offers.times do |i|
 end
 
 puts "#{number_of_offers} offers created"
-
-puts ""
-
-# puts "Ending events"
-
-# (number_of_events / 3).times do
-#   event = Event.all.sample
-#   while our_events_id.include?(event.id) || event.archived == true
-#     event = Event.all.sample
-#   end
-#   end_event(event)
-# end
-
 puts "Users table now contains #{Transaction.count} Transactions."
 puts "Users table now contains #{Investment.count} Investments."
 puts "Portfolio table now contains #{Portfolio.count} portfolio counts."
