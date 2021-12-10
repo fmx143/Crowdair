@@ -90,6 +90,7 @@
   border: 1px solid white;
   color: white;
   text-align: center;
+  margin: 8px;
 }
 
 .button-landing:hover {
@@ -99,4 +100,8 @@
   border-radius: 1em;
   border: 1px solid white;
   text-decoration: none;
+}
+
+.button-container {
+  width: 90%;
 }

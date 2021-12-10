@@ -1,5 +1,5 @@
-<div class="landing" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(https://static.vecteezy.com/ti/vecteur-libre/p1/695297-bougie-bougie-graphique-de-l-39-investissement-boursier-gratuit-vectoriel.jpg);">
-  <div class="container">
+<div class="landing">
+  <div class="container pt-3">
     <h1> Welcome to Crowdair !</h1>
     <h4>Before your journey starts, let us explain how this website works in 3 simple steps. </h4>
 
@@ -7,7 +7,7 @@
       <div class="row justify-content-between">
         <div class="col-12 col-md-4">
           <div class="home-infos">
-            <h3 class="text-center mb-3">📅 Choose event</h3>
+            <h3 class="text-center mb-3">Choose event</h3>
             <h5>After creating your account, go to the list of events and choose some that your familiar with or know about.</h5>
             <div>
               <%= image_tag('idee.png', class: "home-info-logo") %>
@@ -16,51 +16,52 @@
         </div>
         <div class="col-12 col-md-4">
           <div class="home-infos">
-            <h3 class="text-center mb-3">📆 Event</h3>
+            <h3 class="text-center mb-3">Event</h3>
             <h5>Once on the event, analyse the supply and demand from others users and the graphic to know what is the current general opinion. </h5>
             <div>
               <%= image_tag('analyse.png', class: "home-info-logo") %>
             </div>
+            <%= link_to "Go to events", events_path, class: "button-main" %>
           </div>
         </div>
         <div class="col-12 col-md-4">
           <div class="home-infos">
-            <h3 class="text-center mb-3">📈 Trade</h3>
+            <h3 class="text-center mb-3">Trade</h3>
             <h5>Then make an offer to sell your well deserved actions or buy more actions</h5>
-            <h5>🪙Either way, the goal is to gain as much coins as possible!</h5>
+            <h5>Either way, the goal is to gain as much coins as possible!</h5>
             <div>
               <%= image_tag('croissance.png', class: "home-info-logo") %>
             </div>
           </div>
         </div>
       </div>
-    <div>
 
-    <h4>Doubts? Click the buttons below to get more informations.</h4>
+    <div class="button-container">
 
-      <p class="justify-content-between">
-        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample">
-          👨‍💻Account
+      <h4>Doubts? Click the buttons below to get more informations.</h4>
+
+      <div class="d-flex justify-content-between">
+
+        <a class="button-landing" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Account
         </a>
 
-        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample">
-          📢Events list
+        <a class="button-landing" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Events list
         </a>
 
-        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapseExample">
-          📊Dasboard
+        <a class="button-landing" data-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Dasboard
         </a>
 
-        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse4" role="button" aria-expanded="false" aria-controls="collapseExample">
-          📑Event page
+        <a class="button-landing" data-toggle="collapse" href="#collapse4" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Event page
         </a>
 
-        <a class="button-landing mr-2" data-toggle="collapse" href="#collapse5" role="button" aria-expanded="false" aria-controls="collapseExample">
-          🪙Placing a trade
+        <a class="button-landing" data-toggle="collapse" href="#collapse5" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Placing a trade
         </a>
-
-        <%= link_to "Go to events", events_path, style: "texte-decoration: none; color: white;" %>
-      </p>
+      </div>
     </div>
 
     <div class="collapse" id="collapse1">

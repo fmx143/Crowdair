@@ -7,20 +7,22 @@ body {
 }
 
 .landing {
-  // background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p1/695297-bougie-bougie-graphique-de-l-39-investissement-boursier-gratuit-vectoriel.jpg");
+  padding-bottom: 12px;
   background-position: center;
   background-size: cover;
   width: auto;
+  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.6)),
+    url("https://static.vecteezy.com/ti/vecteur-libre/p1/695297-bougie-bougie-graphique-de-l-39-investissement-boursier-gratuit-vectoriel.jpg");
 }
 
 .container h1 {
-  color: white;
+  color: $almost-black;
   margin-bottom: 20px;
   font-weight: 800;
 }
 
 .container h4 {
-  color: white;
+  color: $almost-black;
   margin-bottom: 20px;
 }
 
