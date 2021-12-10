@@ -18,7 +18,7 @@
 
   <div class="col-12 col-sm-6 mb-2 trading" style="overflow: overlay">
     <div class='seller-card'>
-      <div>You currently hold <strong><%= @actions_held %></strong> actions in this event. Of which <strong><%= @actions_on_offer %></strong> are on sale.</div>
+      <div class="pb-2">You currently hold <strong><%= @actions_held %></strong> actions in this event. Of which <strong><%= @actions_on_offer %></strong> are on sale.</div>
       <div>
         <%= simple_form_for [@event, @new_transaction],
         wrapper: :inline_form,
@@ -51,23 +51,24 @@
           <strong><%= offer.price %></strong>
           coins.
         </div>
+        <div class="pt-2">
+          <% if first == 1 && offer.seller != current_user%>
+            <% @offer = offer if @offer.nil?%>
+            <%= simple_form_for [@event, @offer],
+            wrapper: :inline_form,
+            url: event_transaction_buy_url(@event, @offer, anchor: "description"),
+            html: {
+              class: "inline-form "
+            },
+            wrapper_mappings: { boolean: :inline_boolean} do |f| %>
+              <%= f.input :n_actions, placeholder: 'Actions', label: false, input_html: {class: 'form-input'}%>
+              <%= f.submit "Buy", class: "button-buy" %>
+            <% end %>
 
-        <% if first == 1 && offer.seller != current_user%>
-          <% @offer = offer if @offer.nil?%>
-          <%= simple_form_for [@event, @offer],
-          wrapper: :inline_form,
-          url: event_transaction_buy_url(@event, @offer, anchor: "description"),
-          html: {
-            class: "inline-form"
-          },
-          wrapper_mappings: { boolean: :inline_boolean} do |f| %>
-            <%= f.input :n_actions, placeholder: 'Actions', label: false, input_html: {class: 'form-input'}%>
-            <%= f.submit "Buy", class: "button-buy" %>
+          <% elsif offer.seller == current_user %>
+            <%= link_to("Cancel offer", event_transaction_path(@event, offer, anchor: "description"), method: :delete, class: "button-sell") %>
           <% end %>
-
-        <% elsif offer.seller == current_user %>
-          <%= link_to("Cancel offer", event_transaction_path(@event, offer, anchor: "description"), method: :delete, class: "button-sell") %>
-        <% end %>
+        </div>
       </div>
     <% end %>
   </div>
