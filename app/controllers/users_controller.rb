@@ -20,7 +20,6 @@ class UsersController < ApplicationController
     @portfolio_values = @user.portfolio_history
     @portfolio_values_1h = @user.portfolio_history_1h
     @portfolio_value = @user.compute_portfolio_value
-    # raise
   end
 
   def edit

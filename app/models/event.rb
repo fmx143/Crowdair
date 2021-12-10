@@ -101,7 +101,7 @@ class Event < ApplicationRecord
       )
       t.update(buyer_id: user.id, updated_at: 7.days.ago)
     end
-    User.update_all_portfolios(7.days.ago)
+    # User.update_all_portfolios(7.days.ago)
   end
 
 

@@ -103,6 +103,6 @@ class User < ApplicationRecord
       )
       t.update(buyer_id: id)
     end
-    User.update_all_portfolios(7.days.ago)
+    # User.update_all_portfolios(7.days.ago)
   end
 end
