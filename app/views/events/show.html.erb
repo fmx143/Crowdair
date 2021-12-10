@@ -52,7 +52,7 @@
             <div>
               <h5 class="card-title"> <%= new['title'] %></h5>
               <div>
-                <p class="card-text"> <%= new['description'] %></p>
+                <p class="card-text"> <%= new['description'].truncate(75) %></p>
               </div>
               <div>
                   <a href="<%= new['url'] %>" class="button-news"> Article</a>
@@ -66,9 +66,5 @@
   <% else %>
     <%= render('events/end_technical_container') %>
   <% end %>
-
-<div class='d-flex justify-content-center m-3' style="align-items: center;">
-  <%= link_to("Back to Events", events_path, class: "button-classy") %>
-</div>
 
 </div>
