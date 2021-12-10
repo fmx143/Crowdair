@@ -2,9 +2,9 @@ require 'faker'
 require 'json'
 
 
-number_of_users = 12
-number_of_events = 8
-number_of_transactions = 250
+number_of_users = 15
+number_of_events = 7
+number_of_transactions = 500
 number_of_offers = number_of_events * number_of_users
 
 filepath = 'app/assets/data/kalshi.json'
@@ -97,13 +97,13 @@ users_list = [
     avatar: Faker::Avatar.image
   },
   {
-    username: "marcel",
+    username: "Andreas",
     email: "mbower@gmail.com",
     password: "abcdef",
     avatar: Faker::Avatar.image
   },
   {
-    username: "jane",
+    username: "Medi",
     email: "janetarzan@hotmail.com",
     password: "abcdef",
     avatar: Faker::Avatar.image
@@ -146,23 +146,47 @@ puts "Creating OUR events..."
 kalshi_event = kalshi_markets["markets"].sample
 event_list = [
   {
-    title: "La laponie fermera-t-elle ses frontières avant Noël ?",
+    title: "La Laponie fermera-t-elle ses frontières avant Noël ?",
     end_date: DateTime.civil_from_format( :local, 2021, 12, 25),
     description: "Le Premier ministre a annoncé l'exclusion des lutins des usines de production et a mentionné une possible fermeture des frontières avant Noël. Le pays ayant interdit la vaccination aux citoyens de plus de 300 ans, la tournée du père Noël pourrait être compromise cette année.",
     img_url: "https://cdn.unitycms.io/image/ocroped/2001,2000,1000,1000,0,0/UZ4OkoSwoYw/9sPE-eRJqesBCHFh0-tUJr.jpg"
   },
   {
-    title: "La suisse gagnera-t-elle la coupe du monde 2022 ?",
-    end_date: DateTime.civil_from_format( :local, 2022, 12, 22, 16),
+    title: "La Suisse gagnera-t-elle la coupe du monde 2022 ?",
+    end_date: DateTime.civil_from_format( :local, 2022, 12, 22),
     description: "Lors des derniers matchs de qualifications, l'équipe féminine suisse a dominé ses adversaires et s'est hissée au sommet du classement. Suisse et USA sont pressentis pour la finale, à moins qu'un énième accord secret avec la FIFA permette à d'autres pays de briller.",
     img_url: "https://www.football.ch/fr/PortalData/27/Resources/bilder/nationalteams/a-team-frauen/wm_quali/sui_sco/SUISCO_News.jpg"
   },
   {
-    title: "Le batch 732 du Wagon Lausanne sera-il le dernier ?",
-    end_date: DateTime.civil_from_format( :local, 2021, 12, 10, 18),
+    title: "Le Wagon Lausanne existera-t-il en 2022 ?",
+    end_date: DateTime.civil_from_format( :local, 2021, 12, 11),
     description: "Une conférence de presse de M. Jaime est attendue en fin d'après-midi. Un employé a témoigné anonymement du ras-le-bol du directeur général de l'école lausannoise. Selon diverses sources, un conflit latent avec la soufflerie du bâtiment l'aurait poussé à bout de nerfs.",
     img_url: "https://blog.hopitalvs.ch/wp-content/uploads/2030/07/Burnout-epuisement-professionnel.jpg"
   },
+    {
+    title: "La 5G sera-t-elle imposée pour le réveillon?",
+    end_date: DateTime.civil_from_format( :local, 2022, 01, 01),
+    description: "La règle 5G, imposée en Suisse-Allemande, franchira-t-elle la Sarine ? Les autorités sont en discussion et souhaitent s'entretenir avec les différents corps de métier du canton. Une décision est attendue à 11:59 le 31.12.2021.",
+    img_url: "https://cdnuploads.aa.com.tr/uploads/Contents/2020/04/24/thumbs_b_c_1e3f39537fef5f853f2d19526771b5d1.jpg?v=125110"
+  },
+  {
+    title: "M. Karole Niezgoda parviendra-t-il enfin à obtenir une coupe de cheveux convenable d'ici Noël?",
+    end_date: DateTime.civil_from_format( :local, 2021, 12, 25),
+    description: "Selon des sources sûres, M. Niezgoda serait en possession d'une cire miracle pour pallier à son problème de coiffure. Cette dernière serait faite de cire d'abeille afin de permettre la manipulation de cette touffe de cheveux plus épaisse que l'Amazonie. Espérons que cette recette fonctionnera!",
+    img_url: "https://cdn.unitycms.io/image/ocroped/1200,1200,1000,1000,0,0/uagTwv0dQeM/5tUjfPwM4iN9tmij_U57Th.jpg"
+  },
+  {
+    title: "Le Père Noël parviendra-il à éviter Omicron d'ici le 24 décembre pour sa livraison de cadeaux?",
+    end_date: DateTime.civil_from_format( :local, 2021, 12, 15),
+    description: "Selon ses lutins, le Père Noël est enfermé dans sa maison afin d'éviter tout contact nocif pour son voyage planétaire de distribution de cadeau. Espérons que ce dernier réussisse cet exploit!",
+    img_url: "https://images.radio-canada.ca/q_auto,w_960/v1/ici-premiere/16x9/pere-noel-masque-covid-19.jpg"
+  },
+  {
+    title: "SpaceX va annoncer son intention de créer une base lunaire avant Février 2022.",
+    end_date: DateTime.civil_from_format( :local, 2022, 01, 31),
+    description: "L'ambitieux dirigeant Elon Musk à la tête de son entreprise SpaceX a toujours exprimé son envie de visiter les étoiles. Ce projet passera-t-il par la fondation d'une base lunaire?",
+    img_url: "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2019/07/artist_im[…]/19471139-2-eng-GB/Artist_impression_of_a_Moon_Base_concept.jpg"
+  }
 ]
 
 our_events_id = []
@@ -184,7 +208,7 @@ number_of_transactions.times do |i|
   print "#{i + 1} transactions created \r"
 
   # Close events at pre-selected transaction indeces
-  if [38, 105, 208].include?(i)
+  if [80, 200, 400].include?(i)
     event = Event.all.sample
     while our_events_id.include?(event.id) || event.archived == true || event.current_price >= 50
       event = Event.all.sample
@@ -192,7 +216,7 @@ number_of_transactions.times do |i|
     end_action_price = 100
     end_event(event, dates[i], end_action_price)
     puts "Closed an event with YES"
-  elsif [60, 162].include?(i)
+  elsif [120, 324].include?(i)
     event = Event.all.sample
     while our_events_id.include?(event.id) || event.archived == true || event.current_price < 50
       event = Event.all.sample
