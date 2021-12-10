@@ -172,7 +172,7 @@ event_list = [
   {
     title: "M. Karole Niezgoda parviendra-t-il enfin à obtenir une coupe de cheveux convenable d'ici Noël?",
     end_date: DateTime.civil_from_format( :local, 2021, 12, 25),
-    description: "Selon des sources sûres, M. Niezgoda serait en possession d'une cire miracle pour pallier à son problème de coiffure. Cette dernière serait faite d'huile d'olive, de cire d'abeille et de lavande afin de permettre la manipulation de cette touffe de cheveux plus épaisse que l'Amazonie. Espérons que cette recette fonctionnera!",
+    description: "Selon des sources sûres, M. Niezgoda serait en possession d'une cire miracle pour pallier à son problème de coiffure. Cette dernière serait faite de cire d'abeille afin de permettre la manipulation de cette touffe de cheveux plus épaisse que l'Amazonie. Espérons que cette recette fonctionnera!",
     img_url: "https://cdn.unitycms.io/image/ocroped/1200,1200,1000,1000,0,0/uagTwv0dQeM/5tUjfPwM4iN9tmij_U57Th.jpg"
   },
   {
