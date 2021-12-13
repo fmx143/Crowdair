@@ -11,6 +11,7 @@ This project was created at the end of our batch(#732) at Le Wagon Lausane.
   <li> <a href=https://github.com/MalloryWittwer> Mallory Wittwer </a> </li>
   <li> <a href=https://github.com/anh42> Andreas Beney </a> </a>  </li>
   <li> <a href=https://github.com/Medidem13> Medi Gonül </a> </a>  </li>
+  <li> <a href=https://github.com/Loic-Chapuis> Loïc Chapuis </a> </a>  </li>
 </ol>
 
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
