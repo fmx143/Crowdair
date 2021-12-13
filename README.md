@@ -7,5 +7,6 @@ Every event includes news to help you make the best choice before selling or buy
 Notice that events have an ending time 📅, so you need to hurry up. 
 
 This project was created at the end of our batch(#732) at Le Wagon Lausane.
+<a> href=https://github.com/MalloryWittwer </a>
 
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
