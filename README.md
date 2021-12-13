@@ -14,4 +14,6 @@ This project was created at the end of our batch(#732) at Le Wagon Lausane.
   <li> <a href=https://github.com/Loic-Chapuis> Loïc Chapuis </a> </a>  </li>
 </ol>
 
+(notice: the website is on Herokuapp, so it may takes a few seconds to load the page.)
+
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
